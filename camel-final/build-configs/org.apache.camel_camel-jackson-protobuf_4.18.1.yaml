@@ -1,0 +1,9 @@
+name: org.apache.camel_camel-jackson-protobuf_4.18.1
+description: Auto-generated build config for camel-jackson-protobuf
+scmRepository:
+  url: https://github.com/placeholder/camel-jackson-protobuf.git
+  revision: 4.18.1
+buildScript: mvn -DskipTests clean deploy
+environment:
+  name: OpenJDK 11.0; Mvn 3.5.4
+buildType: MVN

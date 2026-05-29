@@ -1,0 +1,10 @@
+name: org.apache.camel_camel-jsonb_4.18.1
+description: "Build configuration for camel-jsonb 4.18.1"
+project: camel-jsonb
+scmRepository:
+  url: "https://github.com/placeholder/camel-jsonb.git"
+  revision: "4.18.1"
+buildScript: "mvn clean deploy -DskipTests"
+environment:
+  name: "OpenJDK 11"
+buildType: MVN

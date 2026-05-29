@@ -1,0 +1,9 @@
+name: org.apache.camel_camel-aws2-eventbridge_4.18.1
+description: Auto-generated build config for camel-aws2-eventbridge
+scmRepository:
+  url: https://github.com/placeholder/camel-aws2-eventbridge.git
+  revision: 4.18.1
+buildScript: mvn -DskipTests clean deploy
+environment:
+  name: OpenJDK 11.0; Mvn 3.5.4
+buildType: MVN

@@ -1,0 +1,10 @@
+name: org.apache.camel_camel-iso8583_4.18.1
+description: "Build configuration for camel-iso8583 4.18.1"
+project: camel-iso8583
+scmRepository:
+  url: "https://github.com/placeholder/camel-iso8583.git"
+  revision: "4.18.1"
+buildScript: "mvn clean deploy -DskipTests"
+environment:
+  name: "OpenJDK 11"
+buildType: MVN

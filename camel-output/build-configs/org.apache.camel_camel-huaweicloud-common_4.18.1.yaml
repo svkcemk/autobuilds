@@ -1,0 +1,10 @@
+name: org.apache.camel_camel-huaweicloud-common_4.18.1
+description: "Build configuration for camel-huaweicloud-common 4.18.1"
+project: camel-huaweicloud-common
+scmRepository:
+  url: "https://github.com/placeholder/camel-huaweicloud-common.git"
+  revision: "4.18.1"
+buildScript: "mvn clean deploy -DskipTests"
+environment:
+  name: "OpenJDK 11"
+buildType: MVN

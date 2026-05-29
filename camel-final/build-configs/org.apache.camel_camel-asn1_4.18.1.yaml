@@ -1,0 +1,9 @@
+name: org.apache.camel_camel-asn1_4.18.1
+description: Auto-generated build config for camel-asn1
+scmRepository:
+  url: https://github.com/placeholder/camel-asn1.git
+  revision: 4.18.1
+buildScript: mvn -DskipTests clean deploy
+environment:
+  name: OpenJDK 11.0; Mvn 3.5.4
+buildType: MVN

@@ -1,0 +1,10 @@
+name: org.apache.camel_camel-couchbase_4.18.1
+description: "Build configuration for camel-couchbase 4.18.1"
+project: camel-couchbase
+scmRepository:
+  url: "https://github.com/placeholder/camel-couchbase.git"
+  revision: "4.18.1"
+buildScript: "mvn clean deploy -DskipTests"
+environment:
+  name: "OpenJDK 11"
+buildType: MVN

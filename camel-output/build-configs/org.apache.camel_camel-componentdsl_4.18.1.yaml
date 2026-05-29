@@ -1,0 +1,10 @@
+name: org.apache.camel_camel-componentdsl_4.18.1
+description: "Build configuration for camel-componentdsl 4.18.1"
+project: camel-componentdsl
+scmRepository:
+  url: "https://github.com/placeholder/camel-componentdsl.git"
+  revision: "4.18.1"
+buildScript: "mvn clean deploy -DskipTests"
+environment:
+  name: "OpenJDK 11"
+buildType: MVN

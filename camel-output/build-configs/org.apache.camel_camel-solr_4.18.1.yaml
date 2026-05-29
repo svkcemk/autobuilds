@@ -1,0 +1,10 @@
+name: org.apache.camel_camel-solr_4.18.1
+description: "Build configuration for camel-solr 4.18.1"
+project: camel-solr
+scmRepository:
+  url: "https://github.com/placeholder/camel-solr.git"
+  revision: "4.18.1"
+buildScript: "mvn clean deploy -DskipTests"
+environment:
+  name: "OpenJDK 11"
+buildType: MVN

@@ -1,0 +1,10 @@
+name: org.apache.camel_camel-torchserve_4.18.1
+description: "Build configuration for camel-torchserve 4.18.1"
+project: camel-torchserve
+scmRepository:
+  url: "https://github.com/placeholder/camel-torchserve.git"
+  revision: "4.18.1"
+buildScript: "mvn clean deploy -DskipTests"
+environment:
+  name: "OpenJDK 11"
+buildType: MVN

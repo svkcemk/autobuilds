@@ -1,0 +1,10 @@
+name: org.apache.camel_camel-azure-cosmosdb_4.18.1
+description: "Build configuration for camel-azure-cosmosdb 4.18.1"
+project: camel-azure-cosmosdb
+scmRepository:
+  url: "https://github.com/placeholder/camel-azure-cosmosdb.git"
+  revision: "4.18.1"
+buildScript: "mvn clean deploy -DskipTests"
+environment:
+  name: "OpenJDK 11"
+buildType: MVN

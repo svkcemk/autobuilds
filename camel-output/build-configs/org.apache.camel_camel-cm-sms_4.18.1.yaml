@@ -1,0 +1,10 @@
+name: org.apache.camel_camel-cm-sms_4.18.1
+description: "Build configuration for camel-cm-sms 4.18.1"
+project: camel-cm-sms
+scmRepository:
+  url: "https://github.com/placeholder/camel-cm-sms.git"
+  revision: "4.18.1"
+buildScript: "mvn clean deploy -DskipTests"
+environment:
+  name: "OpenJDK 11"
+buildType: MVN

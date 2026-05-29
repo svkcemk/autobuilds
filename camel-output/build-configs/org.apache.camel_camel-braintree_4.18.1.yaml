@@ -1,0 +1,10 @@
+name: org.apache.camel_camel-braintree_4.18.1
+description: "Build configuration for camel-braintree 4.18.1"
+project: camel-braintree
+scmRepository:
+  url: "https://github.com/placeholder/camel-braintree.git"
+  revision: "4.18.1"
+buildScript: "mvn clean deploy -DskipTests"
+environment:
+  name: "OpenJDK 11"
+buildType: MVN

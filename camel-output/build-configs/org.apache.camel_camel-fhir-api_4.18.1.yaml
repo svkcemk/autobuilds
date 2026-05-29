@@ -1,0 +1,10 @@
+name: org.apache.camel_camel-fhir-api_4.18.1
+description: "Build configuration for camel-fhir-api 4.18.1"
+project: camel-fhir-api
+scmRepository:
+  url: "https://github.com/placeholder/camel-fhir-api.git"
+  revision: "4.18.1"
+buildScript: "mvn clean deploy -DskipTests"
+environment:
+  name: "OpenJDK 11"
+buildType: MVN

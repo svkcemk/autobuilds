@@ -1,0 +1,10 @@
+name: org.apache.camel_camel-aws2-translate_4.18.1
+description: "Build configuration for camel-aws2-translate 4.18.1"
+project: camel-aws2-translate
+scmRepository:
+  url: "https://github.com/placeholder/camel-aws2-translate.git"
+  revision: "4.18.1"
+buildScript: "mvn clean deploy -DskipTests"
+environment:
+  name: "OpenJDK 11"
+buildType: MVN

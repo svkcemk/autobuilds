@@ -1,0 +1,10 @@
+name: org.apache.camel_camel-jolt_4.18.1
+description: "Build configuration for camel-jolt 4.18.1"
+project: camel-jolt
+scmRepository:
+  url: "https://github.com/placeholder/camel-jolt.git"
+  revision: "4.18.1"
+buildScript: "mvn clean deploy -DskipTests"
+environment:
+  name: "OpenJDK 11"
+buildType: MVN

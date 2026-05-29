@@ -1,0 +1,10 @@
+name: org.apache.camel_camel-smpp_4.18.1
+description: "Build configuration for camel-smpp 4.18.1"
+project: camel-smpp
+scmRepository:
+  url: "https://github.com/placeholder/camel-smpp.git"
+  revision: "4.18.1"
+buildScript: "mvn clean deploy -DskipTests"
+environment:
+  name: "OpenJDK 11"
+buildType: MVN

@@ -1,0 +1,10 @@
+name: org.apache.camel_camel-jsonata_4.18.1
+description: "Build configuration for camel-jsonata 4.18.1"
+project: camel-jsonata
+scmRepository:
+  url: "https://github.com/placeholder/camel-jsonata.git"
+  revision: "4.18.1"
+buildScript: "mvn clean deploy -DskipTests"
+environment:
+  name: "OpenJDK 11"
+buildType: MVN

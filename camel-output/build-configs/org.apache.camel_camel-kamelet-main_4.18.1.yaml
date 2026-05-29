@@ -1,0 +1,10 @@
+name: org.apache.camel_camel-kamelet-main_4.18.1
+description: "Build configuration for camel-kamelet-main 4.18.1"
+project: camel-kamelet-main
+scmRepository:
+  url: "https://github.com/placeholder/camel-kamelet-main.git"
+  revision: "4.18.1"
+buildScript: "mvn clean deploy -DskipTests"
+environment:
+  name: "OpenJDK 11"
+buildType: MVN

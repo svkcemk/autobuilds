@@ -1,0 +1,10 @@
+name: org.apache.camel_camel-jackson-avro_4.18.1
+description: "Build configuration for camel-jackson-avro 4.18.1"
+project: camel-jackson-avro
+scmRepository:
+  url: "https://github.com/placeholder/camel-jackson-avro.git"
+  revision: "4.18.1"
+buildScript: "mvn clean deploy -DskipTests"
+environment:
+  name: "OpenJDK 11"
+buildType: MVN

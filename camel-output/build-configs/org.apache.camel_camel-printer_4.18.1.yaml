@@ -1,0 +1,10 @@
+name: org.apache.camel_camel-printer_4.18.1
+description: "Build configuration for camel-printer 4.18.1"
+project: camel-printer
+scmRepository:
+  url: "https://github.com/placeholder/camel-printer.git"
+  revision: "4.18.1"
+buildScript: "mvn clean deploy -DskipTests"
+environment:
+  name: "OpenJDK 11"
+buildType: MVN

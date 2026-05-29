@@ -1,0 +1,10 @@
+name: org.apache.camel_camel-xml-io-util_4.18.1
+description: "Build configuration for camel-xml-io-util 4.18.1"
+project: camel-xml-io-util
+scmRepository:
+  url: "https://github.com/placeholder/camel-xml-io-util.git"
+  revision: "4.18.1"
+buildScript: "mvn clean deploy -DskipTests"
+environment:
+  name: "OpenJDK 11"
+buildType: MVN

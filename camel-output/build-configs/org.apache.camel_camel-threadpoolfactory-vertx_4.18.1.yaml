@@ -1,0 +1,10 @@
+name: org.apache.camel_camel-threadpoolfactory-vertx_4.18.1
+description: "Build configuration for camel-threadpoolfactory-vertx 4.18.1"
+project: camel-threadpoolfactory-vertx
+scmRepository:
+  url: "https://github.com/placeholder/camel-threadpoolfactory-vertx.git"
+  revision: "4.18.1"
+buildScript: "mvn clean deploy -DskipTests"
+environment:
+  name: "OpenJDK 11"
+buildType: MVN

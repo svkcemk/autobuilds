@@ -1,0 +1,10 @@
+name: org.apache.camel_camel-openai_4.18.1
+description: "Build configuration for camel-openai 4.18.1"
+project: camel-openai
+scmRepository:
+  url: "https://github.com/placeholder/camel-openai.git"
+  revision: "4.18.1"
+buildScript: "mvn clean deploy -DskipTests"
+environment:
+  name: "OpenJDK 11"
+buildType: MVN

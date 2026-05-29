@@ -1,0 +1,10 @@
+name: org.apache.camel_camel-aws2-msk_4.18.1
+description: "Build configuration for camel-aws2-msk 4.18.1"
+project: camel-aws2-msk
+scmRepository:
+  url: "https://github.com/placeholder/camel-aws2-msk.git"
+  revision: "4.18.1"
+buildScript: "mvn clean deploy -DskipTests"
+environment:
+  name: "OpenJDK 11"
+buildType: MVN

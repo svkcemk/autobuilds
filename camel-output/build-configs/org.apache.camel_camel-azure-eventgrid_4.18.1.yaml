@@ -1,0 +1,10 @@
+name: org.apache.camel_camel-azure-eventgrid_4.18.1
+description: "Build configuration for camel-azure-eventgrid 4.18.1"
+project: camel-azure-eventgrid
+scmRepository:
+  url: "https://github.com/placeholder/camel-azure-eventgrid.git"
+  revision: "4.18.1"
+buildScript: "mvn clean deploy -DskipTests"
+environment:
+  name: "OpenJDK 11"
+buildType: MVN

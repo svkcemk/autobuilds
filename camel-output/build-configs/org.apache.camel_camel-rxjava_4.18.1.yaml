@@ -1,0 +1,10 @@
+name: org.apache.camel_camel-rxjava_4.18.1
+description: "Build configuration for camel-rxjava 4.18.1"
+project: camel-rxjava
+scmRepository:
+  url: "https://github.com/placeholder/camel-rxjava.git"
+  revision: "4.18.1"
+buildScript: "mvn clean deploy -DskipTests"
+environment:
+  name: "OpenJDK 11"
+buildType: MVN

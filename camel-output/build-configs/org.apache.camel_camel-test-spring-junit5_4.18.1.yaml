@@ -1,0 +1,10 @@
+name: org.apache.camel_camel-test-spring-junit5_4.18.1
+description: "Build configuration for camel-test-spring-junit5 4.18.1"
+project: camel-test-spring-junit5
+scmRepository:
+  url: "https://github.com/placeholder/camel-test-spring-junit5.git"
+  revision: "4.18.1"
+buildScript: "mvn clean deploy -DskipTests"
+environment:
+  name: "OpenJDK 11"
+buildType: MVN

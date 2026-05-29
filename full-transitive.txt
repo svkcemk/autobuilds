@@ -1,0 +1,2302 @@
+org.apache.camel:coverage:pom:4.21.0-SNAPSHOT
++- org.apache.camel:camel-util-json:jar:4.21.0-SNAPSHOT:compile
++- org.apache.camel:camel-tooling-util:jar:4.21.0-SNAPSHOT:compile
++- org.apache.camel:camel-tooling-model:jar:4.21.0-SNAPSHOT:compile
++- org.apache.camel:camel-tooling-maven:jar:4.21.0-SNAPSHOT:compile
+|  +- org.apache.maven.resolver:maven-resolver-api:jar:1.9.27:compile
+|  +- org.apache.maven.resolver:maven-resolver-spi:jar:1.9.27:compile
+|  +- org.apache.maven.resolver:maven-resolver-connector-basic:jar:1.9.27:compile
+|  +- org.apache.maven.resolver:maven-resolver-named-locks:jar:1.9.27:compile
+|  +- org.apache.maven.resolver:maven-resolver-impl:jar:1.9.27:compile
+|  +- org.apache.maven.resolver:maven-resolver-supplier:jar:1.9.27:compile
+|  |  +- org.apache.maven:maven-resolver-provider:jar:3.9.12:compile
+|  |  |  +- org.apache.maven:maven-model:jar:3.9.15:provided
+|  |  |  \- org.apache.maven:maven-repository-metadata:jar:3.9.15:provided
+|  |  \- org.apache.maven:maven-model-builder:jar:3.9.12:compile
+|  |     +- org.codehaus.plexus:plexus-interpolation:jar:1.29:compile
+|  |     +- org.apache.maven:maven-artifact:jar:3.9.15:provided
+|  |     \- org.apache.maven:maven-builder-support:jar:3.9.12:compile
+|  +- org.apache.maven.resolver:maven-resolver-util:jar:1.9.27:compile
+|  +- org.apache.maven.resolver:maven-resolver-transport-file:jar:1.9.27:compile
+|  +- org.apache.maven.resolver:maven-resolver-transport-http:jar:1.9.27:compile
+|  |  +- org.apache.httpcomponents:httpcore:jar:4.4.16:compile
+|  |  \- org.slf4j:jcl-over-slf4j:jar:1.7.36:compile
+|  +- eu.maveniverse.maven.mima:context:jar:2.4.44:compile
+|  +- eu.maveniverse.maven.mima.runtime:embedded-maven:jar:2.4.44:runtime
+|  +- eu.maveniverse.maven.mima.runtime:standalone-static:jar:2.4.44:runtime
+|  |  +- eu.maveniverse.maven.mima.runtime:standalone-shared:jar:2.4.44:runtime
+|  |  \- org.apache.maven:maven-settings-builder:jar:3.9.16:runtime
+|  |     +- org.apache.maven:maven-settings:jar:3.9.15:provided
+|  |     \- org.codehaus.plexus:plexus-sec-dispatcher:jar:2.0:runtime
+|  |        \- org.codehaus.plexus:plexus-cipher:jar:2.0:runtime
+|  \- org.codehaus.plexus:plexus-xml:jar:3.0.1:compile
++- org.apache.camel:camel-api:jar:4.21.0-SNAPSHOT:compile
+|  +- org.slf4j:slf4j-api:jar:2.0.18:compile
+|  \- jakarta.xml.bind:jakarta.xml.bind-api:jar:4.0.5:compile
++- org.apache.camel:camel-util:jar:4.21.0-SNAPSHOT:compile
++- org.apache.camel:camel-management-api:jar:4.21.0-SNAPSHOT:compile
++- org.apache.camel:camel-management:jar:4.21.0-SNAPSHOT:compile
++- org.apache.camel:camel-base:jar:4.21.0-SNAPSHOT:compile
++- org.apache.camel:camel-base-engine:jar:4.21.0-SNAPSHOT:compile
++- org.apache.camel:camel-core-all:pom:4.21.0-SNAPSHOT:compile
++- org.apache.camel:camel-core-catalog:jar:4.21.0-SNAPSHOT:compile
++- org.apache.camel:camel-support:jar:4.21.0-SNAPSHOT:compile
++- org.apache.camel:camel-core:jar:4.21.0-SNAPSHOT:compile
++- org.apache.camel:camel-core-engine:jar:4.21.0-SNAPSHOT:compile
++- org.apache.camel:camel-core-languages:jar:4.21.0-SNAPSHOT:compile
++- org.apache.camel:camel-core-model:jar:4.21.0-SNAPSHOT:compile
++- org.apache.camel:camel-core-processor:jar:4.21.0-SNAPSHOT:compile
++- org.apache.camel:camel-core-reifier:jar:4.21.0-SNAPSHOT:compile
++- org.apache.camel:camel-core-xml:jar:4.21.0-SNAPSHOT:compile
++- org.apache.camel:camel-cluster:jar:4.21.0-SNAPSHOT:compile
++- org.apache.camel:camel-health:jar:4.21.0-SNAPSHOT:compile
++- org.apache.camel:camel-console:jar:4.21.0-SNAPSHOT:compile
++- org.apache.camel:camel-main:jar:4.21.0-SNAPSHOT:compile
++- org.apache.camel:camel-xml-io:jar:4.21.0-SNAPSHOT:compile
++- org.apache.camel:camel-xml-io-util:jar:4.21.0-SNAPSHOT:compile
++- org.apache.camel:camel-xml-jaxb:jar:4.21.0-SNAPSHOT:compile
+|  \- org.glassfish.jaxb:jaxb-runtime:jar:4.0.8:compile
+|     \- org.glassfish.jaxb:jaxb-core:jar:4.0.8:compile
+|        \- org.glassfish.jaxb:txw2:jar:4.0.8:compile
++- org.apache.camel:camel-xml-jaxp:jar:4.21.0-SNAPSHOT:compile
++- org.apache.camel:camel-xml-jaxp-util:jar:4.21.0-SNAPSHOT:compile
++- org.apache.camel:camel-yaml-io:jar:4.21.0-SNAPSHOT:compile
+|  \- com.fasterxml.jackson.dataformat:jackson-dataformat-yaml:jar:2.21.3:compile
++- org.apache.camel:camel-activemq:jar:4.21.0-SNAPSHOT:compile
+|  \- org.apache.activemq:activemq-client-jakarta:jar:5.19.6:compile
+|     \- org.fusesource.hawtbuf:hawtbuf:jar:1.11:compile
++- org.apache.camel:camel-activemq6:jar:4.21.0-SNAPSHOT:compile
+|  \- org.apache.activemq:activemq-client:jar:6.2.5:compile
++- org.apache.camel:camel-amqp:jar:4.21.0-SNAPSHOT:compile
+|  +- org.apache.qpid:qpid-jms-client:jar:2.10.0:compile
+|  |  +- io.netty:netty-transport-native-epoll:jar:linux-x86_64:4.2.12.Final:runtime
+|  |  \- io.netty:netty-transport-native-kqueue:jar:osx-x86_64:4.2.12.Final:runtime
+|  +- org.apache.qpid:proton-j:jar:0.34.1:compile
+|  +- io.netty:netty-buffer:jar:4.2.12.Final:compile
+|  +- io.netty:netty-common:jar:4.2.12.Final:compile
+|  +- io.netty:netty-handler:jar:4.2.12.Final:compile
+|  |  \- io.netty:netty-codec-base:jar:4.2.12.Final:compile
+|  +- io.netty:netty-transport:jar:4.2.12.Final:compile
+|  \- io.netty:netty-codec-http:jar:4.2.12.Final:compile
+|     \- io.netty:netty-codec-compression:jar:4.2.12.Final:compile
++- org.apache.camel:camel-arangodb:jar:4.21.0-SNAPSHOT:compile
+|  \- com.arangodb:arangodb-java-driver:jar:7.26.0:compile
+|     +- com.arangodb:core:jar:7.26.0:compile
+|     |  \- com.fasterxml.jackson.datatype:jackson-datatype-jakarta-jsonp:jar:2.21.3:compile
+|     +- com.arangodb:http-protocol:jar:7.26.0:compile
+|     \- com.arangodb:jackson-serde-json:jar:7.26.0:compile
++- org.apache.camel:camel-as2:jar:4.21.0-SNAPSHOT:compile
++- org.apache.camel:camel-as2-api:jar:4.21.0-SNAPSHOT:compile
+|  +- commons-codec:commons-codec:jar:1.22.0:compile
+|  +- org.bouncycastle:bcpkix-jdk18on:jar:1.84:compile
+|  +- org.bouncycastle:bcprov-jdk18on:jar:1.84:compile
+|  +- org.bouncycastle:bcutil-jdk18on:jar:1.84:compile
+|  +- org.apache.httpcomponents.client5:httpclient5:jar:5.5.2:compile
+|  \- org.apache.velocity:velocity-engine-core:jar:2.4.1:compile
++- org.apache.camel:camel-asn1:jar:4.21.0-SNAPSHOT:compile
+|  \- com.beanit:asn1bean:jar:1.14.0:compile
++- org.apache.camel:camel-asterisk:jar:4.21.0-SNAPSHOT:compile
+|  \- org.asteriskjava:asterisk-java:jar:3.41.0:compile
+|     \- org.reflections:reflections:jar:0.10.2:compile
++- org.apache.camel:camel-atmosphere-websocket:jar:4.21.0-SNAPSHOT:compile
+|  +- jakarta.servlet:jakarta.servlet-api:jar:6.1.0:compile
+|  \- org.atmosphere:atmosphere-runtime:jar:3.1.0:compile
++- org.apache.camel:camel-atom:jar:4.21.0-SNAPSHOT:compile
+|  \- com.apptasticsoftware:rssreader:jar:3.12.0:compile
++- org.apache.camel:camel-attachments:jar:4.21.0-SNAPSHOT:compile
+|  \- jakarta.activation:jakarta.activation-api:jar:2.1.4:compile
++- org.apache.camel:camel-avro:jar:4.21.0-SNAPSHOT:compile
+|  \- org.apache.avro:avro:jar:1.12.1:compile
++- org.apache.camel:camel-avro-rpc:jar:4.21.0-SNAPSHOT:compile
+|  \- org.apache.avro:avro-ipc-netty:jar:1.12.1:compile
+|     \- org.apache.avro:avro-ipc:jar:1.12.1:compile
+|        \- org.tukaani:xz:jar:1.10:compile
++- org.apache.camel:camel-avro-rpc-jetty:jar:4.21.0-SNAPSHOT:compile
+|  \- org.apache.avro:avro-ipc-jetty:jar:1.12.1:compile
+|     \- org.eclipse.jetty:jetty-servlet:jar:9.4.58.v20250814:compile
++- org.apache.camel:camel-avro-rpc-spi:jar:4.21.0-SNAPSHOT:compile
++- org.apache.camel:camel-aws-bedrock:jar:4.21.0-SNAPSHOT:compile
+|  +- software.amazon.awssdk:bedrock:jar:2.44.8:compile
+|  |  +- software.amazon.awssdk:protocol-core:jar:2.44.8:compile
+|  |  +- software.amazon.awssdk:aws-json-protocol:jar:2.44.8:compile
+|  |  |  \- software.amazon.awssdk:third-party-jackson-core:jar:2.44.8:compile
+|  |  +- software.amazon.awssdk:http-auth-aws:jar:2.44.8:compile
+|  |  +- software.amazon.awssdk:http-auth-spi:jar:2.44.8:compile
+|  |  +- software.amazon.awssdk:http-auth:jar:2.44.8:compile
+|  |  +- software.amazon.awssdk:identity-spi:jar:2.44.8:compile
+|  |  +- software.amazon.awssdk:http-client-spi:jar:2.44.8:compile
+|  |  +- software.amazon.awssdk:annotations:jar:2.44.8:compile
+|  |  +- software.amazon.awssdk:utils:jar:2.44.8:compile
+|  |  +- software.amazon.awssdk:metrics-spi:jar:2.44.8:compile
+|  |  +- software.amazon.awssdk:json-utils:jar:2.44.8:compile
+|  |  +- software.amazon.awssdk:endpoints-spi:jar:2.44.8:compile
+|  |  \- software.amazon.awssdk:retries-spi:jar:2.44.8:compile
+|  +- software.amazon.awssdk:bedrockruntime:jar:2.44.8:compile
+|  +- software.amazon.awssdk:bedrockagent:jar:2.44.8:compile
+|  +- software.amazon.awssdk:bedrockagentruntime:jar:2.44.8:compile
+|  +- software.amazon.awssdk:sts:jar:2.44.8:compile
+|  |  +- software.amazon.awssdk:aws-query-protocol:jar:2.44.8:compile
+|  |  \- software.amazon.awssdk:profiles:jar:2.44.8:compile
+|  \- software.amazon.awssdk:apache-client:jar:2.44.8:compile
++- org.apache.camel:camel-aws-cloudtrail:jar:4.21.0-SNAPSHOT:compile
+|  \- software.amazon.awssdk:cloudtrail:jar:2.44.8:compile
++- org.apache.camel:camel-aws-common:jar:4.21.0-SNAPSHOT:compile
+|  +- software.amazon.awssdk:auth:jar:2.44.8:compile
+|  |  +- software.amazon.awssdk:http-auth-aws-eventstream:jar:2.44.8:compile
+|  |  +- software.amazon.awssdk:checksums-spi:jar:2.44.8:compile
+|  |  \- software.amazon.eventstream:eventstream:jar:1.0.1:compile
+|  +- software.amazon.awssdk:regions:jar:2.44.8:compile
+|  +- software.amazon.awssdk:sdk-core:jar:2.44.8:compile
+|  |  \- software.amazon.awssdk:retries:jar:2.44.8:compile
+|  +- software.amazon.awssdk:aws-core:jar:2.44.8:compile
+|  |  \- software.amazon.awssdk:utils-lite:jar:2.44.8:compile
+|  \- software.amazon.awssdk:netty-nio-client:jar:2.44.8:compile
+|     +- io.netty:netty-codec-http2:jar:4.2.12.Final:compile
+|     \- io.netty:netty-transport-classes-epoll:jar:4.2.12.Final:compile
++- org.apache.camel:camel-aws-config:jar:4.21.0-SNAPSHOT:compile
+|  \- software.amazon.awssdk:config:jar:2.44.8:compile
++- org.apache.camel:camel-aws-parameter-store:jar:4.21.0-SNAPSHOT:compile
+|  \- software.amazon.awssdk:ssm:jar:2.44.8:compile
++- org.apache.camel:camel-aws-secrets-manager:jar:4.21.0-SNAPSHOT:compile
+|  +- software.amazon.awssdk:secretsmanager:jar:2.44.8:compile
+|  +- software.amazon.awssdk:sqs:jar:2.44.8:compile
+|  \- com.fasterxml.jackson.core:jackson-databind:jar:2.21.3:compile
++- org.apache.camel:camel-aws-security-hub:jar:4.21.0-SNAPSHOT:compile
+|  \- software.amazon.awssdk:securityhub:jar:2.44.8:compile
++- org.apache.camel:camel-aws2-athena:jar:4.21.0-SNAPSHOT:compile
+|  \- software.amazon.awssdk:athena:jar:2.44.8:compile
++- org.apache.camel:camel-aws2-comprehend:jar:4.21.0-SNAPSHOT:compile
+|  \- software.amazon.awssdk:comprehend:jar:2.44.8:compile
++- org.apache.camel:camel-aws2-cw:jar:4.21.0-SNAPSHOT:compile
+|  \- software.amazon.awssdk:cloudwatch:jar:2.44.8:compile
+|     \- software.amazon.awssdk:smithy-rpcv2-protocol:jar:2.44.8:compile
+|        \- software.amazon.awssdk:third-party-jackson-dataformat-cbor:jar:2.44.8:compile
++- org.apache.camel:camel-aws2-ddb:jar:4.21.0-SNAPSHOT:compile
+|  +- software.amazon.awssdk:dynamodb:jar:2.44.8:compile
+|  +- com.google.code.gson:gson:jar:2.14.0:compile
+|  |  \- com.google.errorprone:error_prone_annotations:jar:2.48.0:compile
+|  \- com.google.guava:guava:jar:33.6.0-jre:compile
+|     +- com.google.guava:failureaccess:jar:1.0.3:compile
+|     +- com.google.guava:listenablefuture:jar:9999.0-empty-to-avoid-conflict-with-guava:compile
+|     +- org.jspecify:jspecify:jar:1.0.0:compile
+|     \- com.google.j2objc:j2objc-annotations:jar:3.1:compile
++- org.apache.camel:camel-aws2-ec2:jar:4.21.0-SNAPSHOT:compile
+|  \- software.amazon.awssdk:ec2:jar:2.44.8:compile
++- org.apache.camel:camel-aws2-ecs:jar:4.21.0-SNAPSHOT:compile
+|  \- software.amazon.awssdk:ecs:jar:2.44.8:compile
++- org.apache.camel:camel-aws2-eks:jar:4.21.0-SNAPSHOT:compile
+|  \- software.amazon.awssdk:eks:jar:2.44.8:compile
++- org.apache.camel:camel-aws2-eventbridge:jar:4.21.0-SNAPSHOT:compile
+|  +- software.amazon.awssdk:eventbridge:jar:2.44.8:compile
+|  \- commons-io:commons-io:jar:2.22.0:compile
++- org.apache.camel:camel-aws2-iam:jar:4.21.0-SNAPSHOT:compile
+|  \- software.amazon.awssdk:iam:jar:2.44.8:compile
++- org.apache.camel:camel-aws2-kinesis:jar:4.21.0-SNAPSHOT:compile
+|  +- software.amazon.awssdk:kinesis:jar:2.44.8:compile
+|  |  \- software.amazon.awssdk:aws-cbor-protocol:jar:2.44.8:compile
+|  +- software.amazon.kinesis:amazon-kinesis-client:jar:3.4.3:compile
+|  |  +- software.amazon.awssdk:dynamodb-enhanced:jar:2.41.21:compile
+|  |  +- com.amazonaws:dynamodb-lock-client:jar:1.4.0:compile
+|  |  +- software.amazon.awssdk:arns:jar:2.41.21:compile
+|  |  +- software.amazon.glue:schema-registry-serde:jar:1.1.27:compile
+|  |  |  +- com.kjetland:mbknor-jackson-jsonschema_2.12:jar:1.0.39:compile
+|  |  |  +- com.github.erosb:everit-json-schema:jar:1.14.5:compile
+|  |  |  +- org.jetbrains.kotlin:kotlin-reflect:jar:1.9.25:compile
+|  |  |  +- org.jetbrains.kotlin:kotlin-scripting-compiler-impl-embeddable:jar:1.9.25:compile
+|  |  |  |  +- org.jetbrains.kotlin:kotlin-scripting-common:jar:1.9.25:runtime
+|  |  |  |  \- org.jetbrains.kotlin:kotlin-scripting-jvm:jar:1.9.25:runtime
+|  |  |  |     \- org.jetbrains.kotlin:kotlin-script-runtime:jar:1.9.25:runtime
+|  |  |  +- org.jetbrains.kotlin:kotlin-scripting-compiler-embeddable:jar:1.9.25:compile
+|  |  |  +- com.squareup.okio:okio-fakefilesystem:jar:3.2.0:compile
+|  |  |  |  \- com.squareup.okio:okio-fakefilesystem-jvm:jar:3.2.0:compile
+|  |  |  |     \- org.jetbrains.kotlinx:kotlinx-datetime-jvm:jar:0.3.2:compile
+|  |  |  +- org.jetbrains.kotlinx:kotlinx-serialization-core-jvm:jar:1.4.0:compile
+|  |  |  +- com.squareup.wire:wire-schema:jar:5.2.0:compile
+|  |  |  |  \- com.squareup.wire:wire-runtime:jar:5.2.0:runtime
+|  |  |  +- com.squareup.wire:wire-compiler:jar:5.2.0:compile
+|  |  |  |  +- com.squareup.wire:wire-schema-jvm:jar:5.2.0:compile
+|  |  |  |  |  +- com.palantir.javapoet:javapoet:jar:0.6.0:compile
+|  |  |  |  |  +- com.squareup:kotlinpoet-jvm:jar:2.0.0:compile
+|  |  |  |  |  \- com.squareup.wire:wire-runtime-jvm:jar:5.2.0:compile
+|  |  |  |  +- com.squareup.wire:wire-kotlin-generator:jar:5.2.0:runtime
+|  |  |  |  |  \- com.squareup.wire:wire-grpc-client-jvm:jar:5.2.0:runtime
+|  |  |  |  |     \- org.jetbrains.kotlinx:kotlinx-coroutines-core-jvm:jar:1.9.0:runtime
+|  |  |  |  +- com.squareup.wire:wire-java-generator:jar:5.2.0:runtime
+|  |  |  |  +- com.squareup.wire:wire-swift-generator:jar:5.2.0:runtime
+|  |  |  |  |  \- io.outfoxx:swiftpoet:jar:1.6.5:runtime
+|  |  |  |  \- com.charleskorn.kaml:kaml-jvm:jar:0.67.0:runtime
+|  |  |  |     \- it.krzeminski:snakeyaml-engine-kmp-jvm:jar:3.0.3:runtime
+|  |  |  |        \- net.thauvin.erik.urlencoder:urlencoder-lib-jvm:jar:1.6.0:runtime
+|  |  |  \- com.google.jimfs:jimfs:jar:1.1:compile
+|  |  +- software.amazon.glue:schema-registry-common:jar:1.1.27:compile
+|  |  |  +- software.amazon.awssdk:glue:jar:2.32.25:compile
+|  |  |  +- software.amazon.glue:schema-registry-build-tools:jar:1.1.27:compile
+|  |  |  \- software.amazon.awssdk:url-connection-client:jar:2.32.25:compile
+|  |  +- com.google.code.findbugs:jsr305:jar:3.0.2:compile
+|  |  +- org.jetbrains:annotations:jar:26.0.1:compile
+|  |  \- io.reactivex.rxjava3:rxjava:jar:3.1.11:compile
+|  +- at.yawk.lz4:lz4-java:jar:1.11.0:compile
+|  \- software.amazon.awssdk:firehose:jar:2.44.8:compile
++- org.apache.camel:camel-aws2-kms:jar:4.21.0-SNAPSHOT:compile
+|  \- software.amazon.awssdk:kms:jar:2.44.8:compile
++- org.apache.camel:camel-aws2-lambda:jar:4.21.0-SNAPSHOT:compile
+|  \- software.amazon.awssdk:lambda:jar:2.44.8:compile
++- org.apache.camel:camel-aws2-mq:jar:4.21.0-SNAPSHOT:compile
+|  \- software.amazon.awssdk:mq:jar:2.44.8:compile
++- org.apache.camel:camel-aws2-msk:jar:4.21.0-SNAPSHOT:compile
+|  \- software.amazon.awssdk:kafka:jar:2.44.8:compile
++- org.apache.camel:camel-aws2-polly:jar:4.21.0-SNAPSHOT:compile
+|  \- software.amazon.awssdk:polly:jar:2.44.8:compile
++- org.apache.camel:camel-aws2-redshift:jar:4.21.0-SNAPSHOT:compile
+|  \- software.amazon.awssdk:redshiftdata:jar:2.44.8:compile
++- org.apache.camel:camel-aws2-rekognition:jar:4.21.0-SNAPSHOT:compile
+|  \- software.amazon.awssdk:rekognition:jar:2.44.8:compile
++- org.apache.camel:camel-aws2-s3:jar:4.21.0-SNAPSHOT:compile
+|  +- software.amazon.awssdk:s3:jar:2.44.8:compile
+|  |  +- software.amazon.awssdk:aws-xml-protocol:jar:2.44.8:compile
+|  |  \- software.amazon.awssdk:crt-core:jar:2.44.8:compile
+|  \- software.amazon.awssdk:checksums:jar:2.44.8:compile
++- org.apache.camel:camel-aws2-s3-vectors:jar:4.21.0-SNAPSHOT:compile
+|  \- software.amazon.awssdk:s3vectors:jar:2.44.8:compile
++- org.apache.camel:camel-aws2-ses:jar:4.21.0-SNAPSHOT:compile
+|  +- org.eclipse.angus:angus-mail:jar:2.0.5:compile
+|  |  +- jakarta.mail:jakarta.mail-api:jar:2.1.5:compile
+|  |  \- org.eclipse.angus:angus-activation:jar:2.0.3:compile
+|  \- software.amazon.awssdk:ses:jar:2.44.8:compile
++- org.apache.camel:camel-aws2-sns:jar:4.21.0-SNAPSHOT:compile
+|  \- software.amazon.awssdk:sns:jar:2.44.8:compile
++- org.apache.camel:camel-aws2-sqs:jar:4.21.0-SNAPSHOT:compile
++- org.apache.camel:camel-aws2-step-functions:jar:4.21.0-SNAPSHOT:compile
+|  \- software.amazon.awssdk:sfn:jar:2.44.8:compile
++- org.apache.camel:camel-aws2-sts:jar:4.21.0-SNAPSHOT:compile
++- org.apache.camel:camel-aws2-textract:jar:4.21.0-SNAPSHOT:compile
+|  \- software.amazon.awssdk:textract:jar:2.44.8:compile
++- org.apache.camel:camel-aws2-timestream:jar:4.21.0-SNAPSHOT:compile
+|  +- software.amazon.awssdk:timestreamquery:jar:2.44.8:compile
+|  \- software.amazon.awssdk:timestreamwrite:jar:2.44.8:compile
++- org.apache.camel:camel-aws2-transcribe:jar:4.21.0-SNAPSHOT:compile
+|  \- software.amazon.awssdk:transcribe:jar:2.44.8:compile
++- org.apache.camel:camel-aws2-translate:jar:4.21.0-SNAPSHOT:compile
+|  \- software.amazon.awssdk:translate:jar:2.44.8:compile
++- org.apache.camel:camel-azure-common:jar:4.21.0-SNAPSHOT:compile
++- org.apache.camel:camel-azure-cosmosdb:jar:4.21.0-SNAPSHOT:compile
+|  +- com.azure:azure-cosmos:jar:4.75.0:compile
+|  |  +- com.azure:azure-core:jar:1.57.0:compile
+|  |  +- com.azure:azure-core-http-netty:jar:1.16.2:compile
+|  |  \- org.hdrhistogram:HdrHistogram:jar:2.1.12:compile
+|  \- com.azure:azure-identity:jar:1.18.1:compile
+|     +- com.azure:azure-json:jar:1.5.0:compile
+|     +- com.microsoft.azure:msal4j-persistence-extension:jar:1.3.0:compile
+|     \- net.java.dev.jna:jna-platform:jar:5.17.0:compile
++- org.apache.camel:camel-azure-eventgrid:jar:4.21.0-SNAPSHOT:compile
+|  \- com.azure:azure-messaging-eventgrid:jar:4.31.4:compile
++- org.apache.camel:camel-azure-eventhubs:jar:4.21.0-SNAPSHOT:compile
+|  +- com.azure:azure-messaging-eventhubs:jar:5.21.2:compile
+|  |  \- com.azure:azure-core-amqp:jar:2.11.2:compile
+|  |     \- com.microsoft.azure:qpid-proton-j-extensions:jar:1.2.6:compile
+|  \- com.azure:azure-messaging-eventhubs-checkpointstore-blob:jar:1.21.2:compile
++- org.apache.camel:camel-azure-files:jar:4.21.0-SNAPSHOT:compile
+|  \- com.azure:azure-storage-file-share:jar:12.28.0:compile
+|     +- com.azure:azure-xml:jar:1.2.0:compile
+|     \- com.azure:azure-storage-common:jar:12.31.0:compile
++- org.apache.camel:camel-azure-key-vault:jar:4.21.0-SNAPSHOT:compile
+|  \- com.azure:azure-security-keyvault-secrets:jar:4.10.4:compile
++- org.apache.camel:camel-azure-schema-registry:jar:4.21.0-SNAPSHOT:compile
++- org.apache.camel:camel-azure-servicebus:jar:4.21.0-SNAPSHOT:compile
+|  \- com.azure:azure-messaging-servicebus:jar:7.17.16:compile
++- org.apache.camel:camel-azure-storage-blob:jar:4.21.0-SNAPSHOT:compile
+|  +- com.azure:azure-storage-blob:jar:12.32.0:compile
+|  |  \- com.azure:azure-storage-internal-avro:jar:12.17.0:compile
+|  +- com.azure:azure-storage-blob-changefeed:jar:12.0.0-beta.37:compile
+|  +- com.fasterxml.jackson.core:jackson-core:jar:2.21.3:compile
+|  +- com.fasterxml.jackson.core:jackson-annotations:jar:2.21:compile
+|  \- com.fasterxml.jackson.dataformat:jackson-dataformat-xml:jar:2.21.3:compile
+|     \- org.codehaus.woodstox:stax2-api:jar:4.2.2:compile
++- org.apache.camel:camel-azure-storage-datalake:jar:4.21.0-SNAPSHOT:compile
+|  \- com.azure:azure-storage-file-datalake:jar:12.25.0:compile
++- org.apache.camel:camel-azure-storage-queue:jar:4.21.0-SNAPSHOT:compile
+|  \- com.azure:azure-storage-queue:jar:12.27.0:compile
++- org.apache.camel:camel-barcode:jar:4.21.0-SNAPSHOT:compile
+|  +- com.google.zxing:core:jar:3.5.4:compile
+|  \- com.google.zxing:javase:jar:3.5.4:compile
+|     +- org.jcommander:jcommander:jar:1.85:compile
+|     \- com.github.jai-imageio:jai-imageio-core:jar:1.4.0:runtime
++- org.apache.camel:camel-base64:jar:4.21.0-SNAPSHOT:compile
++- org.apache.camel:camel-bean:jar:4.21.0-SNAPSHOT:compile
++- org.apache.camel:camel-bean-validator:jar:4.21.0-SNAPSHOT:compile
+|  +- org.hibernate.validator:hibernate-validator:jar:9.1.0.Final:compile
+|  |  +- jakarta.validation:jakarta.validation-api:jar:3.1.1:compile
+|  |  \- com.fasterxml:classmate:jar:1.7.1:compile
+|  +- org.jboss.logging:jboss-logging:jar:3.6.3.Final:compile
+|  +- jakarta.el:jakarta.el-api:jar:6.0.1:compile
+|  \- org.glassfish.expressly:expressly:jar:6.0.0:compile
++- org.apache.camel:camel-beanio:jar:4.21.0-SNAPSHOT:compile
+|  \- com.github.beanio:beanio:jar:3.2.1:compile
++- org.apache.camel:camel-bindy:jar:4.21.0-SNAPSHOT:compile
+|  \- com.ibm.icu:icu4j:jar:78.3:compile
++- org.apache.camel:camel-bonita:jar:4.21.0-SNAPSHOT:compile
+|  +- org.apache.cxf:cxf-rt-rs-client:jar:4.2.0:compile
+|  +- org.apache.cxf:cxf-rt-frontend-jaxrs:jar:4.2.0:compile
+|  |  +- jakarta.ws.rs:jakarta.ws.rs-api:jar:4.0.0:compile
+|  |  \- org.apache.cxf:cxf-rt-security:jar:4.2.0:compile
+|  \- com.fasterxml.jackson.jakarta.rs:jackson-jakarta-rs-json-provider:jar:2.21.3:compile
+|     \- com.fasterxml.jackson.jakarta.rs:jackson-jakarta-rs-base:jar:2.21.3:compile
++- org.apache.camel:camel-box:jar:4.21.0-SNAPSHOT:compile
+|  +- com.box:box-java-sdk:jar:4.16.4:compile
+|  |  +- com.eclipsesource.minimal-json:minimal-json:jar:0.9.5:runtime
+|  |  +- org.bitbucket.b_c:jose4j:jar:0.9.4:runtime
+|  |  +- com.squareup.okhttp3:okhttp:jar:4.12.0:compile
+|  |  \- com.github.luben:zstd-jni:jar:1.5.7-2:compile
+|  \- org.jsoup:jsoup:jar:1.22.2:compile
++- org.apache.camel:camel-box-api:jar:4.21.0-SNAPSHOT:compile
++- org.apache.camel:camel-braintree:jar:4.21.0-SNAPSHOT:compile
+|  \- com.braintreepayments.gateway:braintree-java:jar:3.49.0:compile
+|     +- org.osgi:org.osgi.core:jar:4.2.0:compile
+|     \- com.fasterxml.jackson.jr:jackson-jr-objects:jar:2.21.3:compile
++- org.apache.camel:camel-browse:jar:4.21.0-SNAPSHOT:compile
++- org.apache.camel:camel-caffeine:jar:4.21.0-SNAPSHOT:compile
+|  \- com.github.ben-manes.caffeine:caffeine:jar:3.2.4:compile
++- org.apache.camel:camel-cassandraql:jar:4.21.0-SNAPSHOT:compile
+|  +- org.apache.cassandra:java-driver-core:jar:4.19.2:compile
+|  |  +- com.datastax.oss:native-protocol:jar:1.5.2:compile
+|  |  +- org.apache.cassandra:java-driver-guava-shaded:jar:4.19.2:compile
+|  |  +- com.typesafe:config:jar:1.4.1:compile
+|  |  \- com.github.jnr:jnr-posix:jar:3.1.15:compile
+|  |     +- com.github.jnr:jnr-ffi:jar:2.2.11:compile
+|  |     |  +- com.github.jnr:jffi:jar:1.3.9:compile
+|  |     |  +- com.github.jnr:jffi:jar:native:1.3.9:runtime
+|  |     |  +- org.ow2.asm:asm-analysis:jar:9.2:compile
+|  |     |  +- com.github.jnr:jnr-a64asm:jar:1.0.0:compile
+|  |     |  \- com.github.jnr:jnr-x86asm:jar:1.0.2:compile
+|  |     \- com.github.jnr:jnr-constants:jar:0.10.3:compile
+|  \- org.apache.cassandra:java-driver-query-builder:jar:4.19.2:compile
++- org.apache.camel:camel-cbor:jar:4.21.0-SNAPSHOT:compile
+|  \- com.fasterxml.jackson.dataformat:jackson-dataformat-cbor:jar:2.21.3:compile
++- org.apache.camel:camel-chatscript:jar:4.21.0-SNAPSHOT:compile
++- org.apache.camel:camel-chunk:jar:4.21.0-SNAPSHOT:compile
+|  \- com.x5dev:chunk-templates:jar:3.6.2:compile
++- org.apache.camel:camel-clickup:jar:4.21.0-SNAPSHOT:compile
+|  \- com.fasterxml.jackson.datatype:jackson-datatype-jsr310:jar:2.21.3:compile
++- org.apache.camel:camel-cloudevents:jar:4.21.0-SNAPSHOT:compile
++- org.apache.camel:camel-cm-sms:jar:4.21.0-SNAPSHOT:compile
+|  \- com.googlecode.libphonenumber:libphonenumber:jar:9.0.30:compile
++- org.apache.camel:camel-coap:jar:4.21.0-SNAPSHOT:compile
+|  +- org.eclipse.californium:californium-core:jar:3.14.0:compile
+|  +- org.eclipse.californium:scandium:jar:3.14.0:compile
+|  +- org.eclipse.californium:element-connector-tcp-netty:jar:3.14.0:compile
+|  +- org.eclipse.californium:element-connector:jar:3.14.0:compile
+|  \- org.eclipse.californium:californium-legal:jar:3.14.0:compile
++- org.apache.camel:camel-cometd:jar:4.21.0-SNAPSHOT:compile
+|  +- org.eclipse.jetty:jetty-server:jar:12.1.9:compile
+|  |  \- org.eclipse.jetty:jetty-http:jar:12.1.9:compile
+|  +- org.eclipse.jetty.ee10:jetty-ee10-servlet:jar:12.1.9:compile
+|  |  \- org.eclipse.jetty:jetty-session:jar:12.1.9:compile
+|  +- org.eclipse.jetty.ee10:jetty-ee10-servlets:jar:12.1.9:compile
+|  +- org.eclipse.jetty:jetty-util:jar:12.1.9:compile
+|  +- org.eclipse.jetty:jetty-util-ajax:jar:12.1.9:compile
+|  +- org.cometd.java:cometd-java-server-websocket-jetty:jar:9.0.0:compile
+|  |  +- org.cometd.java:cometd-java-server-websocket-common:jar:9.0.0:compile
+|  |  \- org.eclipse.jetty.websocket:jetty-websocket-jetty-server:jar:12.1.2:compile
+|  |     +- org.eclipse.jetty.websocket:jetty-websocket-core-server:jar:12.1.2:compile
+|  |     |  \- org.eclipse.jetty.websocket:jetty-websocket-core-common:jar:12.1.2:compile
+|  |     \- org.eclipse.jetty.websocket:jetty-websocket-jetty-common:jar:12.1.2:compile
+|  |        \- org.eclipse.jetty.websocket:jetty-websocket-jetty-api:jar:12.1.2:compile
+|  \- org.cometd.java:cometd-java-server-http-jakarta:jar:9.0.0:compile
+|     +- org.cometd.java:cometd-java-api-server:jar:9.0.0:compile
+|     |  \- org.cometd.java:cometd-java-api-client:jar:9.0.0:compile
+|     |     \- org.cometd.java:cometd-java-api-common:jar:9.0.0:compile
+|     +- org.cometd.java:cometd-java-common:jar:9.0.0:compile
+|     \- org.cometd.java:cometd-java-server-common:jar:9.0.0:compile
++- org.apache.camel:camel-consul:jar:4.21.0-SNAPSHOT:compile
+|  \- org.kiwiproject:consul-client:jar:1.12.0:compile
+|     +- com.squareup.retrofit2:converter-jackson:jar:3.0.0:compile
+|     +- com.fasterxml.jackson.datatype:jackson-datatype-guava:jar:2.21.3:compile
+|     \- com.squareup.retrofit2:retrofit:jar:3.0.0:compile
++- org.apache.camel:camel-controlbus:jar:4.21.0-SNAPSHOT:compile
++- org.apache.camel:camel-couchbase:jar:4.21.0-SNAPSHOT:compile
+|  \- com.couchbase.client:java-client:jar:3.11.2:compile
+|     \- com.couchbase.client:core-io:jar:3.11.2:compile
++- org.apache.camel:camel-couchdb:jar:4.21.0-SNAPSHOT:compile
+|  \- com.ibm.cloud:cloudant:jar:0.10.17:compile
+|     +- com.ibm.cloud:cloudant-common:jar:0.10.17:compile
+|     \- com.ibm.cloud:sdk-core:jar:9.25.0:compile
+|        \- com.squareup.okhttp3:okhttp-urlconnection:jar:5.3.2:compile
+|           \- com.squareup.okhttp3:okhttp-java-net-cookiejar:jar:5.3.2:compile
++- org.apache.camel:camel-cron:jar:4.21.0-SNAPSHOT:compile
++- org.apache.camel:camel-crypto:jar:4.21.0-SNAPSHOT:compile
++- org.apache.camel:camel-crypto-pgp:jar:4.21.0-SNAPSHOT:compile
+|  \- org.bouncycastle:bcpg-jdk18on:jar:1.84:compile
++- org.apache.camel:camel-csimple-joor:jar:4.21.0-SNAPSHOT:compile
+|  \- org.jooq:joor:jar:0.9.15:compile
++- org.apache.camel:camel-csv:jar:4.21.0-SNAPSHOT:compile
+|  \- org.apache.commons:commons-csv:jar:1.14.1:compile
++- org.apache.camel:camel-cxf-common:jar:4.21.0-SNAPSHOT:compile
+|  +- org.apache.cxf:cxf-rt-transports-http:jar:4.2.0:compile
+|  +- jakarta.xml.soap:jakarta.xml.soap-api:jar:3.0.2:compile
+|  \- jakarta.xml.ws:jakarta.xml.ws-api:jar:4.0.3:compile
++- org.apache.camel:camel-cxf-rest:jar:4.21.0-SNAPSHOT:compile
+|  \- org.apache.cxf:cxf-rt-features-logging:jar:4.2.0:compile
++- org.apache.camel:camel-cxf-soap:jar:4.21.0-SNAPSHOT:compile
+|  +- org.apache.cxf:cxf-rt-frontend-jaxws:jar:4.2.0:compile
+|  |  +- xml-resolver:xml-resolver:jar:1.2:compile
+|  |  +- org.ow2.asm:asm:jar:9.9.1:compile
+|  |  +- org.apache.cxf:cxf-rt-bindings-xml:jar:4.2.0:compile
+|  |  +- org.apache.cxf:cxf-rt-frontend-simple:jar:4.2.0:compile
+|  |  \- org.apache.cxf:cxf-rt-ws-addr:jar:4.2.0:compile
+|  |     \- org.apache.cxf:cxf-rt-ws-policy:jar:4.2.0:compile
+|  +- org.apache.cxf:cxf-rt-bindings-soap:jar:4.2.0:compile
+|  |  +- org.apache.cxf:cxf-rt-wsdl:jar:4.2.0:compile
+|  |  |  \- wsdl4j:wsdl4j:jar:1.6.3:compile
+|  |  \- org.apache.cxf:cxf-rt-databinding-jaxb:jar:4.2.0:compile
+|  \- org.apache.cxf:cxf-rt-ws-security:jar:4.2.0:compile
+|     +- org.apache.cxf:cxf-rt-security-saml:jar:4.2.0:compile
+|     +- org.apache.wss4j:wss4j-ws-security-dom:jar:4.0.1:compile
+|     +- org.apache.wss4j:wss4j-policy:jar:4.0.1:compile
+|     |  \- org.apache.neethi:neethi:jar:3.2.1:compile
+|     +- org.apache.wss4j:wss4j-ws-security-stax:jar:4.0.1:compile
+|     |  \- org.apache.wss4j:wss4j-bindings:jar:4.0.1:compile
+|     +- org.apache.wss4j:wss4j-ws-security-policy-stax:jar:4.0.1:compile
+|     \- org.apache.wss4j:wss4j-ws-security-common:jar:4.0.1:compile
+|        +- org.opensaml:opensaml-saml-impl:jar:5.1.6:compile
+|        |  +- org.opensaml:opensaml-core-api:jar:5.1.6:compile
+|        |  +- org.opensaml:opensaml-core-impl:jar:5.1.6:compile
+|        |  +- org.opensaml:opensaml-profile-api:jar:5.1.6:compile
+|        |  +- org.opensaml:opensaml-saml-api:jar:5.1.6:compile
+|        |  +- org.opensaml:opensaml-security-api:jar:5.1.6:compile
+|        |  +- org.opensaml:opensaml-security-impl:jar:5.1.6:compile
+|        |  +- org.opensaml:opensaml-soap-api:jar:5.1.6:compile
+|        |  +- org.opensaml:opensaml-xmlsec-api:jar:5.1.6:compile
+|        |  +- org.opensaml:opensaml-xmlsec-impl:jar:5.1.6:compile
+|        |  +- net.shibboleth:shib-security:jar:9.1.6:compile
+|        |  +- net.shibboleth:shib-networking:jar:9.1.6:compile
+|        |  |  \- org.apache.httpcomponents.client5:httpclient5-cache:jar:5.3.1:compile
+|        |  +- net.shibboleth:shib-velocity:jar:9.1.6:compile
+|        |  \- net.shibboleth:shib-support:jar:9.1.6:compile
+|        +- org.cryptacular:cryptacular:jar:1.2.7:compile
+|        +- org.opensaml:opensaml-xacml-impl:jar:5.1.6:compile
+|        |  \- org.opensaml:opensaml-xacml-api:jar:5.1.6:compile
+|        \- org.opensaml:opensaml-xacml-saml-impl:jar:5.1.6:compile
+|           \- org.opensaml:opensaml-xacml-saml-api:jar:5.1.6:compile
++- org.apache.camel:camel-cxf-spring-common:jar:4.21.0-SNAPSHOT:compile
+|  +- org.springframework:spring-beans:jar:7.0.7:compile
+|  \- org.springframework:spring-context:jar:7.0.7:compile
+|     \- io.micrometer:micrometer-observation:jar:1.16.5:compile
++- org.apache.camel:camel-cxf-spring-rest:jar:4.21.0-SNAPSHOT:compile
++- org.apache.camel:camel-cxf-spring-soap:jar:4.21.0-SNAPSHOT:compile
++- org.apache.camel:camel-cxf-spring-transport:jar:4.21.0-SNAPSHOT:compile
++- org.apache.camel:camel-cxf-transport:jar:4.21.0-SNAPSHOT:compile
++- org.apache.camel:camel-cyberark-vault:jar:4.21.0-SNAPSHOT:compile
++- org.apache.camel:camel-dapr:jar:4.21.0-SNAPSHOT:compile
+|  +- io.dapr:dapr-sdk:jar:1.17.2:compile
+|  |  +- io.dapr:dapr-sdk-autogen:jar:1.17.2:compile
+|  |  \- io.netty:netty-handler-proxy:jar:4.2.12.Final:compile
+|  |     \- io.netty:netty-codec-socks:jar:4.2.12.Final:compile
+|  \- io.dapr:dapr-sdk-workflows:jar:1.17.2:compile
+|     \- io.dapr:durabletask-client:jar:1.17.2:compile
++- org.apache.camel:camel-dataformat:jar:4.21.0-SNAPSHOT:compile
++- org.apache.camel:camel-dataset:jar:4.21.0-SNAPSHOT:compile
++- org.apache.camel:camel-datasonnet:jar:4.21.0-SNAPSHOT:compile
+|  +- org.scala-lang:scala-library:jar:2.13.18:compile
+|  +- com.datasonnet:datasonnet-mapper:jar:3.0.1.3:compile
+|  |  +- org.awaitility:awaitility:jar:4.2.0:compile
+|  |  |  \- org.hamcrest:hamcrest:jar:2.1:compile
+|  |  +- com.typesafe.scala-logging:scala-logging_2.13:jar:3.9.5:compile
+|  |  |  \- org.scala-lang:scala-reflect:jar:2.13.8:compile
+|  |  +- com.lihaoyi:ujson_2.13:jar:1.2.0:compile
+|  |  |  \- com.lihaoyi:upickle-core_2.13:jar:1.2.0:compile
+|  |  |     \- org.scala-lang.modules:scala-collection-compat_2.13:jar:2.1.4:compile
+|  |  +- com.lihaoyi:fastparse_2.13:jar:2.3.0:compile
+|  |  |  +- com.lihaoyi:sourcecode_2.13:jar:0.2.1:compile
+|  |  |  \- com.lihaoyi:geny_2.13:jar:0.6.0:compile
+|  |  +- com.lihaoyi:pprint_2.13:jar:0.5.9:compile
+|  |  |  \- com.lihaoyi:fansi_2.13:jar:0.2.9:compile
+|  |  +- com.lihaoyi:scalatags_2.13:jar:0.9.1:compile
+|  |  +- com.fasterxml.jackson.dataformat:jackson-dataformat-csv:jar:2.21.3:compile
+|  |  +- com.fasterxml.jackson.dataformat:jackson-dataformat-properties:jar:2.21.3:compile
+|  |  +- org.apache.commons:commons-fileupload2-jakarta:jar:2.0.0-M1:compile
+|  |  |  \- org.apache.commons:commons-fileupload2-core:jar:2.0.0-M1:compile
+|  |  \- com.google.re2j:re2j:jar:1.7:compile
+|  \- io.github.classgraph:classgraph:jar:4.8.184:compile
++- org.apache.camel:camel-debezium-common:jar:4.21.0-SNAPSHOT:compile
+|  +- org.apache.kafka:kafka-clients:jar:4.2.0:compile
+|  |  \- org.xerial.snappy:snappy-java:jar:1.1.10.7:compile
+|  +- io.debezium:debezium-api:jar:3.5.1.Final:compile
+|  |  \- io.debezium:debezium-util:jar:3.5.1.Final:compile
+|  +- io.debezium:debezium-embedded:jar:3.5.1.Final:compile
+|  |  +- io.debezium:debezium-connector-common:jar:3.5.1.Final:compile
+|  |  |  \- io.debezium:debezium-openlineage-api:jar:3.5.1.Final:compile
+|  |  +- org.apache.kafka:connect-api:jar:4.1.1:compile
+|  |  +- org.apache.kafka:connect-runtime:jar:4.1.1:compile
+|  |  |  +- org.apache.kafka:connect-transforms:jar:4.1.1:compile
+|  |  |  +- javax.xml.bind:jaxb-api:jar:2.3.1:runtime
+|  |  |  |  \- javax.activation:javax.activation-api:jar:1.2.0:runtime
+|  |  |  +- javax.activation:activation:jar:1.1.1:runtime
+|  |  |  \- io.swagger.core.v3:swagger-annotations:jar:2.2.25:compile
+|  |  +- org.apache.kafka:connect-json:jar:4.1.1:compile
+|  |  |  \- com.fasterxml.jackson.module:jackson-module-blackbird:jar:2.21.3:compile
+|  |  \- org.apache.kafka:connect-file:jar:4.1.1:compile
+|  \- io.debezium:debezium-storage-file:jar:3.5.1.Final:compile
++- org.apache.camel:camel-debezium-db2:jar:4.21.0-SNAPSHOT:compile
+|  \- io.debezium:debezium-connector-db2:jar:3.5.1.Final:compile
+|     +- io.debezium:debezium-config:jar:3.5.1.Final:compile
+|     +- io.debezium:debezium-storage-kafka:jar:3.5.1.Final:compile
+|     \- io.debezium:debezium-connect-plugins:jar:3.5.1.Final:compile
++- org.apache.camel:camel-debezium-mongodb:jar:4.21.0-SNAPSHOT:compile
+|  \- io.debezium:debezium-connector-mongodb:jar:3.5.1.Final:compile
+|     \- io.debezium:debezium-sink:jar:3.5.1.Final:compile
++- org.apache.camel:camel-debezium-mysql:jar:4.21.0-SNAPSHOT:compile
+|  \- io.debezium:debezium-connector-mysql:jar:3.5.1.Final:compile
+|     +- io.debezium:debezium-connector-binlog:jar:3.5.1.Final:compile
+|     +- io.debezium:debezium-ddl-parser:jar:3.5.1.Final:compile
+|     \- io.debezium:mysql-binlog-connector-java:jar:0.40.6:compile
++- org.apache.camel:camel-debezium-oracle:jar:4.21.0-SNAPSHOT:compile
+|  \- io.debezium:debezium-connector-oracle:jar:3.5.1.Final:compile
+|     +- com.oracle.database.jdbc:ojdbc11:jar:21.15.0.0:compile
+|     +- org.antlr:antlr4-runtime:jar:4.10.1:compile
+|     +- com.oracle.database.nls:orai18n:jar:21.15.0.0:compile
+|     +- com.oracle.database.xml:xdb:jar:21.15.0.0:compile
+|     +- com.oracle.database.xml:xmlparserv2:jar:21.15.0.0:compile
+|     +- org.ehcache:ehcache:jar:3.11.1:compile
+|     +- com.sun.istack:istack-commons-runtime:jar:3.0.7:compile
+|     \- com.sun.xml.fastinfoset:FastInfoset:jar:1.2.15:compile
++- org.apache.camel:camel-debezium-postgres:jar:4.21.0-SNAPSHOT:compile
+|  \- io.debezium:debezium-connector-postgres:jar:3.5.1.Final:compile
++- org.apache.camel:camel-debezium-sqlserver:jar:4.21.0-SNAPSHOT:compile
+|  \- io.debezium:debezium-connector-sqlserver:jar:3.5.1.Final:compile
+|     \- com.microsoft.sqlserver:mssql-jdbc:jar:12.4.2.jre8:compile
++- org.apache.camel:camel-debug:jar:4.21.0-SNAPSHOT:compile
++- org.apache.camel:camel-dfdl:jar:4.21.0-SNAPSHOT:compile
+|  +- org.apache.daffodil:daffodil-sapi_2.12:jar:3.10.0:compile
+|  |  +- org.apache.daffodil:daffodil-core_2.12:jar:3.10.0:compile
+|  |  |  +- org.apache.daffodil:daffodil-runtime1-unparser_2.12:jar:3.10.0:compile
+|  |  |  |  +- org.apache.daffodil:daffodil-runtime1_2.12:jar:3.10.0:compile
+|  |  |  |  |  \- org.apache.daffodil:daffodil-io_2.12:jar:3.10.0:compile
+|  |  |  |  \- org.apache.daffodil:daffodil-runtime1-layers_2.12:jar:3.10.0:compile
+|  |  |  \- org.apache.daffodil:daffodil-udf_2.12:jar:3.10.0:compile
+|  |  +- com.lihaoyi:os-lib_2.12:jar:0.11.3:compile
+|  |  |  \- com.lihaoyi:geny_2.12:jar:1.1.1:compile
+|  |  +- org.scala-lang.modules:scala-xml_2.12:jar:2.3.0:compile
+|  |  +- org.scala-lang.modules:scala-parser-combinators_2.12:jar:2.4.0:compile
+|  |  +- xerces:xercesImpl:jar:2.12.2:compile
+|  |  +- com.typesafe.scala-logging:scala-logging_2.12:jar:3.9.5:compile
+|  |  \- org.jdom:jdom2:jar:2.0.6.1:compile
+|  +- org.apache.daffodil:daffodil-japi_2.12:jar:3.10.0:compile
+|  \- org.apache.daffodil:daffodil-schematron_2.12:jar:3.10.0:compile
+|     \- org.apache.daffodil:daffodil-lib_2.12:jar:3.10.0:compile
++- org.apache.camel:camel-dhis2:jar:4.21.0-SNAPSHOT:compile
+|  +- org.hisp.dhis.integration.sdk:dhis2-java-sdk:jar:3.0.2:compile
+|  +- org.hisp.dhis.integration.sdk:jackson-resource-model:jar:v40.2.2:3.0.2:compile
+|  \- org.hisp.dhis.integration.sdk:jackson-resource-model:jar:v2.39.1:3.0.2:compile
++- org.apache.camel:camel-dhis2-api:jar:4.21.0-SNAPSHOT:compile
++- org.apache.camel:camel-digitalocean:jar:4.21.0-SNAPSHOT:compile
+|  \- com.myjeeva.digitalocean:digitalocean-api-client:jar:2.17:compile
++- org.apache.camel:camel-direct:jar:4.21.0-SNAPSHOT:compile
++- org.apache.camel:camel-disruptor:jar:4.21.0-SNAPSHOT:compile
+|  \- com.lmax:disruptor:jar:3.4.4:compile
++- org.apache.camel:camel-djl:jar:4.21.0-SNAPSHOT:compile
+|  +- ai.djl:api:jar:0.36.0:compile
+|  |  \- net.java.dev.jna:jna:jar:5.17.0:compile
+|  +- ai.djl.timeseries:timeseries:jar:0.36.0:compile
+|  |  +- ai.djl:basicdataset:jar:0.36.0:compile
+|  |  +- tech.tablesaw:tablesaw-core:jar:0.44.4:compile
+|  |  |  +- it.unimi.dsi:fastutil:jar:8.5.13:compile
+|  |  |  +- org.roaringbitmap:RoaringBitmap:jar:1.0.5:compile
+|  |  |  \- com.univocity:univocity-parsers:jar:2.9.1:compile
+|  |  \- tech.tablesaw:tablesaw-jsplot:jar:0.44.4:compile
+|  |     \- io.pebbletemplates:pebble:jar:3.2.4:compile
+|  +- net.sf.extjwnl:extjwnl:jar:2.0.5:compile
+|  |  \- com.googlecode.concurrentlinkedhashmap:concurrentlinkedhashmap-lru:jar:1.3.2:compile
+|  \- net.sf.extjwnl:extjwnl-data-wn31:jar:1.2:compile
++- org.apache.camel:camel-dns:jar:4.21.0-SNAPSHOT:compile
+|  \- dnsjava:dnsjava:jar:3.6.4:compile
++- org.apache.camel:camel-docker:jar:4.21.0-SNAPSHOT:compile
+|  \- com.github.docker-java:docker-java:jar:3.7.1:compile
+|     +- com.github.docker-java:docker-java-core:jar:3.7.1:compile
+|     |  +- com.github.docker-java:docker-java-api:jar:3.7.1:compile
+|     |  \- com.github.docker-java:docker-java-transport:jar:3.7.1:compile
+|     +- com.github.docker-java:docker-java-transport-jersey:jar:3.7.1:compile
+|     |  +- org.glassfish.jersey.connectors:jersey-apache-connector:jar:2.47:compile
+|     |  +- com.kohlschutter.junixsocket:junixsocket-common:jar:2.10.1:compile
+|     |  \- com.kohlschutter.junixsocket:junixsocket-native-common:jar:2.10.1:compile
+|     \- com.github.docker-java:docker-java-transport-netty:jar:3.7.1:compile
++- org.apache.camel:camel-docling:jar:4.21.0-SNAPSHOT:compile
+|  \- ai.docling:docling-serve-client:jar:0.5.2:compile
+|     \- ai.docling:docling-serve-api:jar:0.5.2:compile
+|        \- ai.docling:docling-core:jar:0.5.2:compile
++- org.apache.camel:camel-drill:jar:4.21.0-SNAPSHOT:compile
+|  +- org.apache.drill.exec:drill-jdbc:jar:1.22.0:compile
+|  |  +- org.apache.calcite.avatica:avatica-core:jar:1.23.0:compile
+|  |  |  \- org.apache.calcite.avatica:avatica-metrics:jar:1.23.0:compile
+|  |  +- org.apache.drill:drill-common:jar:1.22.0:compile
+|  |  |  +- org.apache.drill:drill-protocol:jar:1.22.0:compile
+|  |  |  |  +- io.protostuff:protostuff-core:jar:1.8.0:compile
+|  |  |  |  |  \- io.protostuff:protostuff-api:jar:1.8.0:compile
+|  |  |  |  \- io.protostuff:protostuff-json:jar:1.8.0:compile
+|  |  |  +- org.msgpack:msgpack:jar:0.6.6:compile
+|  |  |  |  \- com.googlecode.json-simple:json-simple:jar:1.1.1:compile
+|  |  |  +- io.dropwizard.metrics:metrics-servlets:jar:4.2.19:compile
+|  |  |  |  +- io.dropwizard.metrics:metrics-healthchecks:jar:4.2.19:compile
+|  |  |  |  \- com.helger:profiler:jar:1.1.1:compile
+|  |  |  \- io.dropwizard.metrics:metrics-jvm:jar:4.2.19:compile
+|  |  +- org.apache.drill:drill-logical:jar:1.22.0:compile
+|  |  |  \- org.apache.calcite:calcite-core:jar:1.34.0:compile
+|  |  |     +- org.apache.calcite:calcite-linq4j:jar:1.34.0:compile
+|  |  |     +- org.locationtech.jts.io:jts-io-common:jar:1.19.0:compile
+|  |  |     +- org.locationtech.proj4j:proj4j:jar:1.2.2:compile
+|  |  |     +- com.google.uzaygezen:uzaygezen-core:jar:0.2:runtime
+|  |  |     +- com.yahoo.datasketches:sketches-core:jar:0.9.0:runtime
+|  |  |     |  \- com.yahoo.datasketches:memory:jar:0.9.0:runtime
+|  |  |     +- net.hydromatic:aggdesigner-algorithm:jar:6.0:runtime
+|  |  |     |  \- commons-lang:commons-lang:jar:2.4:runtime
+|  |  |     \- org.apache.commons:commons-dbcp2:jar:2.6.0:runtime
+|  |  +- org.apache.drill.exec:drill-java-exec:jar:1.22.0:compile
+|  |  |  +- org.owasp.encoder:encoder:jar:1.2.3:compile
+|  |  |  +- org.ow2.asm:asm-util:jar:9.5:compile
+|  |  |  +- org.apache.commons:commons-math:jar:2.2:compile
+|  |  |  +- com.thoughtworks.paranamer:paranamer:jar:2.5.6:compile
+|  |  |  +- com.sun.codemodel:codemodel:jar:2.6:compile
+|  |  |  +- org.eclipse.jetty:jetty-servlets:jar:9.4.56.v20240826:compile
+|  |  |  +- org.glassfish.jersey.containers:jersey-container-jetty-servlet:jar:2.40:compile
+|  |  |  |  \- org.glassfish.jersey.containers:jersey-container-jetty-http:jar:2.40:compile
+|  |  |  |     \- org.eclipse.jetty:jetty-continuation:jar:9.4.51.v20230217:compile
+|  |  |  +- org.glassfish.jersey.media:jersey-media-multipart:jar:2.40:compile
+|  |  |  |  \- org.jvnet.mimepull:mimepull:jar:1.9.15:compile
+|  |  |  +- org.glassfish.jersey.media:jersey-media-json-jackson:jar:2.40:compile
+|  |  |  |  \- org.glassfish.jersey.ext:jersey-entity-filtering:jar:2.40:compile
+|  |  |  +- org.glassfish.jersey.ext:jersey-mvc-freemarker:jar:2.40:compile
+|  |  |  |  \- org.glassfish.jersey.ext:jersey-mvc:jar:2.40:compile
+|  |  |  +- com.fasterxml.jackson.jaxrs:jackson-jaxrs-json-provider:jar:2.21.3:compile
+|  |  |  |  \- com.fasterxml.jackson.jaxrs:jackson-jaxrs-base:jar:2.21.3:compile
+|  |  |  +- com.fasterxml.jackson.module:jackson-module-afterburner:jar:2.21.3:compile
+|  |  |  +- org.honton.chas.hocon:jackson-dataformat-hocon:jar:1.1.1:compile
+|  |  |  +- net.sf.jpam:jpam:jar:1.1:compile
+|  |  |  +- org.apache.drill.exec:drill-rpc:jar:1.22.0:compile
+|  |  |  +- org.apache.drill.memory:drill-memory-base:jar:1.22.0:compile
+|  |  |  +- org.apache.drill.exec:vector:jar:1.22.0:compile
+|  |  |  +- org.apache.drill.metastore:drill-metastore-api:jar:1.22.0:compile
+|  |  |  +- com.beust:jcommander:jar:1.30:compile
+|  |  |  +- com.bettercloud:vault-java-driver:jar:5.1.0:compile
+|  |  |  +- com.carrotsearch:hppc:jar:0.7.1:compile
+|  |  |  +- org.codehaus.janino:janino:jar:3.1.12:compile
+|  |  |  +- org.codehaus.janino:commons-compiler:jar:3.1.12:compile
+|  |  |  +- com.clearspring.analytics:stream:jar:2.7.0:compile
+|  |  |  +- com.tdunning:t-digest:jar:3.3:compile
+|  |  |  +- org.apache.hadoop:hadoop-client:jar:3.3.6:compile
+|  |  |  |  \- org.apache.hadoop:hadoop-mapreduce-client-jobclient:jar:3.3.6:compile
+|  |  |  |     \- org.apache.hadoop:hadoop-mapreduce-client-common:jar:3.3.6:compile
+|  |  |  +- org.apache.avro:avro-mapred:jar:1.12.0:compile
+|  |  |  +- nl.basjes.parse.httpdlog:httpdlog-parser:jar:5.10.0:compile
+|  |  |  |  +- nl.basjes.parse:parser-core:jar:5.10.0:compile
+|  |  |  |  \- com.maxmind.geoip2:geoip2:jar:4.0.1:compile
+|  |  |  |     \- com.maxmind.db:maxmind-db:jar:3.0.0:compile
+|  |  |  +- org.kohsuke:libpam4j:jar:1.11:compile
+|  |  |  +- io.netty:netty-tcnative:jar:2.0.65.Final:runtime
+|  |  |  +- io.airlift:aircompressor:jar:0.25:compile
+|  |  |  +- sqlline:sqlline:jar:1.12.0:compile
+|  |  |  |  +- org.jline:jline-terminal:jar:3.21.0:compile
+|  |  |  |  +- org.jline:jline-terminal-jansi:jar:3.21.0:compile
+|  |  |  |  \- org.jline:jline-terminal-jna:jar:3.21.0:compile
+|  |  |  +- io.swagger.core.v3:swagger-jaxrs2:jar:2.1.12:compile
+|  |  |  |  +- io.swagger.core.v3:swagger-models:jar:2.1.12:compile
+|  |  |  |  \- io.swagger.core.v3:swagger-integration:jar:2.1.12:compile
+|  |  |  |     \- io.swagger.core.v3:swagger-core:jar:2.1.12:compile
+|  |  |  \- io.swagger.core.v3:swagger-jaxrs2-servlet-initializer-v2:jar:2.1.12:compile
+|  |  +- net.hydromatic:foodmart-data-json:jar:0.4:compile
+|  |  +- javax.validation:validation-api:jar:2.0.1.Final:compile
+|  |  \- org.slf4j:jul-to-slf4j:jar:2.0.6:compile
+|  \- org.springframework:spring-jdbc:jar:7.0.7:compile
++- org.apache.camel:camel-dropbox:jar:4.21.0-SNAPSHOT:compile
+|  \- com.dropbox.core:dropbox-core-sdk:jar:7.0.0:compile
++- org.apache.camel:camel-dynamic-router:jar:4.21.0-SNAPSHOT:compile
++- org.apache.camel:camel-ehcache:jar:4.21.0-SNAPSHOT:compile
+|  \- org.ehcache:ehcache:jar:jakarta:3.12.0:compile
++- org.apache.camel:camel-elasticsearch:jar:4.21.0-SNAPSHOT:compile
+|  +- co.elastic.clients:elasticsearch-java:jar:9.4.0:compile
+|  |  +- co.elastic.clients:elasticsearch-rest5-client:jar:9.4.0:compile
+|  |  +- org.eclipse.parsson:parsson:jar:1.1.7:compile
+|  |  +- io.opentelemetry.semconv:opentelemetry-semconv:jar:1.37.0:compile
+|  |  +- tools.jackson.core:jackson-databind:jar:3.1.0:compile
+|  |  \- tools.jackson.core:jackson-core:jar:3.1.0:compile
+|  \- org.elasticsearch.client:elasticsearch-rest-client-sniffer:jar:9.4.1:compile
++- org.apache.camel:camel-elasticsearch-rest-client:jar:4.21.0-SNAPSHOT:compile
+|  \- org.elasticsearch.client:elasticsearch-rest-client:jar:9.4.0:compile
+|     \- org.apache.httpcomponents:httpcore-nio:jar:4.4.16:compile
++- org.apache.camel:camel-exec:jar:4.21.0-SNAPSHOT:compile
+|  \- org.apache.commons:commons-exec:jar:1.6.0:compile
++- org.apache.camel:camel-fastjson:jar:4.21.0-SNAPSHOT:compile
+|  \- com.alibaba:fastjson:jar:2.0.62:compile
+|     \- com.alibaba.fastjson2:fastjson2-extension:jar:2.0.62:compile
+|        \- com.alibaba.fastjson2:fastjson2:jar:2.0.62:compile
++- org.apache.camel:camel-fhir:jar:4.21.0-SNAPSHOT:compile
+|  +- org.apache.commons:commons-text:jar:1.15.0:compile
+|  +- ca.uhn.hapi.fhir:hapi-fhir-base:jar:8.8.1:compile
+|  |  \- io.opentelemetry.instrumentation:opentelemetry-instrumentation-annotations:jar:2.10.0:compile
+|  +- ca.uhn.hapi.fhir:hapi-fhir-client:jar:8.8.1:compile
+|  +- ca.uhn.hapi.fhir:hapi-fhir-structures-r5:jar:8.8.1:compile
+|  |  +- ca.uhn.hapi.fhir:org.hl7.fhir.utilities:jar:6.7.9:compile
+|  |  +- ca.uhn.hapi.fhir:org.hl7.fhir.r5:jar:6.7.9:compile
+|  |  |  \- net.sourceforge.plantuml:plantuml-mit:jar:1.2023.9:compile
+|  |  \- ca.uhn.hapi.fhir:hapi-fhir-caching-api:jar:8.8.1:compile
+|  +- ca.uhn.hapi.fhir:hapi-fhir-structures-r4:jar:8.8.1:compile
+|  |  +- ca.uhn.hapi.fhir:org.hl7.fhir.r4:jar:6.7.9:compile
+|  |  \- org.apache.jena:jena-shex:jar:5.5.0:compile
+|  |     \- org.apache.jena:jena-arq:jar:5.5.0:compile
+|  |        +- org.apache.jena:jena-core:jar:5.5.0:compile
+|  |        |  +- org.apache.jena:jena-base:jar:5.5.0:compile
+|  |        |  |  \- com.github.andrewoma.dexx:collection:jar:0.7:compile
+|  |        |  +- org.apache.jena:jena-iri3986:jar:5.5.0:compile
+|  |        |  +- org.apache.jena:jena-iri:jar:5.5.0:compile
+|  |        |  \- org.apache.jena:jena-langtag:jar:5.5.0:compile
+|  |        +- com.apicatalog:titanium-json-ld:jar:1.6.0:compile
+|  |        |  +- com.apicatalog:titanium-jcs:jar:1.0.0:compile
+|  |        |  +- com.apicatalog:titanium-rdf-api:jar:1.0.0:compile
+|  |        |  \- com.apicatalog:titanium-rdf-n-quads:jar:1.0.0:compile
+|  |        \- org.glassfish:jakarta.json:jar:2.0.1:compile
+|  +- ca.uhn.hapi.fhir:hapi-fhir-structures-dstu3:jar:8.8.1:compile
+|  |  \- ca.uhn.hapi.fhir:org.hl7.fhir.dstu3:jar:6.7.9:compile
+|  +- ca.uhn.hapi.fhir:hapi-fhir-structures-dstu2:jar:8.8.1:compile
+|  +- ca.uhn.hapi.fhir:hapi-fhir-structures-dstu2.1:jar:8.8.1:compile
+|  |  \- ca.uhn.hapi.fhir:org.hl7.fhir.dstu2016may:jar:6.7.9:compile
+|  |     \- org.ogce:xpp3:jar:1.1.6:compile
+|  |        \- jakarta-regexp:jakarta-regexp:jar:1.4:compile
+|  \- ca.uhn.hapi.fhir:hapi-fhir-structures-hl7org-dstu2:jar:8.8.1:compile
+|     \- ca.uhn.hapi.fhir:org.hl7.fhir.dstu2:jar:6.7.9:compile
++- org.apache.camel:camel-fhir-api:jar:4.21.0-SNAPSHOT:compile
++- org.apache.camel:camel-file:jar:4.21.0-SNAPSHOT:compile
++- org.apache.camel:camel-file-watch:jar:4.21.0-SNAPSHOT:compile
+|  \- io.methvin:directory-watcher:jar:0.19.1:compile
++- org.apache.camel:camel-flatpack:jar:4.21.0-SNAPSHOT:compile
+|  \- net.sf.flatpack:flatpack:jar:4.0.18:compile
+|     \- org.projectlombok:lombok:jar:1.18.22:compile
++- org.apache.camel:camel-flink:jar:4.21.0-SNAPSHOT:compile
+|  +- org.apache.flink:flink-java:jar:1.20.4:compile
+|  |  +- org.apache.flink:flink-core:jar:1.20.4:compile
+|  |  |  +- org.apache.flink:flink-core-api:jar:1.20.4:compile
+|  |  |  |  \- org.apache.flink:flink-metrics-core:jar:1.20.4:compile
+|  |  |  +- org.apache.flink:flink-annotations:jar:1.20.4:compile
+|  |  |  +- org.apache.flink:flink-shaded-asm-9:jar:9.5-17.0:compile
+|  |  |  +- org.apache.flink:flink-shaded-jackson:jar:2.14.2-17.0:compile
+|  |  |  \- com.esotericsoftware.kryo:kryo:jar:2.24.0:compile
+|  |  |     \- com.esotericsoftware.minlog:minlog:jar:1.2:compile
+|  |  +- org.apache.commons:commons-math3:jar:3.6.1:compile
+|  |  \- com.twitter:chill-java:jar:0.7.6:compile
+|  +- org.apache.flink:flink-clients:jar:1.20.4:compile
+|  |  +- org.apache.flink:flink-runtime:jar:1.20.4:compile
+|  |  |  +- org.apache.flink:flink-rpc-core:jar:1.20.4:compile
+|  |  |  +- org.apache.flink:flink-rpc-akka-loader:jar:1.20.4:compile
+|  |  |  +- org.apache.flink:flink-queryable-state-client-java:jar:1.20.4:compile
+|  |  |  +- org.apache.flink:flink-hadoop-fs:jar:1.20.4:compile
+|  |  |  +- org.apache.flink:flink-shaded-netty:jar:4.1.91.Final-17.0:compile
+|  |  |  +- org.apache.flink:flink-shaded-zookeeper-3:jar:3.7.1-17.0:compile
+|  |  |  \- tools.profiler:async-profiler:jar:2.9:compile
+|  |  +- org.apache.flink:flink-optimizer:jar:1.20.4:compile
+|  |  +- commons-cli:commons-cli:jar:1.5.0:compile
+|  |  \- org.apache.flink:flink-datastream:jar:1.20.4:compile
+|  |     \- org.apache.flink:flink-datastream-api:jar:1.20.4:compile
+|  \- org.apache.flink:flink-streaming-java:jar:1.20.4:compile
+|     +- org.apache.flink:flink-file-sink-common:jar:1.20.4:compile
+|     +- org.apache.flink:flink-shaded-guava:jar:31.1-jre-17.0:compile
+|     \- org.apache.flink:flink-connector-datagen:jar:1.20.4:compile
++- org.apache.camel:camel-flowable:jar:4.21.0-SNAPSHOT:compile
+|  +- org.flowable:flowable-engine:jar:7.2.0:compile
+|  |  +- org.flowable:flowable-bpmn-converter:jar:7.2.0:compile
+|  |  |  \- org.flowable:flowable-bpmn-model:jar:7.2.0:compile
+|  |  +- org.flowable:flowable-process-validation:jar:7.2.0:compile
+|  |  +- org.flowable:flowable-image-generator:jar:7.2.0:compile
+|  |  +- org.flowable:flowable-engine-common-api:jar:7.2.0:compile
+|  |  +- org.flowable:flowable-engine-common:jar:7.2.0:compile
+|  |  |  \- org.flowable:flowable-variable-service-api:jar:7.2.0:compile
+|  |  +- org.flowable:flowable-variable-service:jar:7.2.0:compile
+|  |  +- org.flowable:flowable-identitylink-service:jar:7.2.0:compile
+|  |  |  \- org.flowable:flowable-identitylink-service-api:jar:7.2.0:compile
+|  |  +- org.flowable:flowable-entitylink-service:jar:7.2.0:compile
+|  |  |  \- org.flowable:flowable-entitylink-service-api:jar:7.2.0:compile
+|  |  +- org.flowable:flowable-event-registry-configurator:jar:7.2.0:compile
+|  |  +- org.flowable:flowable-eventsubscription-service:jar:7.2.0:compile
+|  |  +- org.flowable:flowable-task-service:jar:7.2.0:compile
+|  |  |  \- org.flowable:flowable-task-service-api:jar:7.2.0:compile
+|  |  +- org.flowable:flowable-job-service:jar:7.2.0:compile
+|  |  |  \- org.flowable:flowable-job-service-api:jar:7.2.0:compile
+|  |  +- org.flowable:flowable-batch-service:jar:7.2.0:compile
+|  |  |  \- org.flowable:flowable-batch-service-api:jar:7.2.0:compile
+|  |  +- org.flowable:flowable-idm-api:jar:7.2.0:compile
+|  |  +- org.flowable:flowable-idm-engine:jar:7.2.0:compile
+|  |  +- org.flowable:flowable-idm-engine-configurator:jar:7.2.0:compile
+|  |  +- org.flowable:flowable-cmmn-api:jar:7.2.0:compile
+|  |  |  \- org.flowable:flowable-cmmn-model:jar:7.2.0:compile
+|  |  +- org.flowable:flowable-dmn-api:jar:7.2.0:compile
+|  |  |  \- org.flowable:flowable-dmn-model:jar:7.2.0:compile
+|  |  +- org.flowable:flowable-form-model:jar:7.2.0:compile
+|  |  +- org.flowable:flowable-form-api:jar:7.2.0:compile
+|  |  +- org.flowable:flowable-content-api:jar:7.2.0:compile
+|  |  +- org.flowable:flowable-http-common:jar:7.2.0:compile
+|  |  \- org.flowable:flowable-mail:jar:7.2.0:compile
+|  \- org.flowable:flowable-event-registry:jar:7.2.0:compile
+|     +- org.flowable:flowable-event-registry-api:jar:7.2.0:compile
+|     +- org.flowable:flowable-event-registry-model:jar:7.2.0:compile
+|     +- org.flowable:flowable-event-registry-json-converter:jar:7.2.0:compile
+|     +- org.flowable:flowable-eventsubscription-service-api:jar:7.2.0:compile
+|     \- com.fasterxml.uuid:java-uuid-generator:jar:5.1.0:compile
++- org.apache.camel:camel-fop:jar:4.21.0-SNAPSHOT:compile
+|  \- org.apache.xmlgraphics:fop:jar:2.11:compile
+|     +- org.apache.xmlgraphics:fop-util:jar:2.11:compile
+|     |  \- org.apache.xmlgraphics:xmlgraphics-commons:jar:2.11:compile
+|     +- org.apache.xmlgraphics:fop-events:jar:2.11:compile
+|     |  \- com.thoughtworks.qdox:qdox:jar:1.12:compile
+|     \- org.apache.xmlgraphics:fop-core:jar:2.11:compile
+|        +- org.apache.xmlgraphics:batik-anim:jar:1.19:compile
+|        |  +- org.apache.xmlgraphics:batik-css:jar:1.19:compile
+|        |  +- org.apache.xmlgraphics:batik-dom:jar:1.19:compile
+|        |  +- org.apache.xmlgraphics:batik-ext:jar:1.19:compile
+|        |  +- org.apache.xmlgraphics:batik-parser:jar:1.19:compile
+|        |  +- org.apache.xmlgraphics:batik-shared-resources:jar:1.19:compile
+|        |  +- org.apache.xmlgraphics:batik-svg-dom:jar:1.19:compile
+|        |  +- org.apache.xmlgraphics:batik-util:jar:1.19:compile
+|        |  |  +- org.apache.xmlgraphics:batik-constants:jar:1.19:compile
+|        |  |  \- org.apache.xmlgraphics:batik-i18n:jar:1.19:compile
+|        |  \- xml-apis:xml-apis-ext:jar:1.3.04:compile
+|        +- org.apache.xmlgraphics:batik-awt-util:jar:1.19:compile
+|        +- org.apache.xmlgraphics:batik-bridge:jar:1.19:compile
+|        |  +- org.apache.xmlgraphics:batik-script:jar:1.19:compile
+|        |  \- org.apache.xmlgraphics:batik-xml:jar:1.19:compile
+|        +- org.apache.xmlgraphics:batik-extension:jar:1.19:compile
+|        +- org.apache.xmlgraphics:batik-gvt:jar:1.19:compile
+|        +- org.apache.xmlgraphics:batik-transcoder:jar:1.19:compile
+|        |  \- org.apache.xmlgraphics:batik-svggen:jar:1.19:compile
+|        \- org.apache.xmlgraphics:batik-codec:jar:1.19:compile
++- org.apache.camel:camel-fory:jar:4.21.0-SNAPSHOT:compile
+|  \- org.apache.fory:fory-core:jar:0.17.0:compile
++- org.apache.camel:camel-freemarker:jar:4.21.0-SNAPSHOT:compile
+|  \- org.freemarker:freemarker:jar:2.3.34:compile
++- org.apache.camel:camel-ftp:jar:4.21.0-SNAPSHOT:compile
+|  +- org.apache.camel:camel-ftp-common:jar:4.21.0-SNAPSHOT:compile
+|  +- com.github.mwiede:jsch:jar:2.28.2:compile
+|  \- commons-net:commons-net:jar:3.13.0:compile
++- org.apache.camel:camel-geocoder:jar:4.21.0-SNAPSHOT:compile
+|  +- com.google.maps:google-maps-services:jar:2.2.0:compile
+|  |  \- io.opencensus:opencensus-api:jar:0.31.0:compile
+|  \- com.jayway.jsonpath:json-path:jar:3.0.0:compile
++- org.apache.camel:camel-git:jar:4.21.0-SNAPSHOT:compile
+|  \- org.eclipse.jgit:org.eclipse.jgit:jar:7.6.0.202603022253-r:compile
+|     \- com.googlecode.javaewah:JavaEWAH:jar:1.2.3:compile
++- org.apache.camel:camel-github:jar:4.21.0-SNAPSHOT:compile
+|  \- org.eclipse.mylyn.github:org.eclipse.egit.github.core:jar:2.1.5:compile
++- org.apache.camel:camel-google-bigquery:jar:4.21.0-SNAPSHOT:compile
+|  \- com.google.cloud:google-cloud-bigquery:jar:2.66.0:compile
+|     +- com.google.cloud:google-cloud-core:jar:2.70.0:compile
+|     +- com.google.api.grpc:proto-google-common-protos:jar:2.71.0:compile
+|     +- com.google.api.grpc:proto-google-iam-v1:jar:1.66.0:compile
+|     +- org.threeten:threetenbp:jar:1.7.0:compile
+|     +- com.google.cloud:google-cloud-core-http:jar:2.70.0:compile
+|     +- com.google.http-client:google-http-client-appengine:jar:2.1.0:compile
+|     +- com.google.api:gax-httpjson:jar:2.80.0:compile
+|     +- io.opencensus:opencensus-contrib-http-util:jar:0.31.1:compile
+|     +- io.grpc:grpc-context:jar:1.81.0:compile
+|     +- org.checkerframework:checker-compat-qual:jar:2.5.6:compile
+|     +- org.checkerframework:checker-qual:jar:3.49.0:compile
+|     +- com.google.apis:google-api-services-bigquery:jar:v2-rev20251012-2.0.0:compile
+|     +- com.google.api:api-common:jar:2.63.0:compile
+|     +- com.google.api:gax:jar:2.80.0:compile
+|     +- io.grpc:grpc-api:jar:1.81.0:compile
+|     +- org.threeten:threeten-extra:jar:1.8.0:compile
+|     +- com.google.cloud:google-cloud-bigquerystorage:jar:3.28.0:compile
+|     +- org.codehaus.mojo:animal-sniffer-annotations:jar:1.27:compile
+|     +- io.grpc:grpc-protobuf-lite:jar:1.81.0:runtime
+|     +- com.google.api.grpc:proto-google-cloud-bigquerystorage-v1beta:jar:3.28.0:compile
+|     +- com.google.api.grpc:proto-google-cloud-bigquerystorage-v1alpha:jar:3.28.0:compile
+|     +- com.google.api.grpc:proto-google-cloud-bigquerystorage-v1beta1:jar:0.200.0:compile
+|     +- com.google.api.grpc:proto-google-cloud-bigquerystorage-v1beta2:jar:0.200.0:compile
+|     +- com.google.api:gax-grpc:jar:2.80.0:compile
+|     +- io.grpc:grpc-inprocess:jar:1.81.0:compile
+|     +- com.google.android:annotations:jar:4.1.1.4:runtime
+|     +- io.grpc:grpc-alts:jar:1.81.0:compile
+|     +- org.conscrypt:conscrypt-openjdk-uber:jar:2.5.2:compile
+|     +- io.grpc:grpc-util:jar:1.81.0:runtime
+|     +- io.perfmark:perfmark-api:jar:0.27.0:runtime
+|     +- io.grpc:grpc-googleapis:jar:1.81.0:runtime
+|     +- org.json:json:jar:20250517:compile
+|     +- com.google.api.grpc:grpc-google-cloud-bigquerystorage-v1beta1:jar:0.200.0:compile
+|     +- com.google.api.grpc:grpc-google-cloud-bigquerystorage-v1beta2:jar:0.200.0:compile
+|     +- com.google.api.grpc:grpc-google-cloud-bigquerystorage-v1:jar:3.28.0:compile
+|     +- com.google.api.grpc:proto-google-cloud-bigquerystorage-v1:jar:3.28.0:compile
+|     +- org.apache.arrow:arrow-vector:jar:17.0.0:compile
+|     +- org.apache.arrow:arrow-format:jar:17.0.0:compile
+|     +- com.google.flatbuffers:flatbuffers-java:jar:24.3.25:compile
+|     +- org.apache.arrow:arrow-memory-core:jar:17.0.0:compile
+|     +- org.apache.arrow:arrow-memory-netty:jar:17.0.0:compile
+|     +- org.apache.arrow:arrow-memory-netty-buffer-patch:jar:17.0.0:compile
+|     \- io.opentelemetry:opentelemetry-common:jar:1.57.0:compile
++- org.apache.camel:camel-google-common:jar:4.21.0-SNAPSHOT:compile
+|  +- com.google.auth:google-auth-library-oauth2-http:jar:1.47.0:compile
+|  |  \- com.google.auto.value:auto-value-annotations:jar:1.11.0:compile
+|  +- com.google.api-client:google-api-client:jar:2.9.0:compile
+|  +- com.google.oauth-client:google-oauth-client:jar:1.39.0:compile
+|  \- com.google.http-client:google-http-client-jackson2:jar:2.1.0:compile
++- org.apache.camel:camel-google-calendar:jar:4.21.0-SNAPSHOT:compile
+|  +- com.google.http-client:google-http-client:jar:2.1.0:compile
+|  +- com.google.http-client:google-http-client-gson:jar:2.1.0:compile
+|  +- com.google.http-client:google-http-client-apache-v2:jar:2.1.0:compile
+|  +- com.google.apis:google-api-services-calendar:jar:v3-rev20251207-2.0.0:compile
+|  \- com.google.oauth-client:google-oauth-client-jetty:jar:1.39.0:compile
+|     \- com.google.oauth-client:google-oauth-client-java6:jar:1.39.0:compile
++- org.apache.camel:camel-google-drive:jar:4.21.0-SNAPSHOT:compile
+|  \- com.google.apis:google-api-services-drive:jar:v3-rev20251210-2.0.0:compile
++- org.apache.camel:camel-google-functions:jar:4.21.0-SNAPSHOT:compile
+|  \- com.google.cloud:google-cloud-functions:jar:2.79.0:compile
+|     +- javax.annotation:javax.annotation-api:jar:1.3.2:compile
+|     +- com.google.api.grpc:proto-google-cloud-functions-v2:jar:2.79.0:compile
+|     +- com.google.api.grpc:proto-google-cloud-functions-v2alpha:jar:2.79.0:compile
+|     +- com.google.api.grpc:proto-google-cloud-functions-v2beta:jar:2.79.0:compile
+|     +- com.google.api.grpc:proto-google-cloud-functions-v1:jar:2.79.0:compile
+|     +- io.grpc:grpc-grpclb:jar:1.81.0:compile
+|     \- io.grpc:grpc-xds:jar:1.81.0:runtime
++- org.apache.camel:camel-google-mail:jar:4.21.0-SNAPSHOT:compile
+|  \- com.google.apis:google-api-services-gmail:jar:v1-rev20251201-2.0.0:compile
++- org.apache.camel:camel-google-pubsub:jar:4.21.0-SNAPSHOT:compile
+|  \- com.google.cloud:google-cloud-pubsub:jar:1.150.2:compile
+|     \- com.google.api.grpc:proto-google-cloud-pubsub-v1:jar:1.132.2:compile
++- org.apache.camel:camel-google-secret-manager:jar:4.21.0-SNAPSHOT:compile
+|  \- com.google.cloud:google-cloud-secretmanager:jar:2.92.0:compile
+|     +- com.google.api.grpc:proto-google-cloud-secretmanager-v1beta1:jar:2.92.0:compile
+|     +- com.google.api.grpc:proto-google-cloud-secretmanager-v1beta2:jar:2.92.0:compile
+|     \- com.google.api.grpc:proto-google-cloud-secretmanager-v1:jar:2.92.0:compile
++- org.apache.camel:camel-google-sheets:jar:4.21.0-SNAPSHOT:compile
+|  \- com.google.apis:google-api-services-sheets:jar:v4-rev20251110-2.0.0:compile
++- org.apache.camel:camel-google-storage:jar:4.21.0-SNAPSHOT:compile
+|  \- com.google.cloud:google-cloud-storage:jar:2.68.0:compile
+|     +- com.google.apis:google-api-services-storage:jar:v1-rev20260204-2.0.0:compile
+|     +- com.google.cloud:google-cloud-core-grpc:jar:2.70.0:compile
+|     +- com.google.api.grpc:proto-google-cloud-storage-v2:jar:2.68.0:compile
+|     +- com.google.api.grpc:grpc-google-cloud-storage-v2:jar:2.68.0:compile
+|     +- com.google.api.grpc:gapic-google-cloud-storage-v2:jar:2.68.0:compile
+|     +- io.opentelemetry:opentelemetry-sdk-trace:jar:1.57.0:compile
+|     +- io.opentelemetry:opentelemetry-sdk-logs:jar:1.57.0:compile
+|     +- io.grpc:grpc-opentelemetry:jar:1.81.0:compile
+|     +- io.opentelemetry:opentelemetry-sdk-metrics:jar:1.57.0:compile
+|     +- io.opentelemetry:opentelemetry-sdk-common:jar:1.57.0:compile
+|     +- io.opentelemetry:opentelemetry-sdk-extension-autoconfigure-spi:jar:1.57.0:compile
+|     +- com.google.cloud.opentelemetry:exporter-metrics:jar:0.33.0:compile
+|     +- com.google.cloud:google-cloud-monitoring:jar:3.52.0:compile
+|     +- com.google.api.grpc:proto-google-cloud-monitoring-v3:jar:3.52.0:compile
+|     +- com.google.cloud.opentelemetry:shared-resourcemapping:jar:0.33.0:runtime
+|     +- io.opentelemetry.contrib:opentelemetry-gcp-resources:jar:1.37.0-alpha:compile
+|     +- com.google.cloud.opentelemetry:detector-resources-support:jar:0.33.0:runtime
+|     \- io.grpc:grpc-rls:jar:1.81.0:runtime
++- org.apache.camel:camel-google-vertexai:jar:4.21.0-SNAPSHOT:compile
+|  +- com.google.genai:google-genai:jar:1.53.0:compile
+|  |  +- org.java-websocket:Java-WebSocket:jar:1.6.0:compile
+|  |  \- com.squareup.okhttp3:logging-interceptor:jar:4.12.0:compile
+|  +- com.google.cloud:google-cloud-aiplatform:jar:3.93.0:compile
+|  |  +- com.google.api.grpc:proto-google-cloud-aiplatform-v1beta1:jar:0.109.0:compile
+|  |  \- com.google.api.grpc:proto-google-cloud-aiplatform-v1:jar:3.93.0:compile
+|  \- com.google.auth:google-auth-library-credentials:jar:1.47.0:compile
++- org.apache.camel:camel-graphql:jar:4.21.0-SNAPSHOT:compile
++- org.apache.camel:camel-grok:jar:4.21.0-SNAPSHOT:compile
+|  \- io.github.whatap:java-grok:jar:0.2.0:compile
++- org.apache.camel:camel-groovy:jar:4.21.0-SNAPSHOT:compile
+|  +- org.apache.groovy:groovy:jar:5.0.6:compile
+|  +- org.apache.groovy:groovy-json:jar:5.0.6:compile
+|  +- org.apache.groovy:groovy-xml:jar:5.0.6:compile
+|  \- org.apache.groovy:groovy-dateutil:jar:5.0.6:compile
++- org.apache.camel:camel-grpc:jar:4.21.0-SNAPSHOT:compile
+|  +- io.grpc:grpc-auth:jar:1.81.0:compile
+|  +- io.grpc:grpc-netty:jar:1.81.0:compile
+|  +- io.grpc:grpc-protobuf:jar:1.81.0:compile
+|  +- io.grpc:grpc-stub:jar:1.81.0:compile
+|  +- io.grpc:grpc-core:jar:1.81.0:compile
+|  +- org.javassist:javassist:jar:3.31.0-GA:compile
+|  \- com.auth0:java-jwt:jar:4.5.2:compile
++- org.apache.camel:camel-gson:jar:4.21.0-SNAPSHOT:compile
++- org.apache.camel:camel-hashicorp-vault:jar:4.21.0-SNAPSHOT:compile
+|  \- org.springframework.vault:spring-vault-core:jar:4.0.2:compile
+|     \- org.springframework:spring-web:jar:7.0.7:compile
++- org.apache.camel:camel-hazelcast:jar:4.21.0-SNAPSHOT:compile
+|  \- com.hazelcast:hazelcast:jar:5.4.0:compile
++- org.apache.camel:camel-headersmap:jar:4.21.0-SNAPSHOT:compile
+|  \- com.cedarsoftware:java-util:jar:4.102.0:compile
++- org.apache.camel:camel-hl7:jar:4.21.0-SNAPSHOT:compile
+|  \- ca.uhn.hapi:hapi-base:jar:2.6.0:compile
++- org.apache.camel:camel-http:jar:4.21.0-SNAPSHOT:compile
+|  +- org.apache.httpcomponents.core5:httpcore5:jar:5.4.2:compile
+|  \- org.apache.httpcomponents.core5:httpcore5-h2:jar:5.4.2:compile
++- org.apache.camel:camel-http-base:jar:4.21.0-SNAPSHOT:compile
++- org.apache.camel:camel-http-common:jar:4.21.0-SNAPSHOT:compile
++- org.apache.camel:camel-huaweicloud-common:jar:4.21.0-SNAPSHOT:compile
++- org.apache.camel:camel-huaweicloud-dms:jar:4.21.0-SNAPSHOT:compile
+|  \- com.huaweicloud.sdk:huaweicloud-sdk-core:jar:3.1.196:compile
+|     \- org.openeuler:bgmprovider:jar:1.1.4:compile
+|        +- org.openeuler:jca:jar:1.1.4:compile
+|        |  \- org.openeuler:commons:jar:1.1.4:compile
+|        \- org.openeuler:jsse:jar:1.1.4:compile
++- org.apache.camel:camel-huaweicloud-frs:jar:4.21.0-SNAPSHOT:compile
+|  \- com.huaweicloud.sdk:huaweicloud-sdk-frs:jar:3.1.196:compile
++- org.apache.camel:camel-huaweicloud-functiongraph:jar:4.21.0-SNAPSHOT:compile
+|  \- com.huaweicloud.sdk:huaweicloud-sdk-functiongraph:jar:3.1.196:compile
++- org.apache.camel:camel-huaweicloud-iam:jar:4.21.0-SNAPSHOT:compile
+|  \- com.huaweicloud.sdk:huaweicloud-sdk-iam:jar:3.1.196:compile
++- org.apache.camel:camel-huaweicloud-imagerecognition:jar:4.21.0-SNAPSHOT:compile
+|  \- com.huaweicloud.sdk:huaweicloud-sdk-image:jar:3.1.196:compile
++- org.apache.camel:camel-huaweicloud-obs:jar:4.21.0-SNAPSHOT:compile
+|  \- com.huaweicloud:esdk-obs-java:jar:3.25.10:compile
+|     \- com.squareup.okio:okio:jar:3.8.0:compile
++- org.apache.camel:camel-huaweicloud-smn:jar:4.21.0-SNAPSHOT:compile
+|  +- com.huaweicloud.sdk:huaweicloud-sdk-smn:jar:3.1.196:compile
+|  \- org.apache.commons:commons-lang3:jar:3.20.0:compile
++- org.apache.camel:camel-ibm-cos:jar:4.21.0-SNAPSHOT:compile
+|  \- com.ibm.cos:ibm-cos-java-sdk:jar:2.15.1:compile
+|     +- com.ibm.cos:ibm-cos-java-sdk-s3:jar:2.15.1:compile
+|     +- com.ibm.cos:ibm-cos-java-sdk-kms:jar:2.15.1:compile
+|     \- com.ibm.cos:ibm-cos-java-sdk-core:jar:2.15.1:compile
+|        \- com.amazon.ion:ion-java:jar:1.11.11:compile
++- org.apache.camel:camel-ibm-secrets-manager:jar:4.21.0-SNAPSHOT:compile
+|  \- com.ibm.cloud:secrets-manager:jar:2.0.28:compile
+|     \- com.ibm.cloud:secrets-manager-sdk-common:jar:2.0.28:compile
++- org.apache.camel:camel-ibm-watson-discovery:jar:4.21.0-SNAPSHOT:compile
+|  \- com.ibm.watson:discovery:jar:16.2.0:compile
+|     \- com.ibm.watson:common:jar:16.2.0:compile
++- org.apache.camel:camel-ibm-watson-language:jar:4.21.0-SNAPSHOT:compile
+|  \- com.ibm.watson:natural-language-understanding:jar:16.2.0:compile
++- org.apache.camel:camel-ibm-watson-speech-to-text:jar:4.21.0-SNAPSHOT:compile
+|  \- com.ibm.watson:speech-to-text:jar:16.2.0:compile
++- org.apache.camel:camel-ibm-watson-text-to-speech:jar:4.21.0-SNAPSHOT:compile
+|  \- com.ibm.watson:text-to-speech:jar:16.2.0:compile
++- org.apache.camel:camel-ibm-watsonx-ai:jar:4.21.0-SNAPSHOT:compile
+|  \- com.ibm.watsonx:watsonx-ai:jar:0.20.0:compile
+|     \- com.ibm.watsonx:watsonx-ai-core:jar:0.20.0:compile
++- org.apache.camel:camel-ical:jar:4.21.0-SNAPSHOT:compile
+|  \- org.mnode.ical4j:ical4j:jar:4.2.5:compile
++- org.apache.camel:camel-iec60870:jar:4.21.0-SNAPSHOT:compile
+|  +- org.eclipse.neoscada.protocols:org.eclipse.neoscada.protocol.iec60870:jar:0.4.0:compile
+|  +- org.eclipse.neoscada.protocols:org.eclipse.neoscada.protocol.iec60870.client:jar:0.4.0:compile
+|  +- org.eclipse.neoscada.protocols:org.eclipse.neoscada.protocol.iec60870.client.data:jar:0.4.0:compile
+|  +- org.eclipse.neoscada.protocols:org.eclipse.neoscada.protocol.iec60870.server:jar:0.4.0:compile
+|  +- org.eclipse.neoscada.protocols:org.eclipse.neoscada.protocol.iec60870.server.data:jar:0.4.0:compile
+|  +- org.eclipse.neoscada.utils:org.eclipse.scada.utils:jar:0.4.0:compile
+|  \- io.netty:netty-codec:jar:4.2.12.Final:compile
+|     +- io.netty:netty-codec-protobuf:jar:4.2.12.Final:compile
+|     \- io.netty:netty-codec-marshalling:jar:4.2.12.Final:compile
++- org.apache.camel:camel-iggy:jar:4.21.0-SNAPSHOT:compile
+|  +- org.apache.iggy:iggy:jar:0.8.0:compile
+|  |  \- com.github.spotbugs:spotbugs-annotations:jar:4.9.8:runtime
+|  \- org.apache.commons:commons-pool2:jar:2.13.1:compile
++- org.apache.camel:camel-ignite:jar:4.21.0-SNAPSHOT:compile
+|  \- org.apache.ignite:ignite-core:jar:2.18.0:compile
+|     +- org.apache.ignite:ignite-commons:jar:2.18.0:compile
+|     +- org.apache.ignite:ignite-binary-api:jar:2.18.0:compile
+|     +- org.apache.ignite:ignite-binary-impl:jar:2.18.0:compile
+|     \- org.apache.ignite:ignite-grid-unsafe:jar:2.18.0:compile
++- org.apache.camel:camel-infinispan:jar:4.21.0-SNAPSHOT:compile
+|  +- org.infinispan:infinispan-client-hotrod:jar:16.0.11:compile
+|  |  +- org.infinispan:infinispan-api:jar:16.0.11:compile
+|  |  +- org.infinispan:infinispan-counter-api:jar:16.0.11:compile
+|  |  +- io.smallrye.reactive:mutiny:jar:2.9.5:compile
+|  |  |  +- io.smallrye.common:smallrye-common-annotation:jar:2.13.8:compile
+|  |  |  \- org.jctools:jctools-core:jar:4.0.5:compile
+|  |  +- org.wildfly.security:wildfly-elytron-sasl-digest:jar:2.7.0.Final:compile
+|  |  |  +- org.wildfly.security:wildfly-elytron-auth-server:jar:2.7.0.Final:compile
+|  |  |  |  +- org.wildfly.security:wildfly-elytron-auth:jar:2.7.0.Final:compile
+|  |  |  |  +- org.wildfly.security:wildfly-elytron-base:jar:2.7.0.Final:compile
+|  |  |  |  +- org.wildfly.security:wildfly-elytron-permission:jar:2.7.0.Final:compile
+|  |  |  |  \- org.wildfly.security:wildfly-elytron-x500:jar:2.7.0.Final:compile
+|  |  |  +- org.wildfly.security:wildfly-elytron-credential:jar:2.7.0.Final:compile
+|  |  |  |  +- org.wildfly.security:wildfly-elytron-keystore:jar:2.7.0.Final:compile
+|  |  |  |  |  \- org.wildfly.security:wildfly-elytron-x500-cert:jar:2.7.0.Final:compile
+|  |  |  |  |     \- org.wildfly.security:wildfly-elytron-x500-cert-util:jar:2.7.0.Final:compile
+|  |  |  |  \- org.wildfly.security:wildfly-elytron-provider-util:jar:2.7.0.Final:compile
+|  |  |  +- org.wildfly.security:wildfly-elytron-mechanism:jar:2.7.0.Final:compile
+|  |  |  |  \- org.wildfly.security:wildfly-elytron-http:jar:2.7.0.Final:compile
+|  |  |  +- org.wildfly.security:wildfly-elytron-mechanism-digest:jar:2.7.0.Final:compile
+|  |  |  +- org.wildfly.security:wildfly-elytron-sasl:jar:2.7.0.Final:compile
+|  |  |  |  \- org.wildfly.security:wildfly-elytron-ssl:jar:2.7.0.Final:compile
+|  |  |  +- org.wildfly.security:wildfly-elytron-util:jar:2.7.0.Final:compile
+|  |  |  \- org.wildfly.common:wildfly-common:jar:1.6.0.Final:compile
+|  |  +- org.wildfly.security:wildfly-elytron-sasl-external:jar:2.7.0.Final:compile
+|  |  +- org.wildfly.security:wildfly-elytron-sasl-gs2:jar:2.7.0.Final:compile
+|  |  |  +- org.wildfly.security:wildfly-elytron-asn1:jar:2.7.0.Final:compile
+|  |  |  +- org.wildfly.security:wildfly-elytron-mechanism-gssapi:jar:2.7.0.Final:compile
+|  |  |  \- org.wildfly.security:wildfly-elytron-security-manager-action:jar:2.7.0.Final:compile
+|  |  +- org.wildfly.security:wildfly-elytron-sasl-gssapi:jar:2.7.0.Final:compile
+|  |  +- org.wildfly.security:wildfly-elytron-sasl-oauth2:jar:2.7.0.Final:compile
+|  |  |  \- org.wildfly.security:wildfly-elytron-mechanism-oauth2:jar:2.7.0.Final:compile
+|  |  +- org.wildfly.security:wildfly-elytron-sasl-plain:jar:2.7.0.Final:compile
+|  |  +- org.wildfly.security:wildfly-elytron-sasl-scram:jar:2.7.0.Final:compile
+|  |  |  \- org.wildfly.security:wildfly-elytron-mechanism-scram:jar:2.7.0.Final:compile
+|  |  +- org.wildfly.security:wildfly-elytron-password-impl:jar:2.7.0.Final:compile
+|  |  +- io.netty:netty-resolver-dns:jar:4.2.12.Final:compile
+|  |  |  \- io.netty:netty-codec-dns:jar:4.2.12.Final:compile
+|  |  \- io.netty:netty-transport-native-epoll:jar:linux-aarch_64:4.2.12.Final:runtime
+|  \- org.infinispan:infinispan-query:jar:16.0.11:compile
+|     +- org.hibernate.models:hibernate-models:jar:1.0.1:compile
+|     +- org.hibernate.search:hibernate-search-mapper-pojo-base:jar:8.1.2.Final:compile
+|     |  \- org.hibernate.search:hibernate-search-engine:jar:8.1.2.Final:compile
+|     |     \- org.hibernate.search:hibernate-search-util-common:jar:8.1.2.Final:compile
+|     \- org.hibernate.search:hibernate-search-backend-lucene:jar:8.1.2.Final:compile
+|        +- org.apache.lucene:lucene-join:jar:9.12.2:compile
+|        \- org.apache.lucene:lucene-highlighter:jar:9.12.2:compile
+|           \- org.apache.lucene:lucene-memory:jar:9.12.2:runtime
++- org.apache.camel:camel-infinispan-common:jar:4.21.0-SNAPSHOT:compile
+|  \- org.infinispan:infinispan-commons:jar:16.0.11:compile
+|     +- org.infinispan.protostream:protostream:jar:6.0.7:compile
+|     \- org.infinispan.protostream:protostream-types:jar:6.0.7:compile
++- org.apache.camel:camel-infinispan-embedded:jar:4.21.0-SNAPSHOT:compile
+|  +- org.infinispan:infinispan-core:jar:16.0.11:compile
+|  |  \- org.jboss.threads:jboss-threads:jar:3.9.1:compile
+|  |     +- io.smallrye.common:smallrye-common-constraint:jar:2.12.0:compile
+|  |     +- io.smallrye.common:smallrye-common-cpu:jar:2.12.0:compile
+|  |     \- io.smallrye.common:smallrye-common-function:jar:2.12.0:compile
+|  \- org.infinispan:infinispan-component-annotations:jar:16.0.11:compile
++- org.apache.camel:camel-influxdb:jar:4.21.0-SNAPSHOT:compile
+|  \- org.influxdb:influxdb-java:jar:2.25:compile
+|     +- com.squareup.retrofit2:converter-moshi:jar:2.9.0:compile
+|     |  \- com.squareup.moshi:moshi:jar:1.8.0:compile
+|     \- org.msgpack:msgpack-core:jar:0.9.8:compile
++- org.apache.camel:camel-influxdb2:jar:4.21.0-SNAPSHOT:compile
+|  \- com.influxdb:influxdb-client-java:jar:8.0.0:compile
+|     +- com.influxdb:influxdb-client-core:jar:8.0.0:compile
+|     |  \- com.influxdb:influxdb-client-utils:jar:8.0.0:compile
+|     +- com.squareup.retrofit2:adapter-rxjava3:jar:2.11.0:compile
+|     +- com.squareup.retrofit2:converter-scalars:jar:2.11.0:compile
+|     \- com.squareup.retrofit2:converter-gson:jar:2.11.0:compile
++- org.apache.camel:camel-irc:jar:4.21.0-SNAPSHOT:compile
+|  \- org.schwering:irclib:jar:1.10:compile
++- org.apache.camel:camel-ironmq:jar:4.21.0-SNAPSHOT:compile
+|  \- io.iron.ironmq:ironmq:jar:3.0.5:compile
++- org.apache.camel:camel-iso8583:jar:4.21.0-SNAPSHOT:compile
+|  \- net.sf.j8583:j8583:jar:3.0.1:compile
++- org.apache.camel:camel-jackson:jar:4.21.0-SNAPSHOT:compile
++- org.apache.camel:camel-jackson-avro:jar:4.21.0-SNAPSHOT:compile
+|  \- com.fasterxml.jackson.dataformat:jackson-dataformat-avro:jar:2.21.3:compile
++- org.apache.camel:camel-jackson-protobuf:jar:4.21.0-SNAPSHOT:compile
+|  \- com.fasterxml.jackson.dataformat:jackson-dataformat-protobuf:jar:2.21.3:compile
+|     \- com.squareup:protoparser:jar:4.0.3:compile
++- org.apache.camel:camel-jacksonxml:jar:4.21.0-SNAPSHOT:compile
+|  \- com.fasterxml.jackson.module:jackson-module-jakarta-xmlbind-annotations:jar:2.21.3:compile
++- org.apache.camel:camel-jandex:jar:4.21.0-SNAPSHOT:compile
+|  \- io.smallrye:jandex:jar:3.5.3:compile
++- org.apache.camel:camel-jasypt:jar:4.21.0-SNAPSHOT:compile
+|  \- org.jasypt:jasypt:jar:1.9.3:compile
++- org.apache.camel:camel-javascript:jar:4.21.0-SNAPSHOT:compile
+|  \- org.graalvm.js:js-language:jar:25.0.3:compile
+|     +- org.graalvm.regex:regex:jar:25.0.3:compile
+|     +- org.graalvm.truffle:truffle-api:jar:25.0.3:compile
+|     |  +- org.graalvm.sdk:collections:jar:25.0.3:compile
+|     |  \- org.graalvm.sdk:nativeimage:jar:25.0.3:compile
+|     |     \- org.graalvm.sdk:word:jar:25.0.3:compile
+|     +- org.graalvm.polyglot:polyglot:jar:25.0.3:compile
+|     \- org.graalvm.shadowed:icu4j:jar:25.0.3:compile
+|        \- org.graalvm.shadowed:xz:jar:25.0.3:compile
++- org.apache.camel:camel-jaxb:jar:4.21.0-SNAPSHOT:compile
++- org.apache.camel:camel-jcache:jar:4.21.0-SNAPSHOT:compile
+|  \- javax.cache:cache-api:jar:1.1.1:compile
++- org.apache.camel:camel-jcr:jar:4.21.0-SNAPSHOT:compile
+|  +- org.apache.jackrabbit:jackrabbit-core:jar:2.22.3:compile
+|  |  +- concurrent:concurrent:jar:1.3.4:compile
+|  |  +- commons-dbcp:commons-dbcp:jar:1.4:compile
+|  |  |  \- commons-pool:commons-pool:jar:1.5.4:compile
+|  |  +- org.apache.jackrabbit:oak-jackrabbit-api:jar:1.88.0:compile
+|  |  +- org.apache.jackrabbit:jackrabbit-jcr-commons:jar:2.22.3:compile
+|  |  +- org.apache.jackrabbit:jackrabbit-data:jar:2.22.3:compile
+|  |  +- org.apache.jackrabbit:jackrabbit-spi-commons:jar:2.22.3:compile
+|  |  \- org.apache.jackrabbit:jackrabbit-spi:jar:2.22.3:compile
+|  \- javax.jcr:jcr:jar:2.0:compile
++- org.apache.camel:camel-jdbc:jar:4.21.0-SNAPSHOT:compile
++- org.apache.camel:camel-jetty:jar:4.21.0-SNAPSHOT:compile
+|  +- org.eclipse.jetty:jetty-security:jar:12.1.9:compile
+|  +- org.eclipse.jetty:jetty-client:jar:12.1.9:compile
+|  |  +- org.eclipse.jetty:jetty-alpn-client:jar:12.1.9:compile
+|  |  \- org.eclipse.jetty.compression:jetty-compression-gzip:jar:12.1.9:compile
+|  |     \- org.eclipse.jetty.compression:jetty-compression-common:jar:12.1.9:compile
+|  \- org.eclipse.jetty:jetty-jmx:jar:12.1.9:compile
++- org.apache.camel:camel-jetty-common:jar:4.21.0-SNAPSHOT:compile
++- org.apache.camel:camel-jfr:jar:4.21.0-SNAPSHOT:compile
++- org.apache.camel:camel-jgroups:jar:4.21.0-SNAPSHOT:compile
+|  \- org.jgroups:jgroups:jar:5.5.5.Final:compile
++- org.apache.camel:camel-jgroups-raft:jar:4.21.0-SNAPSHOT:compile
+|  \- org.jgroups:jgroups-raft:jar:1.1.4.Final:compile
++- org.apache.camel:camel-jira:jar:4.21.0-SNAPSHOT:compile
+|  +- com.atlassian.sal:sal-api:jar:7.2.1:compile
+|  +- com.atlassian.jira:jira-rest-java-client-api:jar:6.0.2:compile
+|  |  +- io.atlassian.util.concurrent:atlassian-util-concurrent:jar:4.0.1:compile
+|  |  \- com.atlassian.httpclient:atlassian-httpclient-api:jar:4.0.1:compile
+|  +- com.atlassian.jira:jira-rest-java-client-core:jar:6.0.2:compile
+|  |  +- org.glassfish.jersey.core:jersey-client:jar:2.42:compile
+|  |  |  +- org.glassfish.jersey.core:jersey-common:jar:2.42:compile
+|  |  |  |  \- org.glassfish.hk2:osgi-resource-locator:jar:1.0.3:compile
+|  |  |  \- org.glassfish.hk2.external:jakarta.inject:jar:2.6.1:compile
+|  |  +- org.glassfish.jersey.media:jersey-media-json-jettison:jar:2.42:compile
+|  |  |  \- org.glassfish.jersey.media:jersey-media-jaxb:jar:2.42:compile
+|  |  +- com.atlassian.event:atlassian-event:jar:6.0.0:compile
+|  |  \- com.atlassian.httpclient:atlassian-httpclient-library:jar:4.0.1:compile
+|  |     +- org.apache.httpcomponents:httpasyncclient-cache:jar:4.1.5:compile
+|  |     \- org.apache.httpcomponents:httpclient-cache:jar:4.5.14:compile
+|  +- io.atlassian.fugue:fugue:jar:6.1.3:compile
+|  +- org.codehaus.jettison:jettison:jar:1.5.5:compile
+|  \- org.apache.httpcomponents:httpclient:jar:4.5.14:compile
++- org.apache.camel:camel-jms:jar:4.21.0-SNAPSHOT:compile
+|  +- org.springframework:spring-jms:jar:7.0.7:compile
+|  |  \- org.springframework:spring-messaging:jar:7.0.7:compile
+|  +- org.springframework:spring-tx:jar:7.0.7:compile
+|  \- jakarta.jms:jakarta.jms-api:jar:3.1.0:compile
++- org.apache.camel:camel-jmx:jar:4.21.0-SNAPSHOT:compile
++- org.apache.camel:camel-jolt:jar:4.21.0-SNAPSHOT:compile
+|  +- com.bazaarvoice.jolt:jolt-core:jar:0.1.8:compile
+|  |  \- javax.inject:javax.inject:jar:1:compile
+|  \- com.bazaarvoice.jolt:json-utils:jar:0.1.8:compile
++- org.apache.camel:camel-jooq:jar:4.21.0-SNAPSHOT:compile
+|  +- org.jooq:jooq:jar:3.19.30:compile
+|  |  \- io.r2dbc:r2dbc-spi:jar:1.0.0.RELEASE:compile
+|  \- jakarta.annotation:jakarta.annotation-api:jar:3.0.0:compile
++- org.apache.camel:camel-joor:jar:4.21.0-SNAPSHOT:compile
++- org.apache.camel:camel-jpa:jar:4.21.0-SNAPSHOT:compile
+|  +- org.springframework:spring-orm:jar:7.0.7:compile
+|  +- jakarta.persistence:jakarta.persistence-api:jar:3.2.0:compile
+|  \- org.apache.openjpa:openjpa:jar:4.1.1:compile
+|     \- org.apache.xbean:xbean-asm9-shaded:jar:4.26:compile
++- org.apache.camel:camel-jq:jar:4.21.0-SNAPSHOT:compile
+|  +- net.thisptr:jackson-jq:jar:1.6.1:compile
+|  |  \- org.jruby.joni:joni:jar:2.2.6:compile
+|  |     \- org.jruby.jcodings:jcodings:jar:1.0.63:compile
+|  \- net.thisptr:jackson-jq-extra:jar:1.6.1:compile
++- org.apache.camel:camel-jsch:jar:4.21.0-SNAPSHOT:compile
+|  \- org.apache.mina:mina-core:jar:2.2.7:compile
++- org.apache.camel:camel-jslt:jar:4.21.0-SNAPSHOT:compile
+|  \- com.schibsted.spt.data:jslt:jar:0.1.14:compile
++- org.apache.camel:camel-json-patch:jar:4.21.0-SNAPSHOT:compile
+|  \- com.github.java-json-tools:json-patch:jar:1.13:compile
+|     +- com.github.java-json-tools:msg-simple:jar:1.2:compile
+|     |  \- com.github.java-json-tools:btf:jar:1.3:compile
+|     \- com.github.java-json-tools:jackson-coreutils:jar:2.0:compile
++- org.apache.camel:camel-json-validator:jar:4.21.0-SNAPSHOT:compile
+|  \- com.networknt:json-schema-validator:jar:2.0.1:compile
+|     \- com.ethlo.time:itu:jar:1.14.0:compile
++- org.apache.camel:camel-jsonapi:jar:4.21.0-SNAPSHOT:compile
+|  \- com.github.jasminb:jsonapi-converter:jar:0.15:compile
++- org.apache.camel:camel-jsonata:jar:4.21.0-SNAPSHOT:compile
+|  \- com.dashjoin:jsonata:jar:0.9.10:compile
++- org.apache.camel:camel-jsonb:jar:4.21.0-SNAPSHOT:compile
+|  +- jakarta.json:jakarta.json-api:jar:2.1.3:compile
+|  +- jakarta.json.bind:jakarta.json.bind-api:jar:3.0.1:compile
+|  \- org.eclipse:yasson:jar:3.0.4:compile
++- org.apache.camel:camel-jsonpath:jar:4.21.0-SNAPSHOT:compile
+|  \- net.minidev:json-smart:jar:2.6.0:compile
+|     \- net.minidev:accessors-smart:jar:2.6.0:compile
++- org.apache.camel:camel-jt400:jar:4.21.0-SNAPSHOT:compile
+|  \- net.sf.jt400:jt400:jar:java11:21.0.6:compile
++- org.apache.camel:camel-jta:jar:4.21.0-SNAPSHOT:compile
+|  \- jakarta.transaction:jakarta.transaction-api:jar:2.0.1:compile
++- org.apache.camel:camel-jte:jar:4.21.0-SNAPSHOT:compile
+|  \- gg.jte:jte:jar:3.2.4:compile
+|     +- gg.jte:jte-runtime:jar:3.2.4:compile
+|     \- gg.jte:jte-extension-api:jar:3.2.4:compile
++- org.apache.camel:camel-kafka:jar:4.21.0-SNAPSHOT:compile
++- org.apache.camel:camel-kamelet:jar:4.21.0-SNAPSHOT:compile
++- org.apache.camel:camel-keycloak:jar:4.21.0-SNAPSHOT:compile
+|  +- org.keycloak:keycloak-admin-client:jar:26.0.8:compile
+|  |  +- org.keycloak:keycloak-client-common-synced:jar:26.0.8:compile
+|  |  +- com.fasterxml.jackson.jakarta.rs:jackson-jakarta-rs-yaml-provider:jar:2.21.3:compile
+|  |  +- org.eclipse.microprofile.openapi:microprofile-openapi-api:jar:4.0.2:compile
+|  |  +- org.jboss.resteasy:resteasy-client:jar:6.2.12.Final:compile
+|  |  |  +- org.jboss.resteasy:resteasy-client-api:jar:6.2.12.Final:compile
+|  |  |  +- org.jboss.resteasy:resteasy-core-spi:jar:6.2.12.Final:compile
+|  |  |  \- org.jboss.resteasy:resteasy-core:jar:6.2.12.Final:compile
+|  |  |     +- org.jboss:jandex:jar:2.4.5.Final:compile
+|  |  |     \- com.ibm.async:asyncutil:jar:0.1.0:compile
+|  |  +- org.jboss.resteasy:resteasy-multipart-provider:jar:6.2.12.Final:compile
+|  |  |  +- org.apache.james:apache-mime4j-dom:jar:0.8.12:compile
+|  |  |  |  \- org.apache.james:apache-mime4j-core:jar:0.8.12:compile
+|  |  |  \- org.apache.james:apache-mime4j-storage:jar:0.8.12:compile
+|  |  +- org.jboss.resteasy:resteasy-jackson2-provider:jar:6.2.12.Final:compile
+|  |  \- org.jboss.resteasy:resteasy-jaxb-provider:jar:6.2.12.Final:compile
+|  |     +- org.glassfish.jaxb:codemodel:jar:4.0.5:compile
+|  |     +- org.glassfish.jaxb:jaxb-jxc:jar:4.0.5:compile
+|  |     +- org.glassfish.jaxb:jaxb-xjc:jar:4.0.5:compile
+|  |     +- org.glassfish.jaxb:xsom:jar:4.0.5:compile
+|  |     +- com.sun.istack:istack-commons-tools:jar:4.1.2:compile
+|  |     +- com.sun.xml.bind.external:relaxng-datatype:jar:4.0.5:compile
+|  |     \- com.sun.xml.bind.external:rngom:jar:4.0.5:compile
+|  +- org.keycloak:keycloak-authz-client:jar:26.0.8:compile
+|  |  \- org.jboss.logging:commons-logging-jboss-logging:jar:1.0.0.Final:runtime
+|  \- org.keycloak:keycloak-core:jar:26.0.8:compile
+|     \- org.keycloak:keycloak-common:jar:26.0.8:compile
++- org.apache.camel:camel-knative:jar:4.21.0-SNAPSHOT:compile
+|  \- com.fasterxml.jackson.datatype:jackson-datatype-jdk8:jar:2.21.3:compile
++- org.apache.camel:camel-knative-api:jar:4.21.0-SNAPSHOT:compile
++- org.apache.camel:camel-knative-http:jar:4.21.0-SNAPSHOT:compile
+|  +- io.vertx:vertx-web-client:jar:4.5.27:compile
+|  |  +- io.vertx:vertx-uri-template:jar:4.5.27:compile
+|  |  +- io.vertx:vertx-web-common:jar:4.5.27:compile
+|  |  \- io.vertx:vertx-auth-common:jar:4.5.27:compile
+|  \- io.vertx:vertx-web:jar:4.5.27:compile
+|     \- io.vertx:vertx-bridge-common:jar:4.5.27:compile
++- org.apache.camel:camel-kserve:jar:4.21.0-SNAPSHOT:compile
+|  +- com.google.protobuf:protobuf-java:jar:4.33.2:compile
+|  \- io.grpc:grpc-netty-shaded:jar:1.81.0:compile
++- org.apache.camel:camel-kubernetes:jar:4.21.0-SNAPSHOT:compile
+|  +- io.fabric8:kubernetes-client:jar:7.7.0:compile
+|  |  +- io.fabric8:kubernetes-client-api:jar:7.7.0:compile
+|  |  |  +- io.fabric8:kubernetes-model-gatewayapi:jar:7.7.0:compile
+|  |  |  +- io.fabric8:kubernetes-model-resource:jar:7.7.0:compile
+|  |  |  +- io.fabric8:kubernetes-model-admissionregistration:jar:7.7.0:compile
+|  |  |  +- io.fabric8:kubernetes-model-autoscaling:jar:7.7.0:compile
+|  |  |  +- io.fabric8:kubernetes-model-apiextensions:jar:7.7.0:compile
+|  |  |  +- io.fabric8:kubernetes-model-certificates:jar:7.7.0:compile
+|  |  |  +- io.fabric8:kubernetes-model-coordination:jar:7.7.0:compile
+|  |  |  +- io.fabric8:kubernetes-model-discovery:jar:7.7.0:compile
+|  |  |  +- io.fabric8:kubernetes-model-events:jar:7.7.0:compile
+|  |  |  +- io.fabric8:kubernetes-model-extensions:jar:7.7.0:compile
+|  |  |  +- io.fabric8:kubernetes-model-flowcontrol:jar:7.7.0:compile
+|  |  |  +- io.fabric8:kubernetes-model-networking:jar:7.7.0:compile
+|  |  |  +- io.fabric8:kubernetes-model-metrics:jar:7.7.0:compile
+|  |  |  +- io.fabric8:kubernetes-model-policy:jar:7.7.0:compile
+|  |  |  +- io.fabric8:kubernetes-model-scheduling:jar:7.7.0:compile
+|  |  |  +- io.fabric8:kubernetes-model-storageclass:jar:7.7.0:compile
+|  |  |  \- io.fabric8:kubernetes-model-node:jar:7.7.0:compile
+|  |  \- io.fabric8:zjsonpatch:jar:7.7.0:compile
+|  \- io.fabric8:openshift-client:jar:7.7.0:compile
+|     \- io.fabric8:openshift-client-api:jar:7.7.0:compile
+|        +- io.fabric8:openshift-model-autoscaling:jar:7.7.0:compile
+|        +- io.fabric8:openshift-model-operator:jar:7.7.0:compile
+|        +- io.fabric8:openshift-model-operatorhub:jar:7.7.0:compile
+|        +- io.fabric8:openshift-model-machine:jar:7.7.0:compile
+|        +- io.fabric8:openshift-model-whereabouts:jar:7.7.0:compile
+|        +- io.fabric8:openshift-model-monitoring:jar:7.7.0:compile
+|        +- io.fabric8:openshift-model-storageversionmigrator:jar:7.7.0:compile
+|        +- io.fabric8:openshift-model-tuned:jar:7.7.0:compile
+|        +- io.fabric8:openshift-model-console:jar:7.7.0:compile
+|        +- io.fabric8:openshift-model-machineconfiguration:jar:7.7.0:compile
+|        +- io.fabric8:openshift-model-miscellaneous:jar:7.7.0:compile
+|        +- io.fabric8:openshift-model-hive:jar:7.7.0:compile
+|        \- io.fabric8:openshift-model-installer:jar:7.7.0:compile
++- org.apache.camel:camel-kudu:jar:4.21.0-SNAPSHOT:compile
+|  +- org.apache.kudu:kudu-client:jar:1.18.1:compile
+|  |  \- com.stumbleupon:async:jar:1.4.1:compile
+|  \- org.apache.yetus:audience-annotations:jar:0.15.1:compile
++- org.apache.camel:camel-langchain4j-agent:jar:4.21.0-SNAPSHOT:compile
+|  +- dev.langchain4j:langchain4j:jar:1.15.0:compile
+|  |  \- org.apache.opennlp:opennlp-tools:jar:2.5.9:compile
+|  +- dev.langchain4j:langchain4j-mcp:jar:1.15.0-beta25:compile
+|  |  +- com.squareup.okhttp3:okhttp-sse:jar:4.12.0:compile
+|  |  +- dev.langchain4j:langchain4j-http-client:jar:1.15.0:compile
+|  |  \- dev.langchain4j:langchain4j-http-client-jdk:jar:1.15.0:runtime
+|  \- dev.langchain4j:langchain4j-guardrails:jar:1.15.0-beta25:compile
++- org.apache.camel:camel-langchain4j-agent-api:jar:4.21.0-SNAPSHOT:compile
++- org.apache.camel:camel-langchain4j-chat:jar:4.21.0-SNAPSHOT:compile
+|  +- dev.langchain4j:langchain4j-core:jar:1.15.0:compile
+|  +- dev.langchain4j:langchain4j-open-ai:jar:1.15.0:compile
+|  |  \- com.knuddels:jtokkit:jar:1.1.0:compile
+|  \- dev.langchain4j:langchain4j-hugging-face:jar:1.15.0-beta25:compile
++- org.apache.camel:camel-langchain4j-core:jar:4.21.0-SNAPSHOT:compile
++- org.apache.camel:camel-langchain4j-embeddings:jar:4.21.0-SNAPSHOT:compile
++- org.apache.camel:camel-langchain4j-embeddingstore:jar:4.21.0-SNAPSHOT:compile
++- org.apache.camel:camel-langchain4j-embeddingstore-api:jar:4.21.0-SNAPSHOT:compile
++- org.apache.camel:camel-langchain4j-tokenizer:jar:4.21.0-SNAPSHOT:compile
++- org.apache.camel:camel-langchain4j-tools:jar:4.21.0-SNAPSHOT:compile
++- org.apache.camel:camel-langchain4j-web-search:jar:4.21.0-SNAPSHOT:compile
++- org.apache.camel:camel-language:jar:4.21.0-SNAPSHOT:compile
++- org.apache.camel:camel-ldap:jar:4.21.0-SNAPSHOT:compile
++- org.apache.camel:camel-ldif:jar:4.21.0-SNAPSHOT:compile
+|  \- org.apache.directory.server:apacheds-core-api:jar:2.0.0.AM27:compile
+|     +- org.apache.directory.server:apacheds-core-constants:jar:2.0.0.AM27:compile
+|     +- org.apache.directory.server:apacheds-i18n:jar:2.0.0.AM27:compile
+|     +- org.apache.directory.api:api-i18n:jar:2.1.5:compile
+|     +- org.apache.directory.api:api-asn1-api:jar:2.1.5:compile
+|     +- org.apache.directory.api:api-ldap-client-api:jar:2.1.5:compile
+|     |  +- org.apache.directory.api:api-ldap-extras-codec:jar:2.1.5:compile
+|     |  \- org.apache.directory.api:api-ldap-extras-codec-api:jar:2.1.5:compile
+|     +- org.apache.directory.api:api-ldap-codec-core:jar:2.1.5:compile
+|     |  \- org.apache.directory.api:api-asn1-ber:jar:2.1.5:compile
+|     +- org.apache.directory.api:api-ldap-extras-aci:jar:2.1.5:compile
+|     |  \- org.apache.servicemix.bundles:org.apache.servicemix.bundles.antlr:jar:2.7.7_5:compile
+|     +- org.apache.directory.api:api-ldap-extras-util:jar:2.1.5:compile
+|     +- org.apache.directory.api:api-ldap-model:jar:2.1.5:compile
+|     +- org.apache.directory.api:api-ldap-schema-data:jar:2.1.5:compile
+|     \- org.apache.directory.api:api-util:jar:2.1.5:compile
++- org.apache.camel:camel-leveldb:jar:4.21.0-SNAPSHOT:compile
+|  +- org.fusesource.leveldbjni:leveldbjni-all:jar:1.8:compile
+|  \- org.iq80.leveldb:leveldb:jar:0.12:compile
+|     \- org.iq80.leveldb:leveldb-api:jar:0.12:compile
++- org.apache.camel:camel-log:jar:4.21.0-SNAPSHOT:compile
++- org.apache.camel:camel-lra:jar:4.21.0-SNAPSHOT:compile
++- org.apache.camel:camel-lucene:jar:4.21.0-SNAPSHOT:compile
+|  +- org.apache.lucene:lucene-core:jar:9.12.3:compile
+|  +- org.apache.lucene:lucene-queryparser:jar:9.12.3:compile
+|  |  +- org.apache.lucene:lucene-queries:jar:9.12.3:compile
+|  |  \- org.apache.lucene:lucene-sandbox:jar:9.12.3:compile
+|  |     \- org.apache.lucene:lucene-facet:jar:9.12.3:compile
+|  \- org.apache.lucene:lucene-analysis-common:jar:9.12.3:compile
++- org.apache.camel:camel-lumberjack:jar:4.21.0-SNAPSHOT:compile
++- org.apache.camel:camel-lzf:jar:4.21.0-SNAPSHOT:compile
+|  \- com.ning:compress-lzf:jar:1.2.0:compile
++- org.apache.camel:camel-mail:jar:4.21.0-SNAPSHOT:compile
++- org.apache.camel:camel-mail-microsoft-oauth:jar:4.21.0-SNAPSHOT:compile
+|  \- com.microsoft.azure:msal4j:jar:1.24.1:compile
++- org.apache.camel:camel-mapstruct:jar:4.21.0-SNAPSHOT:compile
+|  \- org.mapstruct:mapstruct:jar:1.6.3:compile
++- org.apache.camel:camel-master:jar:4.21.0-SNAPSHOT:compile
++- org.apache.camel:camel-mdc:jar:4.21.0-SNAPSHOT:compile
++- org.apache.camel:camel-metrics:jar:4.21.0-SNAPSHOT:compile
+|  +- io.dropwizard.metrics:metrics-core:jar:4.2.38:compile
+|  +- io.dropwizard.metrics:metrics-jmx:jar:4.2.38:compile
+|  \- io.dropwizard.metrics:metrics-json:jar:4.2.38:compile
++- org.apache.camel:camel-micrometer:jar:4.21.0-SNAPSHOT:compile
+|  \- io.micrometer:micrometer-core:jar:1.16.5:compile
+|     +- io.micrometer:micrometer-commons:jar:1.16.5:compile
+|     \- org.latencyutils:LatencyUtils:jar:2.0.3:runtime
++- org.apache.camel:camel-micrometer-observability:jar:4.21.0-SNAPSHOT:compile
+|  \- io.micrometer:micrometer-tracing:jar:1.6.5:compile
+|     +- io.micrometer:context-propagation:jar:1.2.1:compile
+|     \- aopalliance:aopalliance:jar:1.0:compile
++- org.apache.camel:camel-micrometer-prometheus:jar:4.21.0-SNAPSHOT:compile
+|  \- io.micrometer:micrometer-registry-prometheus:jar:1.16.5:compile
+|     +- io.prometheus:prometheus-metrics-core:jar:1.4.3:compile
+|     |  +- io.prometheus:prometheus-metrics-model:jar:1.4.3:compile
+|     |  \- io.prometheus:prometheus-metrics-config:jar:1.4.3:compile
+|     +- io.prometheus:prometheus-metrics-tracer-common:jar:1.4.3:compile
+|     \- io.prometheus:prometheus-metrics-exposition-formats:jar:1.4.3:runtime
+|        \- io.prometheus:prometheus-metrics-exposition-textformats:jar:1.4.3:runtime
++- org.apache.camel:camel-microprofile-config:jar:4.21.0-SNAPSHOT:compile
+|  +- io.smallrye.config:smallrye-config:jar:3.17.2:compile
+|  |  \- io.smallrye.config:smallrye-config-core:jar:3.17.2:compile
+|  |     +- io.smallrye.common:smallrye-common-expression:jar:2.17.1:compile
+|  |     +- io.smallrye.common:smallrye-common-classloader:jar:2.17.1:compile
+|  |     \- io.smallrye.config:smallrye-config-common:jar:3.17.2:compile
+|  \- org.eclipse.microprofile.config:microprofile-config-api:jar:3.1.1:compile
++- org.apache.camel:camel-microprofile-fault-tolerance:jar:4.21.0-SNAPSHOT:compile
+|  \- io.smallrye:smallrye-fault-tolerance-standalone:jar:6.11.1:compile
+|     +- io.smallrye:smallrye-fault-tolerance-api:jar:6.11.1:compile
+|     +- io.smallrye:smallrye-fault-tolerance-core:jar:6.11.1:compile
+|     |  \- org.eclipse.microprofile.fault-tolerance:microprofile-fault-tolerance-api:jar:4.1.2:compile
+|     \- io.smallrye:smallrye-fault-tolerance-apiimpl:jar:6.11.1:compile
+|        \- io.smallrye:smallrye-fault-tolerance-autoconfig-core:jar:6.11.1:compile
++- org.apache.camel:camel-microprofile-health:jar:4.21.0-SNAPSHOT:compile
+|  \- io.smallrye:smallrye-health:jar:4.3.0:compile
+|     +- org.eclipse.microprofile.health:microprofile-health-api:jar:4.0.1:compile
+|     +- io.smallrye:smallrye-health-api:jar:4.3.0:compile
+|     +- jakarta.enterprise:jakarta.enterprise.cdi-api:jar:4.0.1:compile
+|     |  +- jakarta.enterprise:jakarta.enterprise.lang-model:jar:4.0.1:compile
+|     |  +- jakarta.interceptor:jakarta.interceptor-api:jar:2.1.0:compile
+|     |  \- jakarta.inject:jakarta.inject-api:jar:2.0.1:compile
+|     \- org.eclipse.parsson:jakarta.json:jar:1.1.7:compile
++- org.apache.camel:camel-milo:jar:4.21.0-SNAPSHOT:compile
+|  +- org.eclipse.milo:milo-sdk-server:jar:1.1.3:compile
+|  |  +- org.eclipse.milo:milo-transport:jar:1.1.3:compile
+|  |  |  \- com.digitalpetri.netty:netty-channel-fsm:jar:1.0.2:compile
+|  |  |     \- com.digitalpetri.fsm:strict-machine:jar:1.0.0:compile
+|  |  \- org.eclipse.milo:milo-sdk-core:jar:1.1.3:compile
+|  +- org.eclipse.milo:milo-sdk-client:jar:1.1.3:compile
+|  +- org.eclipse.milo:milo-stack-core:jar:1.1.3:compile
+|  \- org.eclipse.milo:milo-dtd-manager:jar:1.1.3:compile
+|     \- org.eclipse.milo:milo-dtd-core:jar:1.1.3:compile
+|        \- com.sun.activation:jakarta.activation:jar:2.0.1:compile
++- org.apache.camel:camel-milvus:jar:4.21.0-SNAPSHOT:compile
+|  \- io.milvus:milvus-sdk-java:jar:2.6.20:compile
+|     +- com.squareup.okio:okio-jvm:jar:3.6.0:compile
+|     +- org.jetbrains.kotlin:kotlin-stdlib-common:jar:1.9.10:compile
+|     +- org.jetbrains.kotlin:kotlin-stdlib-jdk8:jar:1.9.10:compile
+|     +- org.jetbrains.kotlin:kotlin-stdlib:jar:1.9.10:compile
+|     \- org.jetbrains.kotlin:kotlin-stdlib-jdk7:jar:1.9.10:compile
++- org.apache.camel:camel-mina:jar:4.21.0-SNAPSHOT:compile
++- org.apache.camel:camel-minio:jar:4.21.0-SNAPSHOT:compile
+|  +- io.minio:minio:jar:8.6.0:compile
+|  |  \- com.carrotsearch.thirdparty:simple-xml-safe:jar:2.7.1:compile
+|  +- com.squareup.okhttp3:okhttp-jvm:jar:5.3.2:compile
+|  \- org.apache.commons:commons-compress:jar:1.28.0:compile
++- org.apache.camel:camel-mllp:jar:4.21.0-SNAPSHOT:compile
++- org.apache.camel:camel-mock:jar:4.21.0-SNAPSHOT:compile
++- org.apache.camel:camel-mongodb:jar:4.21.0-SNAPSHOT:compile
+|  +- org.mongodb:mongodb-driver-core:jar:5.7.0:compile
+|  |  \- org.mongodb:bson-record-codec:jar:5.7.0:runtime
+|  +- org.mongodb:mongodb-driver-sync:jar:5.7.0:compile
+|  \- org.mongodb:bson:jar:5.7.0:compile
++- org.apache.camel:camel-mongodb-gridfs:jar:4.21.0-SNAPSHOT:compile
++- org.apache.camel:camel-mustache:jar:4.21.0-SNAPSHOT:compile
+|  \- com.github.spullara.mustache.java:compiler:jar:0.9.14:compile
++- org.apache.camel:camel-mvel:jar:4.21.0-SNAPSHOT:compile
+|  \- org.mvel:mvel2:jar:2.5.2.Final:compile
++- org.apache.camel:camel-mybatis:jar:4.21.0-SNAPSHOT:compile
+|  \- org.mybatis:mybatis:jar:3.5.19:compile
++- org.apache.camel:camel-nats:jar:4.21.0-SNAPSHOT:compile
+|  \- io.nats:jnats:jar:2.25.3:compile
+|     \- org.bouncycastle:bcprov-lts8on:jar:2.73.10:compile
++- org.apache.camel:camel-neo4j:jar:4.21.0-SNAPSHOT:compile
+|  \- org.neo4j.driver:neo4j-java-driver:jar:6.1.0:compile
+|     +- org.neo4j.bolt:neo4j-bolt-connection:jar:11.0.2:compile
+|     +- org.neo4j.bolt:neo4j-bolt-connection-netty:jar:11.0.2:compile
+|     |  \- io.netty:netty-tcnative-classes:jar:2.0.75.Final:compile
+|     +- org.neo4j.bolt:neo4j-bolt-connection-pooled:jar:11.0.2:compile
+|     \- org.neo4j.bolt:neo4j-bolt-connection-routed:jar:11.0.2:compile
++- org.apache.camel:camel-netty:jar:4.21.0-SNAPSHOT:compile
+|  +- io.netty:netty-resolver:jar:4.2.12.Final:compile
+|  +- io.netty:netty-transport-native-epoll:jar:4.2.12.Final:compile
+|  +- io.netty:netty-transport-native-kqueue:jar:4.2.12.Final:compile
+|  |  \- io.netty:netty-transport-classes-kqueue:jar:4.2.12.Final:compile
+|  \- io.netty:netty-transport-native-unix-common:jar:4.2.12.Final:compile
++- org.apache.camel:camel-netty-http:jar:4.21.0-SNAPSHOT:compile
++- org.apache.camel:camel-oaipmh:jar:4.21.0-SNAPSHOT:compile
+|  \- joda-time:joda-time:jar:2.14.2:compile
++- org.apache.camel:camel-oauth:jar:4.21.0-SNAPSHOT:compile
+|  +- com.nimbusds:nimbus-jose-jwt:jar:10.9:compile
+|  +- io.vertx:vertx-auth-oauth2:jar:4.5.27:compile
+|  \- org.apache.httpcomponents.client5:httpclient5-fluent:jar:5.5.2:compile
++- org.apache.camel:camel-observability-services:jar:4.21.0-SNAPSHOT:compile
++- org.apache.camel:camel-observation:jar:4.21.0-SNAPSHOT:compile
++- org.apache.camel:camel-ocsf:jar:4.21.0-SNAPSHOT:compile
++- org.apache.camel:camel-ognl:jar:4.21.0-SNAPSHOT:compile
+|  \- ognl:ognl:jar:3.4.11:compile
++- org.apache.camel:camel-olingo2:jar:4.21.0-SNAPSHOT:compile
++- org.apache.camel:camel-olingo2-api:jar:4.21.0-SNAPSHOT:compile
+|  +- org.apache.olingo:olingo-odata2-api:jar:2.0.13:compile
+|  +- org.apache.olingo:olingo-odata2-core:jar:2.0.13:runtime
+|  \- org.apache.httpcomponents:httpasyncclient:jar:4.1.5:compile
++- org.apache.camel:camel-olingo4:jar:4.21.0-SNAPSHOT:compile
+|  +- org.apache.olingo:odata-client-api:jar:5.0.0:compile
+|  +- org.apache.olingo:odata-client-core:jar:5.0.0:compile
+|  |  \- com.fasterxml:aalto-xml:jar:1.3.2:compile
+|  \- org.apache.olingo:odata-commons-api:jar:5.0.0:compile
++- org.apache.camel:camel-olingo4-api:jar:4.21.0-SNAPSHOT:compile
+|  +- org.apache.olingo:odata-commons-core:jar:5.0.0:compile
+|  \- org.apache.olingo:odata-server-core:jar:5.0.0:compile
+|     \- org.apache.olingo:odata-server-api:jar:5.0.0:compile
++- org.apache.camel:camel-once:jar:4.21.0-SNAPSHOT:compile
++- org.apache.camel:camel-openai:jar:4.21.0-SNAPSHOT:compile
+|  +- com.openai:openai-java:jar:4.36.0:compile
+|  |  \- com.openai:openai-java-client-okhttp:jar:4.36.0:compile
+|  |     \- com.openai:openai-java-core:jar:4.36.0:compile
+|  +- io.modelcontextprotocol.sdk:mcp-core:jar:1.1.2:compile
+|  \- io.modelcontextprotocol.sdk:mcp-json-jackson2:jar:1.1.2:compile
++- org.apache.camel:camel-openapi-java:jar:4.21.0-SNAPSHOT:compile
+|  +- io.swagger.core.v3:swagger-core-jakarta:jar:2.2.36:compile
+|  |  \- io.swagger.core.v3:swagger-annotations-jakarta:jar:2.2.36:compile
+|  +- io.swagger.core.v3:swagger-models-jakarta:jar:2.2.36:compile
+|  +- io.swagger.parser.v3:swagger-parser:jar:2.1.42:compile
+|  \- com.fasterxml.jackson.datatype:jackson-datatype-joda:jar:2.21.3:compile
++- org.apache.camel:camel-openapi-validator:jar:4.21.0-SNAPSHOT:compile
+|  \- com.atlassian.oai:swagger-request-validator-core:jar:2.46.1:compile
+|     \- com.github.java-json-tools:json-schema-validator:jar:2.2.14:compile
+|        +- com.github.java-json-tools:jackson-coreutils-equivalence:jar:1.0:compile
+|        +- com.github.java-json-tools:json-schema-core:jar:1.2.14:compile
+|        |  +- com.github.java-json-tools:uri-template:jar:0.10:compile
+|        |  \- org.mozilla:rhino:jar:1.7.7.2:compile
+|        +- com.sun.mail:mailapi:jar:1.6.2:compile
+|        \- net.sf.jopt-simple:jopt-simple:jar:5.0.4:compile
++- org.apache.camel:camel-opensearch:jar:4.21.0-SNAPSHOT:compile
+|  +- org.opensearch.client:opensearch-java:jar:3.8.0:compile
+|  +- org.opensearch.client:opensearch-rest-client:jar:3.6.0:compile
+|  |  \- org.apache.httpcomponents.core5:httpcore5-reactive:jar:5.4:compile
+|  \- org.opensearch.client:opensearch-rest-client-sniffer:jar:3.6.0:compile
++- org.apache.camel:camel-openstack:jar:4.21.0-SNAPSHOT:compile
+|  +- com.github.openstack4j.core:openstack4j-core:jar:3.12:compile
+|  |  \- com.github.fge:json-patch:jar:1.9:compile
+|  |     \- com.github.fge:jackson-coreutils:jar:1.6:compile
+|  |        \- com.github.fge:msg-simple:jar:1.1:compile
+|  |           \- com.github.fge:btf:jar:1.2:compile
+|  \- com.github.openstack4j.core.connectors:openstack4j-okhttp:jar:3.12:compile
++- org.apache.camel:camel-opentelemetry:jar:4.21.0-SNAPSHOT:compile
+|  +- io.opentelemetry:opentelemetry-sdk:jar:1.62.0:compile
+|  +- io.opentelemetry:opentelemetry-api:jar:1.62.0:compile
+|  +- io.opentelemetry:opentelemetry-context:jar:1.62.0:compile
+|  \- io.opentelemetry:opentelemetry-semconv:jar:1.30.1-alpha:compile
++- org.apache.camel:camel-opentelemetry-metrics:jar:4.21.0-SNAPSHOT:compile
++- org.apache.camel:camel-opentelemetry2:jar:4.21.0-SNAPSHOT:compile
++- org.apache.camel:camel-optaplanner:jar:4.21.0-SNAPSHOT:compile
+|  +- org.optaplanner:optaplanner-core:jar:10.2.0:compile
+|  |  +- org.optaplanner:optaplanner-core-impl:jar:10.2.0:compile
+|  |  +- org.optaplanner:optaplanner-constraint-streams-drools:jar:10.2.0:compile
+|  |  |  +- org.optaplanner:optaplanner-constraint-streams-common:jar:10.2.0:compile
+|  |  |  +- org.drools:drools-engine:jar:10.2.0:compile
+|  |  |  |  +- org.kie:kie-api:jar:10.2.0:compile
+|  |  |  |  +- org.kie:kie-internal:jar:10.2.0:compile
+|  |  |  |  +- org.drools:drools-core:jar:10.2.0:compile
+|  |  |  |  |  +- org.kie:kie-util-xml:jar:10.2.0:compile
+|  |  |  |  |  +- org.drools:drools-util:jar:10.2.0:compile
+|  |  |  |  |  +- org.drools:drools-base:jar:10.2.0:compile
+|  |  |  |  |  +- org.drools:drools-wiring-api:jar:10.2.0:compile
+|  |  |  |  |  \- org.drools:drools-wiring-static:jar:10.2.0:compile
+|  |  |  |  +- org.drools:drools-wiring-dynamic:jar:10.2.0:compile
+|  |  |  |  +- org.drools:drools-kiesession:jar:10.2.0:compile
+|  |  |  |  +- org.drools:drools-tms:jar:10.2.0:compile
+|  |  |  |  +- org.drools:drools-compiler:jar:10.2.0:compile
+|  |  |  |  |  +- org.drools:drools-drl-parser:jar:10.2.0:compile
+|  |  |  |  |  |  \- org.drools:drools-io:jar:10.2.0:compile
+|  |  |  |  |  +- org.drools:drools-drl-extensions:jar:10.2.0:compile
+|  |  |  |  |  +- org.drools:drools-drl-ast:jar:10.2.0:compile
+|  |  |  |  |  +- org.kie:kie-memory-compiler:jar:10.2.0:compile
+|  |  |  |  |  +- org.drools:drools-ecj:jar:10.2.0:compile
+|  |  |  |  |  |  \- org.eclipse.jdt:ecj:jar:3.44.0:compile
+|  |  |  |  |  \- org.kie:kie-util-maven-support:jar:10.2.0:compile
+|  |  |  |  +- org.drools:drools-model-compiler:jar:10.2.0:compile
+|  |  |  |  |  \- org.drools:drools-canonical-model:jar:10.2.0:compile
+|  |  |  |  +- org.drools:drools-model-codegen:jar:10.2.0:compile
+|  |  |  |  |  +- org.drools:drools-codegen-common:jar:10.2.0:compile
+|  |  |  |  |  +- org.drools:drools-model-prototype:jar:10.2.0:compile
+|  |  |  |  |  +- com.github.javaparser:javaparser-core:jar:3.27.0:compile
+|  |  |  |  |  +- org.drools:drools-mvel-parser:jar:10.2.0:compile
+|  |  |  |  |  \- org.drools:drools-mvel-compiler:jar:10.2.0:compile
+|  |  |  |  \- org.drools:drools-commands:jar:10.2.0:compile
+|  |  |  \- org.drools:drools-alphanetwork-compiler:jar:10.2.0:compile
+|  |  +- org.optaplanner:optaplanner-constraint-drl:jar:10.2.0:compile
+|  |  \- org.optaplanner:optaplanner-constraint-streams-bavet:jar:10.2.0:compile
+|  \- org.optaplanner:optaplanner-persistence-common:jar:10.2.0:compile
++- org.apache.camel:camel-paho:jar:4.21.0-SNAPSHOT:compile
+|  \- org.eclipse.paho:org.eclipse.paho.client.mqttv3:jar:1.2.5:compile
++- org.apache.camel:camel-paho-mqtt5:jar:4.21.0-SNAPSHOT:compile
+|  \- org.eclipse.paho:org.eclipse.paho.mqttv5.client:jar:1.2.5:compile
++- org.apache.camel:camel-parquet-avro:jar:4.21.0-SNAPSHOT:compile
+|  +- org.apache.parquet:parquet-common:jar:1.17.1:compile
+|  |  \- org.apache.parquet:parquet-format-structures:jar:1.17.1:compile
+|  +- org.apache.parquet:parquet-avro:jar:1.17.1:compile
+|  |  +- org.apache.parquet:parquet-column:jar:1.17.1:compile
+|  |  |  +- org.apache.parquet:parquet-encoding:jar:1.17.1:compile
+|  |  |  \- org.locationtech.jts:jts-core:jar:1.20.0:compile
+|  |  +- org.apache.parquet:parquet-hadoop:jar:1.17.1:compile
+|  |  |  \- org.apache.parquet:parquet-jackson:jar:1.17.1:runtime
+|  |  \- org.apache.parquet:parquet-variant:jar:1.17.1:compile
+|  +- org.apache.hadoop:hadoop-common:jar:3.5.0:compile
+|  |  +- org.apache.hadoop.thirdparty:hadoop-shaded-protobuf_3_25:jar:1.5.0:compile
+|  |  +- org.apache.hadoop:hadoop-annotations:jar:3.5.0:compile
+|  |  +- org.apache.hadoop.thirdparty:hadoop-shaded-guava:jar:1.5.0:compile
+|  |  +- jakarta.servlet.jsp:jakarta.servlet.jsp-api:jar:2.3.6:compile
+|  |  +- org.glassfish.jersey.core:jersey-server:jar:2.46:compile
+|  |  +- org.glassfish.jersey.containers:jersey-container-servlet:jar:2.46:compile
+|  |  |  \- org.glassfish.jersey.containers:jersey-container-servlet-core:jar:2.46:compile
+|  |  +- org.glassfish.jersey.inject:jersey-hk2:jar:2.46:compile
+|  |  |  \- org.glassfish.hk2:hk2-locator:jar:2.6.1:compile
+|  |  |     +- org.glassfish.hk2.external:aopalliance-repackaged:jar:2.6.1:compile
+|  |  |     +- org.glassfish.hk2:hk2-api:jar:2.6.1:compile
+|  |  |     \- org.glassfish.hk2:hk2-utils:jar:2.6.1:compile
+|  |  +- org.eclipse.jetty:jetty-webapp:jar:9.4.58.v20250814:compile
+|  |  |  \- org.eclipse.jetty:jetty-xml:jar:9.4.58.v20250814:compile
+|  |  +- ch.qos.reload4j:reload4j:jar:1.2.22:compile
+|  |  +- org.apache.commons:commons-configuration2:jar:2.10.1:compile
+|  |  +- org.slf4j:slf4j-reload4j:jar:1.7.36:compile
+|  |  +- org.apache.hadoop:hadoop-auth:jar:3.5.0:compile
+|  |  |  \- org.apache.kerby:kerb-util:jar:2.0.3:compile
+|  |  |     +- org.apache.kerby:kerby-config:jar:2.0.3:compile
+|  |  |     \- org.apache.kerby:kerb-crypto:jar:2.0.3:compile
+|  |  +- com.jcraft:jsch:jar:0.1.55:compile
+|  |  \- org.apache.kerby:kerb-core:jar:2.0.3:compile
+|  |     \- org.apache.kerby:kerby-pkix:jar:2.0.3:compile
+|  |        +- org.apache.kerby:kerby-asn1:jar:2.0.3:compile
+|  |        \- org.apache.kerby:kerby-util:jar:2.0.3:compile
+|  \- org.apache.hadoop:hadoop-mapreduce-client-core:jar:3.5.0:compile
+|     +- org.apache.hadoop:hadoop-yarn-client:jar:3.5.0:compile
+|     |  +- org.eclipse.jetty.websocket:websocket-client:jar:9.4.58.v20250814:compile
+|     |  |  \- org.eclipse.jetty.websocket:websocket-common:jar:9.4.58.v20250814:compile
+|     |  |     \- org.eclipse.jetty.websocket:websocket-api:jar:9.4.58.v20250814:compile
+|     |  \- org.apache.hadoop:hadoop-yarn-api:jar:3.5.0:compile
+|     +- org.apache.hadoop:hadoop-yarn-common:jar:3.5.0:compile
+|     |  +- com.google.inject:guice:jar:5.1.0:compile
+|     |  +- com.fasterxml.jackson.module:jackson-module-jaxb-annotations:jar:2.21.3:compile
+|     |  \- net.jodah:failsafe:jar:2.4.4:compile
+|     +- org.apache.hadoop:hadoop-hdfs-client:jar:3.5.0:compile
+|     +- com.google.inject.extensions:guice-servlet:jar:5.1.0:compile
+|     \- io.netty:netty-all:jar:4.2.12.Final:compile
+|        +- io.netty:netty-codec-haproxy:jar:4.2.12.Final:compile
+|        +- io.netty:netty-codec-http3:jar:4.2.12.Final:compile
+|        +- io.netty:netty-codec-memcache:jar:4.2.12.Final:compile
+|        +- io.netty:netty-codec-mqtt:jar:4.2.12.Final:compile
+|        +- io.netty:netty-codec-redis:jar:4.2.12.Final:compile
+|        +- io.netty:netty-codec-smtp:jar:4.2.12.Final:compile
+|        +- io.netty:netty-codec-stomp:jar:4.2.12.Final:compile
+|        +- io.netty:netty-codec-xml:jar:4.2.12.Final:compile
+|        +- io.netty:netty-handler-ssl-ocsp:jar:4.2.12.Final:compile
+|        +- io.netty:netty-transport-rxtx:jar:4.2.12.Final:compile
+|        +- io.netty:netty-transport-sctp:jar:4.2.12.Final:compile
+|        +- io.netty:netty-transport-udt:jar:4.2.12.Final:compile
+|        +- io.netty:netty-resolver-dns-classes-macos:jar:4.2.12.Final:compile
+|        +- io.netty:netty-transport-classes-io_uring:jar:4.2.12.Final:compile
+|        +- io.netty:netty-codec-classes-quic:jar:4.2.12.Final:compile
+|        +- io.netty:netty-transport-native-epoll:jar:linux-riscv64:4.2.12.Final:runtime
+|        +- io.netty:netty-transport-native-io_uring:jar:linux-x86_64:4.2.12.Final:runtime
+|        +- io.netty:netty-transport-native-io_uring:jar:linux-aarch_64:4.2.12.Final:runtime
+|        +- io.netty:netty-transport-native-io_uring:jar:linux-riscv64:4.2.12.Final:runtime
+|        +- io.netty:netty-transport-native-kqueue:jar:osx-aarch_64:4.2.12.Final:runtime
+|        +- io.netty:netty-resolver-dns-native-macos:jar:osx-x86_64:4.2.12.Final:runtime
+|        +- io.netty:netty-resolver-dns-native-macos:jar:osx-aarch_64:4.2.12.Final:runtime
+|        +- io.netty:netty-codec-native-quic:jar:linux-x86_64:4.2.12.Final:runtime
+|        +- io.netty:netty-codec-native-quic:jar:linux-aarch_64:4.2.12.Final:runtime
+|        +- io.netty:netty-codec-native-quic:jar:osx-x86_64:4.2.12.Final:runtime
+|        +- io.netty:netty-codec-native-quic:jar:osx-aarch_64:4.2.12.Final:runtime
+|        \- io.netty:netty-codec-native-quic:jar:windows-x86_64:4.2.12.Final:runtime
++- org.apache.camel:camel-pdf:jar:4.21.0-SNAPSHOT:compile
+|  +- org.apache.pdfbox:pdfbox:jar:3.0.7:compile
+|  |  +- org.apache.pdfbox:pdfbox-io:jar:3.0.7:compile
+|  |  \- org.apache.pdfbox:fontbox:jar:3.0.7:compile
+|  \- org.bouncycastle:bcmail-jdk18on:jar:1.84:compile
++- org.apache.camel:camel-pg-replication-slot:jar:4.21.0-SNAPSHOT:compile
+|  \- org.postgresql:postgresql:jar:42.7.11:compile
++- org.apache.camel:camel-pgevent:jar:4.21.0-SNAPSHOT:compile
+|  \- com.impossibl.pgjdbc-ng:pgjdbc-ng:jar:0.8.9:compile
+|     \- com.impossibl.pgjdbc-ng:spy:jar:0.8.9:runtime
++- org.apache.camel:camel-pinecone:jar:4.21.0-SNAPSHOT:compile
+|  \- io.pinecone:pinecone-client:jar:3.1.0:compile
+|     +- io.gsonfire:gson-fire:jar:1.8.5:runtime
+|     +- org.openapitools:jackson-databind-nullable:jar:0.2.6:runtime
+|     \- io.netty:netty-tcnative-boringssl-static:jar:2.0.75.Final:compile
+|        +- io.netty:netty-tcnative-boringssl-static:jar:linux-x86_64:2.0.75.Final:runtime
+|        +- io.netty:netty-tcnative-boringssl-static:jar:linux-aarch_64:2.0.75.Final:runtime
+|        +- io.netty:netty-tcnative-boringssl-static:jar:osx-x86_64:2.0.75.Final:runtime
+|        +- io.netty:netty-tcnative-boringssl-static:jar:osx-aarch_64:2.0.75.Final:runtime
+|        \- io.netty:netty-tcnative-boringssl-static:jar:windows-x86_64:2.0.75.Final:runtime
++- org.apache.camel:camel-platform-http:jar:4.21.0-SNAPSHOT:compile
++- org.apache.camel:camel-platform-http-jolokia:jar:4.21.0-SNAPSHOT:compile
+|  +- org.jolokia:jolokia-server-core:jar:2.6.0:compile
+|  |  +- org.jolokia:jolokia-json:jar:2.6.0:compile
+|  |  \- org.jolokia:jolokia-core:jar:2.6.0:compile
+|  +- org.jolokia:jolokia-service-serializer:jar:2.6.0:compile
+|  \- org.jolokia:jolokia-service-jmx:jar:2.6.0:compile
++- org.apache.camel:camel-platform-http-main:jar:4.21.0-SNAPSHOT:compile
+|  +- io.vertx:vertx-auth-properties:jar:4.5.27:compile
+|  \- io.vertx:vertx-auth-jwt:jar:4.5.27:compile
++- org.apache.camel:camel-platform-http-vertx:jar:4.21.0-SNAPSHOT:compile
++- org.apache.camel:camel-plc4x:jar:4.21.0-SNAPSHOT:compile
+|  +- org.apache.plc4x:plc4j-api:jar:0.13.1:compile
+|  +- org.apache.plc4x:plc4j-scraper:jar:0.13.1:compile
+|  |  \- org.apache.plc4x:plc4j-connection-cache:jar:0.13.1:compile
+|  +- org.apache.plc4x:plc4j-driver-ab-eth:jar:0.13.1:runtime
+|  |  +- org.apache.plc4x:plc4j-spi:jar:0.13.1:runtime
+|  |  |  \- com.github.jinahya:bit-io:jar:1.4.3:runtime
+|  |  \- org.apache.plc4x:plc4j-transport-tcp:jar:0.13.1:runtime
+|  +- org.apache.plc4x:plc4j-driver-ads:jar:0.13.1:runtime
+|  +- org.apache.plc4x:plc4j-driver-canopen:jar:0.13.1:runtime
+|  |  +- org.apache.plc4x:plc4j-driver-can:jar:0.13.1:runtime
+|  |  \- org.apache.plc4x:plc4j-transport-can:jar:0.13.1:runtime
+|  +- org.apache.plc4x:plc4j-driver-eip:jar:0.13.1:runtime
+|  +- org.apache.plc4x:plc4j-driver-firmata:jar:0.13.1:runtime
+|  |  +- org.apache.plc4x:plc4j-transport-serial:jar:0.13.1:runtime
+|  |  |  \- com.fazecast:jSerialComm:jar:2.11.2:runtime
+|  |  \- com.github.purejavacomm:purejavacomm:jar:1.0.2.RELEASE:runtime
+|  +- org.apache.plc4x:plc4j-driver-knxnetip:jar:0.13.1:runtime
+|  |  +- org.apache.plc4x:plc4j-transport-udp:jar:0.13.1:runtime
+|  |  +- org.apache.plc4x:plc4j-transport-raw-socket:jar:0.13.1:runtime
+|  |  |  \- org.apache.plc4x:plc4j-transport-pcap-shared:jar:0.13.1:runtime
+|  |  +- org.apache.plc4x:plc4j-transport-pcap-replay:jar:0.13.1:runtime
+|  |  |  \- org.apache.plc4x:plc4j-utils-pcap-replay:jar:0.13.1:runtime
+|  |  +- net.lingala.zip4j:zip4j:jar:2.11.5:runtime
+|  |  +- org.pcap4j:pcap4j-core:jar:1.8.2:runtime
+|  |  \- org.apache.plc4x:plc4j-utils-pcap-shared:jar:0.13.1:runtime
+|  +- org.apache.plc4x:plc4j-driver-modbus:jar:0.13.1:runtime
+|  |  \- org.apache.plc4x:plc4j-utils-raw-sockets:jar:0.13.1:runtime
+|  +- org.apache.plc4x:plc4j-driver-opcua:jar:0.13.1:runtime
+|  +- org.apache.plc4x:plc4j-driver-s7:jar:0.13.1:runtime
+|  |  \- org.pcap4j:pcap4j-packetfactory-static:jar:1.8.2:runtime
+|  \- org.apache.plc4x:plc4j-driver-simulated:jar:0.13.1:runtime
++- org.apache.camel:camel-pqc:jar:4.21.0-SNAPSHOT:compile
++- org.apache.camel:camel-printer:jar:4.21.0-SNAPSHOT:compile
++- org.apache.camel:camel-protobuf:jar:4.21.0-SNAPSHOT:compile
+|  \- com.google.protobuf:protobuf-java-util:jar:4.33.2:compile
++- org.apache.camel:camel-pubnub:jar:4.21.0-SNAPSHOT:compile
+|  \- com.pubnub:pubnub-gson:jar:13.3.0:compile
+|     +- com.pubnub:pubnub-gson-api:jar:13.3.0:compile
+|     |  \- com.pubnub:pubnub-kotlin-core-api-jvm:jar:13.3.0:compile
+|     |     \- org.jetbrains.kotlinx:atomicfu-jvm:jar:0.24.0:runtime
+|     \- com.pubnub:pubnub-gson-impl:jar:13.3.0:runtime
+|        \- com.pubnub:pubnub-kotlin-impl:jar:13.3.0:runtime
+|           +- com.pubnub:pubnub-kotlin-api-jvm:jar:13.3.0:runtime
+|           \- co.nstant.in:cbor:jar:0.9:runtime
++- org.apache.camel:camel-pulsar:jar:4.21.0-SNAPSHOT:compile
+|  +- org.apache.pulsar:pulsar-client:jar:4.2.1:compile
+|  |  +- org.apache.pulsar:pulsar-client-api:jar:4.2.1:compile
+|  |  +- org.apache.pulsar:pulsar-client-admin-api:jar:4.2.1:compile
+|  |  +- org.apache.pulsar:bouncy-castle-bc:jar:pkg:4.2.1:compile
+|  |  \- io.opentelemetry:opentelemetry-api-incubator:jar:1.56.0-alpha:compile
+|  \- org.apache.pulsar:pulsar-client-admin:jar:4.2.1:compile
+|     +- org.apache.avro:avro-protobuf:jar:1.12.0:compile
+|     \- org.apache.pulsar:pulsar-package-core:jar:4.2.1:compile
++- org.apache.camel:camel-python:jar:4.21.0-SNAPSHOT:compile
+|  \- org.python:jython-standalone:jar:2.7.4:compile
++- org.apache.camel:camel-qdrant:jar:4.21.0-SNAPSHOT:compile
+|  +- io.qdrant:client:jar:1.18.1:compile
+|  \- io.grpc:grpc-services:jar:1.81.0:compile
++- org.apache.camel:camel-quartz:jar:4.21.0-SNAPSHOT:compile
+|  +- org.quartz-scheduler:quartz:jar:2.5.2:compile
+|  \- com.mchange:c3p0:jar:0.13.0:compile
+|     \- com.mchange:mchange-commons-java:jar:0.5.0:compile
++- org.apache.camel:camel-quickfix:jar:4.21.0-SNAPSHOT:compile
+|  +- org.quickfixj:quickfixj-core:jar:3.0.0:compile
+|  |  +- org.quickfixj:quickfixj-base:jar:3.0.0:compile
+|  |  \- com.zaxxer:HikariCP:jar:4.0.3:compile
+|  \- org.quickfixj:quickfixj-messages-all:jar:3.0.0:compile
++- org.apache.camel:camel-reactive-executor-tomcat:jar:4.21.0-SNAPSHOT:compile
++- org.apache.camel:camel-reactive-executor-vertx:jar:4.21.0-SNAPSHOT:compile
+|  \- io.vertx:vertx-core:jar:4.5.27:compile
++- org.apache.camel:camel-reactive-streams:jar:4.21.0-SNAPSHOT:compile
+|  \- org.reactivestreams:reactive-streams:jar:1.0.4:compile
++- org.apache.camel:camel-reactor:jar:4.21.0-SNAPSHOT:compile
+|  \- io.projectreactor:reactor-core:jar:3.8.5:compile
++- org.apache.camel:camel-redis:jar:4.21.0-SNAPSHOT:compile
+|  \- org.redisson:redisson:jar:4.4.0:compile
+|     +- com.esotericsoftware:kryo:jar:5.6.2:compile
+|     |  +- com.esotericsoftware:reflectasm:jar:1.11.9:compile
+|     |  \- com.esotericsoftware:minlog:jar:1.3.1:compile
+|     +- net.bytebuddy:byte-buddy:jar:1.18.8:compile
+|     \- org.jodd:jodd-util:jar:6.3.0:compile
++- org.apache.camel:camel-ref:jar:4.21.0-SNAPSHOT:compile
++- org.apache.camel:camel-resilience4j:jar:4.21.0-SNAPSHOT:compile
+|  +- io.github.resilience4j:resilience4j-circuitbreaker:jar:2.4.0:compile
+|  |  \- io.github.resilience4j:resilience4j-core:jar:2.4.0:compile
+|  +- io.github.resilience4j:resilience4j-bulkhead:jar:2.4.0:compile
+|  +- io.github.resilience4j:resilience4j-timelimiter:jar:2.4.0:compile
+|  +- io.vavr:vavr:jar:1.0.0:compile
+|  \- io.vavr:vavr-match:jar:1.0.0:compile
++- org.apache.camel:camel-resilience4j-micrometer:jar:4.21.0-SNAPSHOT:compile
+|  \- io.github.resilience4j:resilience4j-micrometer:jar:2.4.0:compile
+|     +- io.github.resilience4j:resilience4j-retry:jar:2.4.0:compile
+|     \- io.github.resilience4j:resilience4j-ratelimiter:jar:2.4.0:compile
++- org.apache.camel:camel-resourceresolver-github:jar:4.21.0-SNAPSHOT:compile
++- org.apache.camel:camel-rest:jar:4.21.0-SNAPSHOT:compile
++- org.apache.camel:camel-rest-openapi:jar:4.21.0-SNAPSHOT:compile
+|  \- io.swagger.parser.v3:swagger-parser-v3:jar:2.1.42:compile
+|     +- io.swagger.parser.v3:swagger-parser-core:jar:2.1.42:compile
+|     \- io.swagger.parser.v3:swagger-parser-safe-url-resolver:jar:2.1.42:compile
++- org.apache.camel:camel-robotframework:jar:4.21.0-SNAPSHOT:compile
+|  +- org.robotframework:robotframework:jar:4.1.2:compile
+|  \- org.python:jython:jar:2.7.4:compile
++- org.apache.camel:camel-rocketmq:jar:4.21.0-SNAPSHOT:compile
+|  +- org.apache.rocketmq:rocketmq-client:jar:5.3.2:compile
+|  |  +- org.apache.rocketmq:rocketmq-remoting:jar:5.3.2:compile
+|  |  +- io.github.aliyunmq:rocketmq-slf4j-api:jar:1.0.1:compile
+|  |  \- io.github.aliyunmq:rocketmq-logback-classic:jar:1.0.1:compile
+|  \- org.apache.rocketmq:rocketmq-acl:jar:5.3.2:compile
+|     +- org.apache.rocketmq:rocketmq-proto:jar:2.0.4:compile
+|     +- org.apache.rocketmq:rocketmq-common:jar:5.3.2:compile
+|     |  +- io.opentelemetry:opentelemetry-exporter-otlp:jar:1.29.0:compile
+|     |  |  +- io.opentelemetry:opentelemetry-exporter-otlp-common:jar:1.29.0:runtime
+|     |  |  |  \- io.opentelemetry:opentelemetry-exporter-common:jar:1.29.0:runtime
+|     |  |  \- io.opentelemetry:opentelemetry-exporter-sender-okhttp:jar:1.29.0:runtime
+|     |  +- io.opentelemetry:opentelemetry-exporter-prometheus:jar:1.29.0-alpha:compile
+|     |  +- io.opentelemetry:opentelemetry-exporter-logging:jar:1.29.0:compile
+|     |  +- io.opentelemetry:opentelemetry-exporter-logging-otlp:jar:1.29.0:compile
+|     |  +- org.apache.tomcat:annotations-api:jar:6.0.53:compile
+|     |  \- org.apache.rocketmq:rocketmq-rocksdb:jar:1.0.2:compile
+|     \- org.apache.rocketmq:rocketmq-srvutil:jar:5.3.2:compile
++- org.apache.camel:camel-rss:jar:4.21.0-SNAPSHOT:compile
+|  \- com.rometools:rome:jar:2.1.0:compile
+|     \- com.rometools:rome-utils:jar:2.1.0:compile
++- org.apache.camel:camel-rxjava:jar:4.21.0-SNAPSHOT:compile
+|  \- io.reactivex.rxjava2:rxjava:jar:2.2.21:compile
++- org.apache.camel:camel-saga:jar:4.21.0-SNAPSHOT:compile
++- org.apache.camel:camel-salesforce:jar:4.21.0-SNAPSHOT:compile
+|  +- org.eclipse.jetty:jetty-io:jar:12.1.9:compile
+|  +- com.fasterxml.jackson.module:jackson-module-jsonSchema-jakarta:jar:2.21.3:compile
+|  +- org.cometd.java:cometd-java-client-http-jetty:jar:9.0.0:compile
+|  |  \- org.cometd.java:cometd-java-client-http-common:jar:9.0.0:compile
+|  |     \- org.cometd.java:cometd-java-client-common:jar:9.0.0:compile
+|  \- tech.allegro.schema.json2avro:converter:jar:0.3.0:compile
++- org.apache.camel:camel-salesforce-codegen:jar:4.21.0-SNAPSHOT:compile
+|  \- org.apache.avro:avro-compiler:jar:1.12.1:compile
++- org.apache.camel:camel-sap-netweaver:jar:4.21.0-SNAPSHOT:compile
++- org.apache.camel:camel-saxon:jar:4.21.0-SNAPSHOT:compile
+|  \- net.sf.saxon:Saxon-HE:jar:12.9:compile
+|     +- org.xmlresolver:xmlresolver:jar:5.3.3:compile
+|     \- org.xmlresolver:xmlresolver:jar:data:5.3.3:compile
++- org.apache.camel:camel-scheduler:jar:4.21.0-SNAPSHOT:compile
++- org.apache.camel:camel-schematron:jar:4.21.0-SNAPSHOT:compile
++- org.apache.camel:camel-seda:jar:4.21.0-SNAPSHOT:compile
++- org.apache.camel:camel-servicenow:jar:4.21.0-SNAPSHOT:compile
+|  +- org.apache.cxf:cxf-core:jar:4.2.0:compile
+|  |  \- org.apache.ws.xmlschema:xmlschema-core:jar:2.3.2:compile
+|  +- org.apache.cxf:cxf-rt-rs-security-oauth2:jar:4.2.0:compile
+|  |  \- org.apache.cxf:cxf-rt-rs-security-jose-jaxrs:jar:4.2.0:compile
+|  |     \- org.apache.cxf:cxf-rt-rs-security-jose:jar:4.2.0:compile
+|  |        \- org.apache.cxf:cxf-rt-rs-json-basic:jar:4.2.0:compile
+|  \- org.apache.cxf:cxf-rt-rs-extension-providers:jar:4.2.0:compile
++- org.apache.camel:camel-servlet:jar:4.21.0-SNAPSHOT:compile
++- org.apache.camel:camel-shiro:jar:4.21.0-SNAPSHOT:compile
+|  +- org.apache.shiro:shiro-jakarta-ee:jar:2.1.0:compile
+|  |  +- org.apache.shiro:shiro-core:jar:2.1.0:compile
+|  |  |  +- org.apache.shiro:shiro-cache:jar:2.1.0:compile
+|  |  |  +- org.apache.shiro:shiro-crypto-hash:jar:2.1.0:compile
+|  |  |  +- org.apache.shiro.crypto:shiro-hashes-argon2:jar:2.1.0:runtime
+|  |  |  +- org.apache.shiro.crypto:shiro-hashes-bcrypt:jar:2.1.0:runtime
+|  |  |  +- org.apache.shiro:shiro-config-core:jar:2.1.0:compile
+|  |  |  +- org.apache.shiro:shiro-config-ogdl:jar:2.1.0:compile
+|  |  |  \- org.apache.shiro:shiro-event:jar:2.1.0:compile
+|  |  +- org.apache.shiro:shiro-web:jar:2.1.0:compile
+|  |  +- org.apache.shiro:shiro-jaxrs:jar:2.1.0:compile
+|  |  +- org.apache.shiro:shiro-cdi:jar:2.1.0:compile
+|  |  \- org.omnifaces:omnifaces:jar:3.14.12:compile
+|  \- org.apache.shiro:shiro-crypto-cipher:jar:2.1.0:compile
+|     +- org.apache.shiro:shiro-lang:jar:2.1.0:compile
+|     \- org.apache.shiro:shiro-crypto-core:jar:2.1.0:compile
++- org.apache.camel:camel-sjms:jar:4.21.0-SNAPSHOT:compile
++- org.apache.camel:camel-sjms2:jar:4.21.0-SNAPSHOT:compile
++- org.apache.camel:camel-slack:jar:4.21.0-SNAPSHOT:compile
+|  \- com.slack.api:slack-api-client:jar:1.49.0:compile
+|     \- com.slack.api:slack-api-model:jar:1.49.0:compile
++- org.apache.camel:camel-smb:jar:4.21.0-SNAPSHOT:compile
+|  \- com.hierynomus:smbj:jar:0.14.0:compile
+|     +- net.engio:mbassador:jar:1.3.0:runtime
+|     \- com.hierynomus:asn-one:jar:0.6.0:runtime
++- org.apache.camel:camel-smooks:jar:4.21.0-SNAPSHOT:compile
+|  +- org.smooks:smooks-core:jar:2.2.1:compile
+|  |  +- org.smooks:smooks-commons:jar:2.2.1:compile
+|  |  |  \- org.smooks:smooks-api:jar:2.2.1:compile
+|  |  +- com.thoughtworks.xstream:xstream:jar:1.4.21:compile
+|  |  |  \- io.github.x-stream:mxparser:jar:1.2.2:compile
+|  |  |     \- xmlpull:xmlpull:jar:1.1.3.1:compile
+|  |  +- jaxen:jaxen:jar:2.0.0:compile
+|  |  \- xml-apis:xml-apis:jar:1.4.01:compile
+|  +- org.smooks.cartridges:smooks-javabean-cartridge:jar:2.0.3:compile
+|  \- org.smooks.cartridges.edi:smooks-edi-cartridge:jar:2.1.0:compile
+|     +- org.smooks.cartridges.edi:edi-schemas:jar:2.1.0:compile
+|     \- org.smooks.cartridges:smooks-dfdl-cartridge:jar:1.0.3:compile
++- org.apache.camel:camel-smpp:jar:4.21.0-SNAPSHOT:compile
+|  \- org.jsmpp:jsmpp:jar:3.0.2:compile
++- org.apache.camel:camel-snakeyaml:jar:4.21.0-SNAPSHOT:compile
+|  \- org.yaml:snakeyaml:jar:2.6:compile
++- org.apache.camel:camel-snmp:jar:4.21.0-SNAPSHOT:compile
+|  \- org.snmp4j:snmp4j:jar:3.10.0:compile
++- org.apache.camel:camel-soap:jar:4.21.0-SNAPSHOT:compile
+|  +- jakarta.jws:jakarta.jws-api:jar:3.0.0:compile
+|  \- com.sun.xml.messaging.saaj:saaj-impl:jar:3.0.5:compile
+|     \- org.jvnet.staxex:stax-ex:jar:2.1.0:compile
++- org.apache.camel:camel-solr:jar:4.21.0-SNAPSHOT:compile
+|  +- org.apache.solr:solr-solrj:jar:10.0.0:compile
+|  +- org.apache.solr:solr-api:jar:10.0.0:compile
+|  |  \- org.semver4j:semver4j:jar:6.0.0:runtime
+|  \- org.apache.httpcomponents:httpmime:jar:4.5.14:compile
++- org.apache.camel:camel-splunk:jar:4.21.0-SNAPSHOT:compile
+|  \- org.apache.servicemix.bundles:org.apache.servicemix.bundles.splunk:jar:1.9.5_1:compile
++- org.apache.camel:camel-splunk-hec:jar:4.21.0-SNAPSHOT:compile
+|  \- commons-validator:commons-validator:jar:1.10.1:compile
+|     +- commons-beanutils:commons-beanutils:jar:1.11.0:compile
+|     +- commons-digester:commons-digester:jar:2.1:compile
+|     \- commons-collections:commons-collections:jar:3.2.2:compile
++- org.apache.camel:camel-spring:jar:4.21.0-SNAPSHOT:compile
+|  +- org.springframework:spring-core:jar:7.0.7:compile
+|  +- org.springframework:spring-aop:jar:7.0.7:compile
+|  \- org.springframework:spring-expression:jar:7.0.7:compile
++- org.apache.camel:camel-spring-ai-chat:jar:4.21.0-SNAPSHOT:compile
+|  +- org.springframework.ai:spring-ai-model:jar:1.1.6:compile
+|  |  +- org.springframework.ai:spring-ai-template-st:jar:1.1.6:compile
+|  |  \- com.github.victools:jsonschema-module-swagger-2:jar:4.38.0:compile
+|  +- org.springframework.ai:spring-ai-vector-store:jar:1.1.6:compile
+|  +- org.springframework.ai:spring-ai-commons:jar:1.1.6:compile
+|  |  \- com.fasterxml.jackson.module:jackson-module-jsonSchema:jar:2.21.3:compile
+|  +- org.springframework.ai:spring-ai-client-chat:jar:1.1.6:compile
+|  +- org.springframework.ai:spring-ai-advisors-vector-store:jar:1.1.6:compile
+|  \- org.springframework.ai:spring-ai-mcp:jar:1.1.6:compile
+|     \- io.modelcontextprotocol.sdk:mcp:jar:0.18.2:compile
++- org.apache.camel:camel-spring-ai-embeddings:jar:4.21.0-SNAPSHOT:compile
++- org.apache.camel:camel-spring-ai-tools:jar:4.21.0-SNAPSHOT:compile
++- org.apache.camel:camel-spring-ai-vector-store:jar:4.21.0-SNAPSHOT:compile
++- org.apache.camel:camel-spring-batch:jar:4.21.0-SNAPSHOT:compile
+|  \- org.springframework.batch:spring-batch-core:jar:6.0.3:compile
+|     \- org.springframework.batch:spring-batch-infrastructure:jar:6.0.3:compile
+|        \- org.springframework.retry:spring-retry:jar:2.0.12:compile
++- org.apache.camel:camel-spring-cloud-config:jar:4.21.0-SNAPSHOT:compile
+|  \- org.springframework.cloud:spring-cloud-config-client:jar:5.0.3:compile
+|     +- org.springframework.boot:spring-boot-autoconfigure:jar:4.0.2:compile
+|     |  \- org.springframework.boot:spring-boot:jar:4.0.2:compile
+|     \- org.springframework.cloud:spring-cloud-starter:jar:5.0.1:compile
+|        +- org.springframework.boot:spring-boot-starter:jar:4.0.2:compile
+|        |  \- org.springframework.boot:spring-boot-starter-logging:jar:4.0.2:compile
+|        |     +- ch.qos.logback:logback-classic:jar:1.5.25:compile
+|        |     |  \- ch.qos.logback:logback-core:jar:1.5.25:compile
+|        |     \- org.apache.logging.log4j:log4j-to-slf4j:jar:2.25.3:compile
+|        +- org.springframework.cloud:spring-cloud-context:jar:5.0.1:compile
+|        |  \- org.springframework.boot:spring-boot-restclient:jar:4.0.2:compile
+|        |     +- org.springframework.boot:spring-boot-http-client:jar:4.0.2:compile
+|        |     \- org.springframework.boot:spring-boot-http-converter:jar:4.0.2:runtime
+|        \- org.springframework.cloud:spring-cloud-commons:jar:5.0.1:compile
++- org.apache.camel:camel-spring-jdbc:jar:4.21.0-SNAPSHOT:compile
++- org.apache.camel:camel-spring-ldap:jar:4.21.0-SNAPSHOT:compile
+|  +- org.springframework.ldap:spring-ldap-core:jar:4.0.3:compile
+|  +- org.springframework.ldap:spring-ldap-odm:jar:4.0.3:compile
+|  \- org.springframework.ldap:spring-ldap-ldif-core:jar:4.0.3:compile
++- org.apache.camel:camel-spring-main:jar:4.21.0-SNAPSHOT:compile
++- org.apache.camel:camel-spring-rabbitmq:jar:4.21.0-SNAPSHOT:compile
+|  \- org.springframework.amqp:spring-rabbit:jar:4.0.3:compile
+|     +- org.springframework.amqp:spring-amqp:jar:4.0.3:compile
+|     \- com.rabbitmq:amqp-client:jar:5.27.1:compile
++- org.apache.camel:camel-spring-redis:jar:4.21.0-SNAPSHOT:compile
+|  +- org.springframework.data:spring-data-redis:jar:4.0.5:compile
+|  |  +- org.springframework.data:spring-data-keyvalue:jar:4.0.5:compile
+|  |  |  \- org.springframework.data:spring-data-commons:jar:4.0.5:compile
+|  |  +- org.springframework:spring-oxm:jar:7.0.7:compile
+|  |  \- org.springframework:spring-context-support:jar:7.0.7:compile
+|  \- redis.clients:jedis:jar:7.5.0:compile
+|     \- redis.clients.authentication:redis-authx-core:jar:0.1.1-beta2:compile
++- org.apache.camel:camel-spring-security:jar:4.21.0-SNAPSHOT:compile
+|  +- org.springframework.security:spring-security-core:jar:7.0.5:compile
+|  |  \- org.springframework.security:spring-security-crypto:jar:7.0.5:compile
+|  +- org.springframework.security:spring-security-config:jar:7.0.5:compile
+|  \- commons-logging:commons-logging:jar:1.3.6:compile
++- org.apache.camel:camel-spring-ws:jar:4.21.0-SNAPSHOT:compile
+|  +- org.springframework:spring-webmvc:jar:7.0.7:compile
+|  +- org.springframework.ws:spring-ws-core:jar:5.0.1:compile
+|  |  \- org.springframework.ws:spring-xml:jar:5.0.1:compile
+|  \- org.springframework.ws:spring-ws-support:jar:5.0.1:compile
++- org.apache.camel:camel-spring-xml:jar:4.21.0-SNAPSHOT:compile
++- org.apache.camel:camel-sql:jar:4.21.0-SNAPSHOT:compile
++- org.apache.camel:camel-ssh:jar:4.21.0-SNAPSHOT:compile
+|  \- org.apache.sshd:sshd-core:jar:2.17.1:compile
+|     \- org.apache.sshd:sshd-common:jar:2.17.1:compile
++- org.apache.camel:camel-stax:jar:4.21.0-SNAPSHOT:compile
+|  \- com.fasterxml.woodstox:woodstox-core:jar:7.1.1:compile
++- org.apache.camel:camel-stitch:jar:4.21.0-SNAPSHOT:compile
+|  \- io.projectreactor.netty:reactor-netty:jar:1.3.5:compile
+|     +- io.projectreactor.netty:reactor-netty-core:jar:1.3.5:compile
+|     \- io.projectreactor.netty:reactor-netty-http:jar:1.3.5:compile
++- org.apache.camel:camel-stream:jar:4.21.0-SNAPSHOT:compile
++- org.apache.camel:camel-stringtemplate:jar:4.21.0-SNAPSHOT:compile
+|  \- org.antlr:ST4:jar:4.3.4:compile
+|     \- org.antlr:antlr-runtime:jar:3.5.3:compile
++- org.apache.camel:camel-stripe:jar:4.21.0-SNAPSHOT:compile
+|  \- com.stripe:stripe-java:jar:32.1.0:compile
++- org.apache.camel:camel-stub:jar:4.21.0-SNAPSHOT:compile
++- org.apache.camel:camel-swift:jar:4.21.0-SNAPSHOT:compile
+|  \- com.prowidesoftware:pw-iso20022:jar:SRU2025-10.3.8:compile
+|     \- com.prowidesoftware:pw-swift-core:jar:SRU2025-10.3.13:compile
++- org.apache.camel:camel-syslog:jar:4.21.0-SNAPSHOT:compile
++- org.apache.camel:camel-tahu:jar:4.21.0-SNAPSHOT:compile
+|  +- org.eclipse.tahu:tahu-core:jar:1.0.19:compile
+|  +- org.eclipse.tahu:tahu-edge:jar:1.0.19:compile
+|  \- org.eclipse.tahu:tahu-host:jar:1.0.19:compile
++- org.apache.camel:camel-tarfile:jar:4.21.0-SNAPSHOT:compile
++- org.apache.camel:camel-telegram:jar:4.21.0-SNAPSHOT:compile
++- org.apache.camel:camel-telemetry:jar:4.21.0-SNAPSHOT:compile
++- org.apache.camel:camel-telemetry-dev:jar:4.21.0-SNAPSHOT:compile
++- org.apache.camel:camel-tensorflow-serving:jar:4.21.0-SNAPSHOT:compile
++- org.apache.camel:camel-test-junit5:jar:4.21.0-SNAPSHOT:compile
+|  +- org.junit.jupiter:junit-jupiter-api:jar:6.1.0:compile
+|  |  +- org.opentest4j:opentest4j:jar:1.3.0:compile
+|  |  \- org.apiguardian:apiguardian-api:jar:1.1.2:compile
+|  +- org.junit.jupiter:junit-jupiter-engine:jar:6.1.0:compile
+|  +- org.junit.jupiter:junit-jupiter-params:jar:6.1.0:compile
+|  \- org.mockito:mockito-core:jar:5.23.0:compile
+|     +- net.bytebuddy:byte-buddy-agent:jar:1.18.8:compile
+|     \- org.objenesis:objenesis:jar:3.3:compile
++- org.apache.camel:camel-test-junit6:jar:4.21.0-SNAPSHOT:compile
+|  +- org.junit.platform:junit-platform-commons:jar:6.1.0:compile
+|  +- org.junit.platform:junit-platform-engine:jar:6.1.0:compile
+|  \- org.junit.platform:junit-platform-launcher:jar:6.1.0:compile
++- org.apache.camel:camel-test-main-junit5:jar:4.21.0-SNAPSHOT:compile
++- org.apache.camel:camel-test-main-junit6:jar:4.21.0-SNAPSHOT:compile
++- org.apache.camel:camel-test-spring-junit5:jar:4.21.0-SNAPSHOT:compile
+|  \- org.springframework:spring-test:jar:7.0.7:compile
++- org.apache.camel:camel-test-spring-junit6:jar:4.21.0-SNAPSHOT:compile
++- org.apache.camel:camel-threadpoolfactory-vertx:jar:4.21.0-SNAPSHOT:compile
++- org.apache.camel:camel-thrift:jar:4.21.0-SNAPSHOT:compile
+|  \- org.apache.thrift:libthrift:jar:0.23.0:compile
++- org.apache.camel:camel-thymeleaf:jar:4.21.0-SNAPSHOT:compile
+|  \- org.thymeleaf:thymeleaf:jar:3.1.5.RELEASE:compile
+|     +- org.attoparser:attoparser:jar:2.0.7.RELEASE:compile
+|     \- org.unbescape:unbescape:jar:1.1.6.RELEASE:compile
++- org.apache.camel:camel-tika:jar:4.21.0-SNAPSHOT:compile
+|  +- org.apache.tika:tika-core:jar:3.3.0:compile
+|  +- org.apache.tika:tika-parser-html-module:jar:3.3.0:compile
+|  \- org.apache.tika:tika-parser-text-module:jar:3.3.0:compile
+|     \- com.github.albfernandez:juniversalchardet:jar:2.5.0:compile
++- org.apache.camel:camel-timer:jar:4.21.0-SNAPSHOT:compile
++- org.apache.camel:camel-tracing:jar:4.21.0-SNAPSHOT:compile
++- org.apache.camel:camel-twilio:jar:4.21.0-SNAPSHOT:compile
+|  \- com.twilio.sdk:twilio:jar:12.1.1:compile
+|     +- io.jsonwebtoken:jjwt-api:jar:0.12.6:compile
+|     +- io.jsonwebtoken:jjwt-jackson:jar:0.12.6:compile
+|     \- io.jsonwebtoken:jjwt-impl:jar:0.12.6:runtime
++- org.apache.camel:camel-twitter:jar:4.21.0-SNAPSHOT:compile
+|  \- org.twitter4j:twitter4j-core:jar:4.1.2:compile
++- org.apache.camel:camel-undertow:jar:4.21.0-SNAPSHOT:compile
+|  +- io.undertow:undertow-core:jar:2.4.0.Final:compile
+|  |  +- org.jboss.xnio:xnio-api:jar:3.8.16.Final:compile
+|  |  |  \- org.wildfly.client:wildfly-client-config:jar:1.0.1.Final:compile
+|  |  \- org.jboss.xnio:xnio-nio:jar:3.8.16.Final:runtime
+|  \- io.undertow:undertow-servlet:jar:2.3.24.Final:compile
++- org.apache.camel:camel-undertow-spring-security:jar:4.21.0-SNAPSHOT:compile
+|  +- org.springframework.security:spring-security-oauth2-client:jar:7.0.5:compile
+|  |  +- org.springframework.security:spring-security-oauth2-core:jar:7.0.5:compile
+|  |  +- org.springframework.security:spring-security-web:jar:7.0.5:compile
+|  |  \- com.nimbusds:oauth2-oidc-sdk:jar:11.26.1:compile
+|  |     +- com.github.stephenc.jcip:jcip-annotations:jar:1.0-1:compile
+|  |     +- com.nimbusds:content-type:jar:2.3:compile
+|  |     \- com.nimbusds:lang-tag:jar:1.7:compile
+|  +- org.springframework.security:spring-security-oauth2-jose:jar:7.0.5:compile
+|  \- org.springframework.security:spring-security-oauth2-resource-server:jar:7.0.5:compile
++- org.apache.camel:camel-univocity-parsers:jar:4.21.0-SNAPSHOT:compile
+|  \- com.sonofab1rd:univocity-parsers:jar:2.10.2:compile
++- org.apache.camel:camel-validator:jar:4.21.0-SNAPSHOT:compile
++- org.apache.camel:camel-velocity:jar:4.21.0-SNAPSHOT:compile
++- org.apache.camel:camel-vertx:jar:4.21.0-SNAPSHOT:compile
++- org.apache.camel:camel-vertx-common:jar:4.21.0-SNAPSHOT:compile
++- org.apache.camel:camel-vertx-http:jar:4.21.0-SNAPSHOT:compile
++- org.apache.camel:camel-vertx-websocket:jar:4.21.0-SNAPSHOT:compile
++- org.apache.camel:camel-wal:jar:4.21.0-SNAPSHOT:compile
++- org.apache.camel:camel-wasm:jar:4.21.0-SNAPSHOT:compile
+|  \- com.dylibso.chicory:runtime:jar:1.7.5:compile
+|     \- com.dylibso.chicory:wasm:jar:1.7.5:compile
++- org.apache.camel:camel-weather:jar:4.21.0-SNAPSHOT:compile
++- org.apache.camel:camel-weaviate:jar:4.21.0-SNAPSHOT:compile
+|  \- io.weaviate:client:jar:5.5.0:compile
++- org.apache.camel:camel-web3j:jar:4.21.0-SNAPSHOT:compile
+|  +- org.web3j:core:jar:5.0.0:compile
+|  |  +- org.web3j:abi:jar:5.0.0:compile
+|  |  |  \- org.web3j:utils:jar:5.0.0:compile
+|  |  |     \- org.bouncycastle:bcprov-jdk15on:jar:1.65:compile
+|  |  +- org.web3j:crypto:jar:5.0.0:compile
+|  |  |  \- org.web3j:rlp:jar:5.0.0:compile
+|  |  +- org.web3j:tuples:jar:5.0.0:compile
+|  |  \- com.github.jnr:jnr-unixsocket:jar:0.21:compile
+|  |     \- com.github.jnr:jnr-enxio:jar:0.19:compile
+|  +- org.web3j:geth:jar:5.0.0:compile
+|  +- org.web3j:parity:jar:5.0.0:compile
+|  \- org.web3j:quorum:jar:4.10.0:compile
+|     \- com.fasterxml.jackson.module:jackson-module-kotlin:jar:2.21.3:runtime
++- org.apache.camel:camel-webhook:jar:4.21.0-SNAPSHOT:compile
++- org.apache.camel:camel-whatsapp:jar:4.21.0-SNAPSHOT:compile
++- org.apache.camel:camel-wordpress:jar:4.21.0-SNAPSHOT:compile
++- org.apache.camel:camel-workday:jar:4.21.0-SNAPSHOT:compile
++- org.apache.camel:camel-xchange:jar:4.21.0-SNAPSHOT:compile
+|  +- org.knowm.xchange:xchange-core:jar:5.2.5:compile
+|  |  \- com.github.mmazi:rescu:jar:3.1:compile
+|  |     \- oauth.signpost:signpost-core:jar:2.1.1:compile
+|  \- org.knowm.xchange:xchange-binance:jar:5.2.5:compile
++- org.apache.camel:camel-xj:jar:4.21.0-SNAPSHOT:compile
++- org.apache.camel:camel-xmlsecurity:jar:4.21.0-SNAPSHOT:compile
+|  \- org.apache.santuario:xmlsec:jar:4.0.4:compile
++- org.apache.camel:camel-xmpp:jar:4.21.0-SNAPSHOT:compile
+|  +- org.igniterealtime.smack:smack-core:jar:4.3.5:compile
+|  |  +- xpp3:xpp3:jar:1.1.4c:compile
+|  |  +- org.jxmpp:jxmpp-core:jar:0.6.4:compile
+|  |  |  \- org.jxmpp:jxmpp-util-cache:jar:0.6.4:compile
+|  |  +- org.jxmpp:jxmpp-jid:jar:0.6.4:compile
+|  |  \- org.minidns:minidns-core:jar:0.3.4:compile
+|  +- org.igniterealtime.smack:smack-extensions:jar:4.3.5:compile
+|  +- org.igniterealtime.smack:smack-java7:jar:4.3.5:compile
+|  |  +- org.igniterealtime.smack:smack-resolver-javax:jar:4.3.5:compile
+|  |  \- org.igniterealtime.smack:smack-sasl-javax:jar:4.3.5:compile
+|  +- org.igniterealtime.smack:smack-im:jar:4.3.5:compile
+|  \- org.igniterealtime.smack:smack-tcp:jar:4.3.5:compile
++- org.apache.camel:camel-xpath:jar:4.21.0-SNAPSHOT:compile
++- org.apache.camel:camel-xslt:jar:4.21.0-SNAPSHOT:compile
++- org.apache.camel:camel-xslt-saxon:jar:4.21.0-SNAPSHOT:compile
++- org.apache.camel:camel-zeebe:jar:4.21.0-SNAPSHOT:compile
+|  +- org.camunda.bpm:camunda-bom:pom:7.24.0:compile
+|  +- org.camunda.bpm.model:camunda-xml-model:jar:7.24.0:compile
+|  \- io.camunda:zeebe-client-java:jar:8.9.5:compile
+|     +- io.camunda:zeebe-bpmn-model:jar:8.9.5:compile
+|     \- io.camunda:zeebe-gateway-protocol-impl:jar:8.9.5:compile
++- org.apache.camel:camel-zendesk:jar:4.21.0-SNAPSHOT:compile
+|  \- com.cloudbees.thirdparty:zendesk-java-client:jar:1.5.2:compile
+|     +- org.asynchttpclient:async-http-client:jar:3.0.9:compile
+|     \- com.damnhandy:handy-uri-templates:jar:2.1.8:compile
++- org.apache.camel:camel-zip-deflater:jar:4.21.0-SNAPSHOT:compile
++- org.apache.camel:camel-zipfile:jar:4.21.0-SNAPSHOT:compile
++- org.apache.camel:camel-zookeeper:jar:4.21.0-SNAPSHOT:compile
+|  +- org.apache.zookeeper:zookeeper:jar:3.9.5:compile
+|  |  \- org.apache.zookeeper:zookeeper-jute:jar:3.9.5:compile
+|  +- org.apache.curator:curator-client:jar:5.9.0:compile
+|  +- org.apache.curator:curator-framework:jar:5.9.0:compile
+|  +- org.apache.curator:curator-recipes:jar:5.9.0:compile
+|  \- org.apache.curator:curator-x-discovery:jar:5.9.0:compile
++- org.apache.camel:camel-zookeeper-master:jar:4.21.0-SNAPSHOT:compile
++- org.apache.camel:dummy-component:jar:4.21.0-SNAPSHOT:compile
+|  \- org.apache.camel:camel-allcomponents:pom:4.21.0-SNAPSHOT:compile
++- org.apache.camel.maven:camel-debezium-maven-plugin:jar:4.21.0-SNAPSHOT:compile
+|  \- org.apache.camel:camel-package-maven-plugin:jar:4.21.0-SNAPSHOT:compile
+|     +- org.apache.maven.shared:maven-shared-utils:jar:3.4.2:compile
+|     +- org.apache.maven.shared:maven-dependency-tree:jar:3.3.0:compile
+|     \- org.ow2.asm:asm-tree:jar:9.10:compile
++- org.apache.camel.maven:camel-salesforce-maven-plugin:jar:4.21.0-SNAPSHOT:compile
+|  +- org.codehaus.plexus:plexus-container-default:jar:2.1.1:compile
+|  |  +- org.codehaus.plexus:plexus-classworlds:jar:2.6.0:compile
+|  |  +- org.apache.xbean:xbean-reflect:jar:3.7:compile
+|  |  \- junit:junit:jar:4.13.2:compile
+|  |     \- org.hamcrest:hamcrest-core:jar:1.3:compile
+|  +- org.codehaus.plexus:plexus-utils:jar:4.0.3:compile
+|  +- org.codehaus.plexus:plexus-build-api:jar:1.2.0:compile
+|  |  +- org.sonatype.plexus:plexus-build-api:jar:0.0.7:compile
+|  |  \- org.eclipse.sisu:org.eclipse.sisu.plexus:jar:0.9.0.M2:compile
+|  \- org.mockito:mockito-junit-jupiter:jar:5.23.0:compile
++- org.apache.camel.maven:camel-servicenow-maven-plugin:jar:4.21.0-SNAPSHOT:compile
+|  \- com.squareup:javapoet:jar:1.13.0:compile
++- org.apache.camel:camel-cli-connector:jar:4.21.0-SNAPSHOT:compile
++- org.apache.camel:camel-cli-debug:jar:4.21.0-SNAPSHOT:compile
++- org.apache.camel:camel-componentdsl:jar:4.21.0-SNAPSHOT:compile
++- org.apache.camel:camel-dsl-modeline:jar:4.21.0-SNAPSHOT:compile
++- org.apache.camel:camel-dsl-support:jar:4.21.0-SNAPSHOT:compile
++- org.apache.camel:camel-endpointdsl:jar:4.21.0-SNAPSHOT:compile
++- org.apache.camel:camel-endpointdsl-support:jar:4.21.0-SNAPSHOT:compile
++- org.apache.camel:camel-java-joor-dsl:jar:4.21.0-SNAPSHOT:compile
++- org.apache.camel:camel-jbang-console:jar:4.21.0-SNAPSHOT:compile
++- org.apache.camel:camel-kamelet-main:jar:4.21.0-SNAPSHOT:compile
+|  +- org.apache.camel:camel-kamelet-main-support:jar:4.21.0-SNAPSHOT:compile
+|  \- org.apache.camel:camel-diagram:jar:4.21.0-SNAPSHOT:compile
++- org.apache.camel:camel-xml-io-dsl:jar:4.21.0-SNAPSHOT:compile
++- org.apache.camel:camel-xml-jaxb-dsl:jar:4.21.0-SNAPSHOT:compile
++- org.apache.camel:camel-yaml-dsl:jar:4.21.0-SNAPSHOT:compile
++- org.apache.camel:camel-yaml-dsl-common:jar:4.21.0-SNAPSHOT:compile
+|  \- org.snakeyaml:snakeyaml-engine:jar:3.0.1:compile
++- org.apache.camel:camel-yaml-dsl-deserializers:jar:4.21.0-SNAPSHOT:compile
++- org.apache.camel:camel-jbang-core:jar:4.21.0-SNAPSHOT:compile
+|  +- info.picocli:picocli:jar:4.7.7:compile
+|  +- org.jline:jline:jar:4.1.0:compile
+|  +- org.jline:jline-picocli:jar:4.1.0:compile
+|  |  +- org.jline:jline-console:jar:4.1.0:compile
+|  |  |  +- org.jline:jline-builtins:jar:4.1.0:compile
+|  |  |  +- org.jline:jline-style:jar:4.1.0:compile
+|  |  |  \- org.jline:jline-console-ui:jar:4.1.0:compile
+|  |  \- org.jline:jline-shell:jar:4.1.0:compile
+|  |     \- org.jline:jline-reader:jar:4.1.0:compile
+|  +- com.github.freva:ascii-table:jar:1.9.0:compile
+|  +- org.jolokia:jolokia-agent-jvm:jar:javaagent:2.6.0:compile
+|  |  +- org.jolokia:jolokia-server-detector:jar:2.6.0:compile
+|  |  +- org.jolokia:jolokia-service-discovery:jar:2.6.0:compile
+|  |  +- org.jolokia:jolokia-service-history:jar:2.6.0:compile
+|  |  +- org.jolokia:jolokia-service-jsr160:jar:2.6.0:compile
+|  |  +- org.jolokia:jolokia-service-notif-pull:jar:2.6.0:compile
+|  |  \- org.jolokia:jolokia-service-notif-sse:jar:2.6.0:compile
+|  +- org.apache.logging.log4j:log4j-api:jar:2.25.4:compile
+|  +- org.apache.logging.log4j:log4j-core:jar:2.25.4:compile
+|  +- org.apache.logging.log4j:log4j-layout-template-json:jar:2.25.4:compile
+|  +- org.apache.logging.log4j:log4j-slf4j2-impl:jar:2.25.4:compile
+|  \- org.fusesource.jansi:jansi:jar:2.4.3:compile
++- org.apache.camel:camel-jbang-main:jar:4.21.0-SNAPSHOT:compile
++- org.apache.camel:camel-jbang-plugin-generate:jar:4.21.0-SNAPSHOT:compile
+|  +- org.openapitools:openapi-generator:jar:7.22.0:compile
+|  |  +- com.samskivert:jmustache:jar:1.16:compile
+|  |  +- com.github.jknack:handlebars:jar:4.3.1:compile
+|  |  +- com.github.jknack:handlebars-jackson2:jar:4.3.1:compile
+|  |  +- org.slf4j:slf4j-ext:jar:1.7.36:compile
+|  |  +- org.commonmark:commonmark:jar:0.21.0:compile
+|  |  +- com.github.mifmif:generex:jar:1.0.2:compile
+|  |  |  \- dk.brics.automaton:automaton:jar:1.11-8:compile
+|  |  +- com.github.curious-odd-man:rgxgen:jar:1.4:compile
+|  |  +- com.github.joschi.jackson:jackson-datatype-threetenbp:jar:2.18.2:compile
+|  |  \- org.openapitools:openapi-generator-core:jar:7.22.0:compile
+|  +- com.github.victools:jsonschema-generator:jar:4.38.0:compile
+|  \- com.github.victools:jsonschema-module-jackson:jar:4.38.0:compile
++- org.apache.camel:camel-jbang-plugin-kubernetes:jar:4.21.0-SNAPSHOT:compile
+|  +- io.fabric8:kubernetes-httpclient-vertx:jar:7.7.0:compile
+|  +- io.fabric8:openshift-model:jar:7.7.0:compile
+|  |  +- io.fabric8:kubernetes-model-core:jar:7.7.0:compile
+|  |  |  \- io.fabric8:kubernetes-model-common:jar:7.7.0:compile
+|  |  +- io.fabric8:kubernetes-model-rbac:jar:7.7.0:compile
+|  |  \- io.fabric8:openshift-model-config:jar:7.7.0:compile
+|  \- io.fabric8:knative-model:jar:7.7.0:compile
+|     +- io.fabric8:kubernetes-model-apps:jar:7.7.0:compile
+|     \- io.fabric8:kubernetes-model-batch:jar:7.7.0:compile
++- org.apache.camel:camel-jbang-plugin-route-parser:jar:4.21.0-SNAPSHOT:compile
+|  \- org.jboss.forge.roaster:roaster-jdt:jar:2.31.0.Final:compile
++- org.apache.camel:camel-jbang-plugin-test:jar:4.21.0-SNAPSHOT:compile
+|  \- org.citrusframework:citrus-jbang-connector:jar:4.10.1:compile
+|     \- org.citrusframework:citrus-base:jar:4.10.1:compile
+|        \- org.citrusframework:citrus-api:jar:4.10.1:compile
++- org.apache.camel:camel-catalog:jar:4.21.0-SNAPSHOT:compile
++- org.apache.camel:camel-catalog-console:jar:4.21.0-SNAPSHOT:compile
++- org.apache.camel:camel-catalog-lucene:jar:4.21.0-SNAPSHOT:compile
+|  \- org.apache.lucene:lucene-suggest:jar:9.12.3:compile
++- org.apache.camel:camel-catalog-maven:jar:4.21.0-SNAPSHOT:compile
++- org.apache.camel:camel-catalog-suggest:jar:4.21.0-SNAPSHOT:compile
++- org.apache.camel:camel-route-parser:jar:4.21.0-SNAPSHOT:compile
++- org.apache.camel:camel-csimple-maven-plugin:jar:4.21.0-SNAPSHOT:compile
+|  +- org.codehaus.mojo:exec-maven-plugin:jar:3.6.3:compile
+|  |  \- org.ow2.asm:asm-commons:jar:9.9.1:compile
+|  +- org.apache.maven.plugin-tools:maven-plugin-annotations:jar:3.15.2:compile
+|  +- org.apache.camel:camel-catalog-common:jar:4.21.0-SNAPSHOT:compile
+|  \- org.jboss.forge.roaster:roaster-api:jar:2.31.0.Final:compile
++- org.apache.camel:camel-report-maven-plugin:jar:4.21.0-SNAPSHOT:compile
+|  \- org.apache.commons:commons-collections4:jar:4.5.0:compile
++- org.apache.camel:camel-openapi-rest-dsl-generator:jar:4.21.0-SNAPSHOT:compile
+\- org.apache.camel:spi-annotations:jar:4.21.0-SNAPSHOT:compile

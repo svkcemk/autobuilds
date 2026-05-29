@@ -1,0 +1,10 @@
+name: org.apache.camel_camel-jgroups-raft_4.18.1
+description: "Build configuration for camel-jgroups-raft 4.18.1"
+project: camel-jgroups-raft
+scmRepository:
+  url: "https://github.com/placeholder/camel-jgroups-raft.git"
+  revision: "4.18.1"
+buildScript: "mvn clean deploy -DskipTests"
+environment:
+  name: "OpenJDK 11"
+buildType: MVN

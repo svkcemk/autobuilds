@@ -1,0 +1,10 @@
+name: org.apache.camel_camel-stomp_4.18.1
+description: "Build configuration for camel-stomp 4.18.1"
+project: camel-stomp
+scmRepository:
+  url: "https://github.com/placeholder/camel-stomp.git"
+  revision: "4.18.1"
+buildScript: "mvn clean deploy -DskipTests"
+environment:
+  name: "OpenJDK 11"
+buildType: MVN

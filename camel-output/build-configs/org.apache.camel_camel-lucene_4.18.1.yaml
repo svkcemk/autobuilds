@@ -1,0 +1,10 @@
+name: org.apache.camel_camel-lucene_4.18.1
+description: "Build configuration for camel-lucene 4.18.1"
+project: camel-lucene
+scmRepository:
+  url: "https://github.com/placeholder/camel-lucene.git"
+  revision: "4.18.1"
+buildScript: "mvn clean deploy -DskipTests"
+environment:
+  name: "OpenJDK 11"
+buildType: MVN

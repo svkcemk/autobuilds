@@ -1,0 +1,10 @@
+name: org.apache.camel_camel-spring-security_4.18.1
+description: "Build configuration for camel-spring-security 4.18.1"
+project: camel-spring-security
+scmRepository:
+  url: "https://github.com/placeholder/camel-spring-security.git"
+  revision: "4.18.1"
+buildScript: "mvn clean deploy -DskipTests"
+environment:
+  name: "OpenJDK 11"
+buildType: MVN

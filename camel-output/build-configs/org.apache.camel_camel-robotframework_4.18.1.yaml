@@ -1,0 +1,10 @@
+name: org.apache.camel_camel-robotframework_4.18.1
+description: "Build configuration for camel-robotframework 4.18.1"
+project: camel-robotframework
+scmRepository:
+  url: "https://github.com/placeholder/camel-robotframework.git"
+  revision: "4.18.1"
+buildScript: "mvn clean deploy -DskipTests"
+environment:
+  name: "OpenJDK 11"
+buildType: MVN

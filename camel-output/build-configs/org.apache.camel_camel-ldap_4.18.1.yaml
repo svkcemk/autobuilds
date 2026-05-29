@@ -1,0 +1,10 @@
+name: org.apache.camel_camel-ldap_4.18.1
+description: "Build configuration for camel-ldap 4.18.1"
+project: camel-ldap
+scmRepository:
+  url: "https://github.com/placeholder/camel-ldap.git"
+  revision: "4.18.1"
+buildScript: "mvn clean deploy -DskipTests"
+environment:
+  name: "OpenJDK 11"
+buildType: MVN

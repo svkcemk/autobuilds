@@ -1,0 +1,10 @@
+name: org.apache.camel_camel-service_4.18.1
+description: "Build configuration for camel-service 4.18.1"
+project: camel-service
+scmRepository:
+  url: "https://github.com/placeholder/camel-service.git"
+  revision: "4.18.1"
+buildScript: "mvn clean deploy -DskipTests"
+environment:
+  name: "OpenJDK 11"
+buildType: MVN

@@ -1,0 +1,10 @@
+name: org.apache.camel_camel-dhis2_4.18.1
+description: "Build configuration for camel-dhis2 4.18.1"
+project: camel-dhis2
+scmRepository:
+  url: "https://github.com/placeholder/camel-dhis2.git"
+  revision: "4.18.1"
+buildScript: "mvn clean deploy -DskipTests"
+environment:
+  name: "OpenJDK 11"
+buildType: MVN

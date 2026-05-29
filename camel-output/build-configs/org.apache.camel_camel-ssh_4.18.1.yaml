@@ -1,0 +1,10 @@
+name: org.apache.camel_camel-ssh_4.18.1
+description: "Build configuration for camel-ssh 4.18.1"
+project: camel-ssh
+scmRepository:
+  url: "https://github.com/placeholder/camel-ssh.git"
+  revision: "4.18.1"
+buildScript: "mvn clean deploy -DskipTests"
+environment:
+  name: "OpenJDK 11"
+buildType: MVN

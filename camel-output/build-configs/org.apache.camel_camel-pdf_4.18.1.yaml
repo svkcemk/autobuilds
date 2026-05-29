@@ -1,0 +1,10 @@
+name: org.apache.camel_camel-pdf_4.18.1
+description: "Build configuration for camel-pdf 4.18.1"
+project: camel-pdf
+scmRepository:
+  url: "https://github.com/placeholder/camel-pdf.git"
+  revision: "4.18.1"
+buildScript: "mvn clean deploy -DskipTests"
+environment:
+  name: "OpenJDK 11"
+buildType: MVN

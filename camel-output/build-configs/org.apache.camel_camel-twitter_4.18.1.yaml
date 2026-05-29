@@ -1,0 +1,10 @@
+name: org.apache.camel_camel-twitter_4.18.1
+description: "Build configuration for camel-twitter 4.18.1"
+project: camel-twitter
+scmRepository:
+  url: "https://github.com/placeholder/camel-twitter.git"
+  revision: "4.18.1"
+buildScript: "mvn clean deploy -DskipTests"
+environment:
+  name: "OpenJDK 11"
+buildType: MVN

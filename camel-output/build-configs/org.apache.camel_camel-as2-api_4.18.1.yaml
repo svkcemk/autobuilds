@@ -1,0 +1,10 @@
+name: org.apache.camel_camel-as2-api_4.18.1
+description: "Build configuration for camel-as2-api 4.18.1"
+project: camel-as2-api
+scmRepository:
+  url: "https://github.com/placeholder/camel-as2-api.git"
+  revision: "4.18.1"
+buildScript: "mvn clean deploy -DskipTests"
+environment:
+  name: "OpenJDK 11"
+buildType: MVN

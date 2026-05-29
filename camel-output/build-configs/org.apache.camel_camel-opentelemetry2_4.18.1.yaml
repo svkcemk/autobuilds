@@ -1,0 +1,10 @@
+name: org.apache.camel_camel-opentelemetry2_4.18.1
+description: "Build configuration for camel-opentelemetry2 4.18.1"
+project: camel-opentelemetry2
+scmRepository:
+  url: "https://github.com/placeholder/camel-opentelemetry2.git"
+  revision: "4.18.1"
+buildScript: "mvn clean deploy -DskipTests"
+environment:
+  name: "OpenJDK 11"
+buildType: MVN

@@ -1,0 +1,10 @@
+name: org.apache.camel_camel-joor_4.18.1
+description: "Build configuration for camel-joor 4.18.1"
+project: camel-joor
+scmRepository:
+  url: "https://github.com/placeholder/camel-joor.git"
+  revision: "4.18.1"
+buildScript: "mvn clean deploy -DskipTests"
+environment:
+  name: "OpenJDK 11"
+buildType: MVN

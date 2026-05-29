@@ -1,0 +1,10 @@
+name: org.apache.camel_camel-azure-servicebus_4.18.1
+description: "Build configuration for camel-azure-servicebus 4.18.1"
+project: camel-azure-servicebus
+scmRepository:
+  url: "https://github.com/placeholder/camel-azure-servicebus.git"
+  revision: "4.18.1"
+buildScript: "mvn clean deploy -DskipTests"
+environment:
+  name: "OpenJDK 11"
+buildType: MVN

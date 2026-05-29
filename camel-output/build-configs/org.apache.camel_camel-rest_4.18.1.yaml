@@ -1,0 +1,10 @@
+name: org.apache.camel_camel-rest_4.18.1
+description: "Build configuration for camel-rest 4.18.1"
+project: camel-rest
+scmRepository:
+  url: "https://github.com/placeholder/camel-rest.git"
+  revision: "4.18.1"
+buildScript: "mvn clean deploy -DskipTests"
+environment:
+  name: "OpenJDK 11"
+buildType: MVN

@@ -1,0 +1,10 @@
+name: org.apache.camel_camel-mongodb-gridfs_4.18.1
+description: "Build configuration for camel-mongodb-gridfs 4.18.1"
+project: camel-mongodb-gridfs
+scmRepository:
+  url: "https://github.com/placeholder/camel-mongodb-gridfs.git"
+  revision: "4.18.1"
+buildScript: "mvn clean deploy -DskipTests"
+environment:
+  name: "OpenJDK 11"
+buildType: MVN

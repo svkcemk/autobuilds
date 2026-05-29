@@ -1,0 +1,10 @@
+name: org.apache.camel_camel-file_4.18.1
+description: "Build configuration for camel-file 4.18.1"
+project: camel-file
+scmRepository:
+  url: "https://github.com/placeholder/camel-file.git"
+  revision: "4.18.1"
+buildScript: "mvn clean deploy -DskipTests"
+environment:
+  name: "OpenJDK 11"
+buildType: MVN

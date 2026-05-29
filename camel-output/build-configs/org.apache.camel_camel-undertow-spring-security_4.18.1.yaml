@@ -1,0 +1,10 @@
+name: org.apache.camel_camel-undertow-spring-security_4.18.1
+description: "Build configuration for camel-undertow-spring-security 4.18.1"
+project: camel-undertow-spring-security
+scmRepository:
+  url: "https://github.com/placeholder/camel-undertow-spring-security.git"
+  revision: "4.18.1"
+buildScript: "mvn clean deploy -DskipTests"
+environment:
+  name: "OpenJDK 11"
+buildType: MVN

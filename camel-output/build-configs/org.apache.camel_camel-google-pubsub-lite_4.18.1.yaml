@@ -1,0 +1,10 @@
+name: org.apache.camel_camel-google-pubsub-lite_4.18.1
+description: "Build configuration for camel-google-pubsub-lite 4.18.1"
+project: camel-google-pubsub-lite
+scmRepository:
+  url: "https://github.com/placeholder/camel-google-pubsub-lite.git"
+  revision: "4.18.1"
+buildScript: "mvn clean deploy -DskipTests"
+environment:
+  name: "OpenJDK 11"
+buildType: MVN

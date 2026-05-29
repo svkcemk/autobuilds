@@ -1,0 +1,10 @@
+name: org.apache.camel_camel-headersmap_4.18.1
+description: "Build configuration for camel-headersmap 4.18.1"
+project: camel-headersmap
+scmRepository:
+  url: "https://github.com/placeholder/camel-headersmap.git"
+  revision: "4.18.1"
+buildScript: "mvn clean deploy -DskipTests"
+environment:
+  name: "OpenJDK 11"
+buildType: MVN

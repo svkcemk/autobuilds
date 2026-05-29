@@ -1,0 +1,10 @@
+name: org.apache.camel_camel-activemq6_4.18.1
+description: "Build configuration for camel-activemq6 4.18.1"
+project: camel-activemq6
+scmRepository:
+  url: "https://github.com/placeholder/camel-activemq6.git"
+  revision: "4.18.1"
+buildScript: "mvn clean deploy -DskipTests"
+environment:
+  name: "OpenJDK 11"
+buildType: MVN

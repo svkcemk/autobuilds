@@ -1,0 +1,33 @@
+================================================================================
+Transitive Build Config Generation Report
+================================================================================
+Generated: Fri May 29 11:17:41 IST 2026
+Config File: build-config.yaml
+BOM Analyzed: org.apache.camel:camel-bom:4.18.1
+
+Summary:
+--------
+Total Dependencies Found:      515
+Dependencies After Filtering:        0
+Build Configs Generated:        0
+
+Output Directory: ./camel-test
+
+Files Generated:
+----------------
+- managed-dependencies.txt: Dependencies managed by the BOM
+- all-dependencies.txt: Complete list of dependencies
+- filtered-dependencies.txt: Dependencies after include/exclude filtering
+- build-configs/: Individual PNC build configurations
+- pig-config.yaml: Product Integration Group configuration
+- build-report.txt: This report
+
+Next Steps:
+-----------
+1. Review the generated build configs in: ./camel-test/build-configs/
+2. Update SCM URLs in the configs with actual repository locations
+3. Use bacon CLI to create builds in PNC
+4. Create build group and trigger builds
+
+For more information: https://project-ncl.github.io/bacon/
+================================================================================

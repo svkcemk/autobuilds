@@ -1,0 +1,10 @@
+name: org.apache.camel_camel-resourceresolver-github_4.18.1
+description: "Build configuration for camel-resourceresolver-github 4.18.1"
+project: camel-resourceresolver-github
+scmRepository:
+  url: "https://github.com/placeholder/camel-resourceresolver-github.git"
+  revision: "4.18.1"
+buildScript: "mvn clean deploy -DskipTests"
+environment:
+  name: "OpenJDK 11"
+buildType: MVN

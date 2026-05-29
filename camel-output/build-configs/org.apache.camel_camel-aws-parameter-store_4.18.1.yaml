@@ -1,0 +1,10 @@
+name: org.apache.camel_camel-aws-parameter-store_4.18.1
+description: "Build configuration for camel-aws-parameter-store 4.18.1"
+project: camel-aws-parameter-store
+scmRepository:
+  url: "https://github.com/placeholder/camel-aws-parameter-store.git"
+  revision: "4.18.1"
+buildScript: "mvn clean deploy -DskipTests"
+environment:
+  name: "OpenJDK 11"
+buildType: MVN

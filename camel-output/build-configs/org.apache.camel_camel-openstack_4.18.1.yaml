@@ -1,0 +1,10 @@
+name: org.apache.camel_camel-openstack_4.18.1
+description: "Build configuration for camel-openstack 4.18.1"
+project: camel-openstack
+scmRepository:
+  url: "https://github.com/placeholder/camel-openstack.git"
+  revision: "4.18.1"
+buildScript: "mvn clean deploy -DskipTests"
+environment:
+  name: "OpenJDK 11"
+buildType: MVN

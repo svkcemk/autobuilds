@@ -1,0 +1,10 @@
+name: org.apache.camel_camel-wasm_4.18.1
+description: "Build configuration for camel-wasm 4.18.1"
+project: camel-wasm
+scmRepository:
+  url: "https://github.com/placeholder/camel-wasm.git"
+  revision: "4.18.1"
+buildScript: "mvn clean deploy -DskipTests"
+environment:
+  name: "OpenJDK 11"
+buildType: MVN

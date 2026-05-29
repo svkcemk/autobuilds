@@ -1,0 +1,10 @@
+name: org.apache.camel_camel-olingo4-api_4.18.1
+description: "Build configuration for camel-olingo4-api 4.18.1"
+project: camel-olingo4-api
+scmRepository:
+  url: "https://github.com/placeholder/camel-olingo4-api.git"
+  revision: "4.18.1"
+buildScript: "mvn clean deploy -DskipTests"
+environment:
+  name: "OpenJDK 11"
+buildType: MVN

@@ -1,0 +1,10 @@
+name: org.apache.camel_camel-health_4.18.1
+description: "Build configuration for camel-health 4.18.1"
+project: camel-health
+scmRepository:
+  url: "https://github.com/placeholder/camel-health.git"
+  revision: "4.18.1"
+buildScript: "mvn clean deploy -DskipTests"
+environment:
+  name: "OpenJDK 11"
+buildType: MVN

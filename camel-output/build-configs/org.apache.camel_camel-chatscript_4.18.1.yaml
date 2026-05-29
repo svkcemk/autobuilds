@@ -1,0 +1,10 @@
+name: org.apache.camel_camel-chatscript_4.18.1
+description: "Build configuration for camel-chatscript 4.18.1"
+project: camel-chatscript
+scmRepository:
+  url: "https://github.com/placeholder/camel-chatscript.git"
+  revision: "4.18.1"
+buildScript: "mvn clean deploy -DskipTests"
+environment:
+  name: "OpenJDK 11"
+buildType: MVN

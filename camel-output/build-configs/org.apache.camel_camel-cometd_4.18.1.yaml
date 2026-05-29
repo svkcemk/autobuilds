@@ -1,0 +1,10 @@
+name: org.apache.camel_camel-cometd_4.18.1
+description: "Build configuration for camel-cometd 4.18.1"
+project: camel-cometd
+scmRepository:
+  url: "https://github.com/placeholder/camel-cometd.git"
+  revision: "4.18.1"
+buildScript: "mvn clean deploy -DskipTests"
+environment:
+  name: "OpenJDK 11"
+buildType: MVN

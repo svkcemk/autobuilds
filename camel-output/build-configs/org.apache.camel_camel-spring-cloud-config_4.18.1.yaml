@@ -1,0 +1,10 @@
+name: org.apache.camel_camel-spring-cloud-config_4.18.1
+description: "Build configuration for camel-spring-cloud-config 4.18.1"
+project: camel-spring-cloud-config
+scmRepository:
+  url: "https://github.com/placeholder/camel-spring-cloud-config.git"
+  revision: "4.18.1"
+buildScript: "mvn clean deploy -DskipTests"
+environment:
+  name: "OpenJDK 11"
+buildType: MVN

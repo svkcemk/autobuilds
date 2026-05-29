@@ -1,0 +1,10 @@
+name: org.apache.camel_camel-arangodb_4.18.1
+description: "Build configuration for camel-arangodb 4.18.1"
+project: camel-arangodb
+scmRepository:
+  url: "https://github.com/placeholder/camel-arangodb.git"
+  revision: "4.18.1"
+buildScript: "mvn clean deploy -DskipTests"
+environment:
+  name: "OpenJDK 11"
+buildType: MVN

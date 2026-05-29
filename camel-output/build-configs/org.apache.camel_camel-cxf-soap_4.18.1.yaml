@@ -1,0 +1,10 @@
+name: org.apache.camel_camel-cxf-soap_4.18.1
+description: "Build configuration for camel-cxf-soap 4.18.1"
+project: camel-cxf-soap
+scmRepository:
+  url: "https://github.com/placeholder/camel-cxf-soap.git"
+  revision: "4.18.1"
+buildScript: "mvn clean deploy -DskipTests"
+environment:
+  name: "OpenJDK 11"
+buildType: MVN

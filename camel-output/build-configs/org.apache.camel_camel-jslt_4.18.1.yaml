@@ -1,0 +1,10 @@
+name: org.apache.camel_camel-jslt_4.18.1
+description: "Build configuration for camel-jslt 4.18.1"
+project: camel-jslt
+scmRepository:
+  url: "https://github.com/placeholder/camel-jslt.git"
+  revision: "4.18.1"
+buildScript: "mvn clean deploy -DskipTests"
+environment:
+  name: "OpenJDK 11"
+buildType: MVN

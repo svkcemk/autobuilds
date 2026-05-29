@@ -1,0 +1,10 @@
+name: org.apache.camel_camel-djl_4.18.1
+description: "Build configuration for camel-djl 4.18.1"
+project: camel-djl
+scmRepository:
+  url: "https://github.com/placeholder/camel-djl.git"
+  revision: "4.18.1"
+buildScript: "mvn clean deploy -DskipTests"
+environment:
+  name: "OpenJDK 11"
+buildType: MVN

@@ -1,0 +1,10 @@
+name: org.apache.camel_camel-rss_4.18.1
+description: "Build configuration for camel-rss 4.18.1"
+project: camel-rss
+scmRepository:
+  url: "https://github.com/placeholder/camel-rss.git"
+  revision: "4.18.1"
+buildScript: "mvn clean deploy -DskipTests"
+environment:
+  name: "OpenJDK 11"
+buildType: MVN

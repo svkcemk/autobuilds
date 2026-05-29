@@ -1,0 +1,10 @@
+name: org.apache.camel_camel-pubnub_4.18.1
+description: "Build configuration for camel-pubnub 4.18.1"
+project: camel-pubnub
+scmRepository:
+  url: "https://github.com/placeholder/camel-pubnub.git"
+  revision: "4.18.1"
+buildScript: "mvn clean deploy -DskipTests"
+environment:
+  name: "OpenJDK 11"
+buildType: MVN

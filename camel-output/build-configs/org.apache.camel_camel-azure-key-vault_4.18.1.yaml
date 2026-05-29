@@ -1,0 +1,10 @@
+name: org.apache.camel_camel-azure-key-vault_4.18.1
+description: "Build configuration for camel-azure-key-vault 4.18.1"
+project: camel-azure-key-vault
+scmRepository:
+  url: "https://github.com/placeholder/camel-azure-key-vault.git"
+  revision: "4.18.1"
+buildScript: "mvn clean deploy -DskipTests"
+environment:
+  name: "OpenJDK 11"
+buildType: MVN

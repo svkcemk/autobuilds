@@ -1,0 +1,10 @@
+name: org.apache.camel_camel-google-vertexai_4.18.1
+description: "Build configuration for camel-google-vertexai 4.18.1"
+project: camel-google-vertexai
+scmRepository:
+  url: "https://github.com/placeholder/camel-google-vertexai.git"
+  revision: "4.18.1"
+buildScript: "mvn clean deploy -DskipTests"
+environment:
+  name: "OpenJDK 11"
+buildType: MVN

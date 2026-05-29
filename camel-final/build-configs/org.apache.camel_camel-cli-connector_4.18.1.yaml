@@ -1,0 +1,9 @@
+name: org.apache.camel_camel-cli-connector_4.18.1
+description: Auto-generated build config for camel-cli-connector
+scmRepository:
+  url: https://github.com/placeholder/camel-cli-connector.git
+  revision: 4.18.1
+buildScript: mvn -DskipTests clean deploy
+environment:
+  name: OpenJDK 11.0; Mvn 3.5.4
+buildType: MVN

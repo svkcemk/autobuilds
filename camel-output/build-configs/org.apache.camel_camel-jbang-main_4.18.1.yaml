@@ -1,0 +1,10 @@
+name: org.apache.camel_camel-jbang-main_4.18.1
+description: "Build configuration for camel-jbang-main 4.18.1"
+project: camel-jbang-main
+scmRepository:
+  url: "https://github.com/placeholder/camel-jbang-main.git"
+  revision: "4.18.1"
+buildScript: "mvn clean deploy -DskipTests"
+environment:
+  name: "OpenJDK 11"
+buildType: MVN

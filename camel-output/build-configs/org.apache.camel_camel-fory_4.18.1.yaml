@@ -1,0 +1,10 @@
+name: org.apache.camel_camel-fory_4.18.1
+description: "Build configuration for camel-fory 4.18.1"
+project: camel-fory
+scmRepository:
+  url: "https://github.com/placeholder/camel-fory.git"
+  revision: "4.18.1"
+buildScript: "mvn clean deploy -DskipTests"
+environment:
+  name: "OpenJDK 11"
+buildType: MVN

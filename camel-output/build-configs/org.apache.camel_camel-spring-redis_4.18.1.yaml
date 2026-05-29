@@ -1,0 +1,10 @@
+name: org.apache.camel_camel-spring-redis_4.18.1
+description: "Build configuration for camel-spring-redis 4.18.1"
+project: camel-spring-redis
+scmRepository:
+  url: "https://github.com/placeholder/camel-spring-redis.git"
+  revision: "4.18.1"
+buildScript: "mvn clean deploy -DskipTests"
+environment:
+  name: "OpenJDK 11"
+buildType: MVN

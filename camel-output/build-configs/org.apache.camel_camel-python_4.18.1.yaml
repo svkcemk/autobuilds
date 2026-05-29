@@ -1,0 +1,10 @@
+name: org.apache.camel_camel-python_4.18.1
+description: "Build configuration for camel-python 4.18.1"
+project: camel-python
+scmRepository:
+  url: "https://github.com/placeholder/camel-python.git"
+  revision: "4.18.1"
+buildScript: "mvn clean deploy -DskipTests"
+environment:
+  name: "OpenJDK 11"
+buildType: MVN

@@ -1,0 +1,10 @@
+name: org.apache.camel_camel-yaml-dsl-deserializers_4.18.1
+description: "Build configuration for camel-yaml-dsl-deserializers 4.18.1"
+project: camel-yaml-dsl-deserializers
+scmRepository:
+  url: "https://github.com/placeholder/camel-yaml-dsl-deserializers.git"
+  revision: "4.18.1"
+buildScript: "mvn clean deploy -DskipTests"
+environment:
+  name: "OpenJDK 11"
+buildType: MVN

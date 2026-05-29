@@ -1,0 +1,10 @@
+name: org.apache.camel_camel-endpointdsl-support_4.18.1
+description: "Build configuration for camel-endpointdsl-support 4.18.1"
+project: camel-endpointdsl-support
+scmRepository:
+  url: "https://github.com/placeholder/camel-endpointdsl-support.git"
+  revision: "4.18.1"
+buildScript: "mvn clean deploy -DskipTests"
+environment:
+  name: "OpenJDK 11"
+buildType: MVN

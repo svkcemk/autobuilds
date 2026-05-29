@@ -1,0 +1,10 @@
+name: org.apache.camel_camel-platform-http_4.18.1
+description: "Build configuration for camel-platform-http 4.18.1"
+project: camel-platform-http
+scmRepository:
+  url: "https://github.com/placeholder/camel-platform-http.git"
+  revision: "4.18.1"
+buildScript: "mvn clean deploy -DskipTests"
+environment:
+  name: "OpenJDK 11"
+buildType: MVN

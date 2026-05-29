@@ -1,0 +1,10 @@
+name: org.apache.camel_camel-docker_4.18.1
+description: "Build configuration for camel-docker 4.18.1"
+project: camel-docker
+scmRepository:
+  url: "https://github.com/placeholder/camel-docker.git"
+  revision: "4.18.1"
+buildScript: "mvn clean deploy -DskipTests"
+environment:
+  name: "OpenJDK 11"
+buildType: MVN

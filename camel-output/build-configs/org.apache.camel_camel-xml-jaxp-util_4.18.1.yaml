@@ -1,0 +1,10 @@
+name: org.apache.camel_camel-xml-jaxp-util_4.18.1
+description: "Build configuration for camel-xml-jaxp-util 4.18.1"
+project: camel-xml-jaxp-util
+scmRepository:
+  url: "https://github.com/placeholder/camel-xml-jaxp-util.git"
+  revision: "4.18.1"
+buildScript: "mvn clean deploy -DskipTests"
+environment:
+  name: "OpenJDK 11"
+buildType: MVN

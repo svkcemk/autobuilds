@@ -1,0 +1,10 @@
+name: org.apache.camel_camel-spring-ai-embeddings_4.18.1
+description: "Build configuration for camel-spring-ai-embeddings 4.18.1"
+project: camel-spring-ai-embeddings
+scmRepository:
+  url: "https://github.com/placeholder/camel-spring-ai-embeddings.git"
+  revision: "4.18.1"
+buildScript: "mvn clean deploy -DskipTests"
+environment:
+  name: "OpenJDK 11"
+buildType: MVN

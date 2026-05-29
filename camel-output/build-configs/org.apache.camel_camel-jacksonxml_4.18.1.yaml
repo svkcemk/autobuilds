@@ -1,0 +1,10 @@
+name: org.apache.camel_camel-jacksonxml_4.18.1
+description: "Build configuration for camel-jacksonxml 4.18.1"
+project: camel-jacksonxml
+scmRepository:
+  url: "https://github.com/placeholder/camel-jacksonxml.git"
+  revision: "4.18.1"
+buildScript: "mvn clean deploy -DskipTests"
+environment:
+  name: "OpenJDK 11"
+buildType: MVN

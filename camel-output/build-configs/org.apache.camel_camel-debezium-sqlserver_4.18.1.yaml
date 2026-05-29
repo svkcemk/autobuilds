@@ -1,0 +1,10 @@
+name: org.apache.camel_camel-debezium-sqlserver_4.18.1
+description: "Build configuration for camel-debezium-sqlserver 4.18.1"
+project: camel-debezium-sqlserver
+scmRepository:
+  url: "https://github.com/placeholder/camel-debezium-sqlserver.git"
+  revision: "4.18.1"
+buildScript: "mvn clean deploy -DskipTests"
+environment:
+  name: "OpenJDK 11"
+buildType: MVN

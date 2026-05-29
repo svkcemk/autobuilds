@@ -1,0 +1,10 @@
+name: org.apache.camel_camel-openapi-java_4.18.1
+description: "Build configuration for camel-openapi-java 4.18.1"
+project: camel-openapi-java
+scmRepository:
+  url: "https://github.com/placeholder/camel-openapi-java.git"
+  revision: "4.18.1"
+buildScript: "mvn clean deploy -DskipTests"
+environment:
+  name: "OpenJDK 11"
+buildType: MVN

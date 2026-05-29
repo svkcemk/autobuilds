@@ -1,0 +1,37 @@
+dependencyResolutionConfig:
+  # BOM to analyze
+  analyzeBOM: org.apache.camel:camel-bom:4.18.1
+  
+  # Include optional dependencies
+  includeOptionalDependencies: true
+  
+  # Patterns to include (supports wildcards)
+  includeArtifacts:
+    - org.apache.camel:*:*
+    - org.apache.cxf:*:*
+  
+  # Patterns to exclude
+  excludeArtifacts:
+    - org.springframework:*:*
+    - org.testcontainers:*:*
+  
+  # Recipe repositories to check for existing builds
+  recipeRepos:
+    - https://github.com/redhat-appstudio/jvm-build-data
+
+buildConfigGeneratorConfig:
+  defaultValues:
+    environmentName: "OpenJDK 11.0; Mvn 3.5.4"
+    buildScript: "mvn -DskipTests clean deploy"
+  
+  # SCM URL transformations
+  scmPattern:
+    "git@github.com:": "https://github.com/"
+  
+  # PIG (Product Integration Group) template
+  pigTemplate:
+    product:
+      name: Camel Extensions for Quarkus Third Party Components
+      abbreviation: ceq-third-party
+    version: 4.18.1
+    milestone: DR1

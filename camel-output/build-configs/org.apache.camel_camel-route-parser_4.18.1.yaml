@@ -1,0 +1,10 @@
+name: org.apache.camel_camel-route-parser_4.18.1
+description: "Build configuration for camel-route-parser 4.18.1"
+project: camel-route-parser
+scmRepository:
+  url: "https://github.com/placeholder/camel-route-parser.git"
+  revision: "4.18.1"
+buildScript: "mvn clean deploy -DskipTests"
+environment:
+  name: "OpenJDK 11"
+buildType: MVN

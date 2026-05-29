@@ -1,0 +1,10 @@
+name: org.apache.camel_camel-aws-common_4.18.1
+description: "Build configuration for camel-aws-common 4.18.1"
+project: camel-aws-common
+scmRepository:
+  url: "https://github.com/placeholder/camel-aws-common.git"
+  revision: "4.18.1"
+buildScript: "mvn clean deploy -DskipTests"
+environment:
+  name: "OpenJDK 11"
+buildType: MVN

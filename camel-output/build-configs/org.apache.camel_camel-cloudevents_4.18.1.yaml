@@ -1,0 +1,10 @@
+name: org.apache.camel_camel-cloudevents_4.18.1
+description: "Build configuration for camel-cloudevents 4.18.1"
+project: camel-cloudevents
+scmRepository:
+  url: "https://github.com/placeholder/camel-cloudevents.git"
+  revision: "4.18.1"
+buildScript: "mvn clean deploy -DskipTests"
+environment:
+  name: "OpenJDK 11"
+buildType: MVN

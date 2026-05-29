@@ -1,0 +1,10 @@
+name: org.apache.camel_camel-web3j_4.18.1
+description: "Build configuration for camel-web3j 4.18.1"
+project: camel-web3j
+scmRepository:
+  url: "https://github.com/placeholder/camel-web3j.git"
+  revision: "4.18.1"
+buildScript: "mvn clean deploy -DskipTests"
+environment:
+  name: "OpenJDK 11"
+buildType: MVN

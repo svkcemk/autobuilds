@@ -1,0 +1,10 @@
+name: org.apache.camel_camel-ibm-watson-speech-to-text_4.18.1
+description: "Build configuration for camel-ibm-watson-speech-to-text 4.18.1"
+project: camel-ibm-watson-speech-to-text
+scmRepository:
+  url: "https://github.com/placeholder/camel-ibm-watson-speech-to-text.git"
+  revision: "4.18.1"
+buildScript: "mvn clean deploy -DskipTests"
+environment:
+  name: "OpenJDK 11"
+buildType: MVN

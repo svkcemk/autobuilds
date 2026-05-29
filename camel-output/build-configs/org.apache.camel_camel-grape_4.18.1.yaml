@@ -1,0 +1,10 @@
+name: org.apache.camel_camel-grape_4.18.1
+description: "Build configuration for camel-grape 4.18.1"
+project: camel-grape
+scmRepository:
+  url: "https://github.com/placeholder/camel-grape.git"
+  revision: "4.18.1"
+buildScript: "mvn clean deploy -DskipTests"
+environment:
+  name: "OpenJDK 11"
+buildType: MVN

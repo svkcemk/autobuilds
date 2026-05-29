@@ -1,0 +1,10 @@
+name: org.apache.camel_camel-microprofile-health_4.18.1
+description: "Build configuration for camel-microprofile-health 4.18.1"
+project: camel-microprofile-health
+scmRepository:
+  url: "https://github.com/placeholder/camel-microprofile-health.git"
+  revision: "4.18.1"
+buildScript: "mvn clean deploy -DskipTests"
+environment:
+  name: "OpenJDK 11"
+buildType: MVN

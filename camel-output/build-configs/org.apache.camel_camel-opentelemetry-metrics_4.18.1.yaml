@@ -1,0 +1,10 @@
+name: org.apache.camel_camel-opentelemetry-metrics_4.18.1
+description: "Build configuration for camel-opentelemetry-metrics 4.18.1"
+project: camel-opentelemetry-metrics
+scmRepository:
+  url: "https://github.com/placeholder/camel-opentelemetry-metrics.git"
+  revision: "4.18.1"
+buildScript: "mvn clean deploy -DskipTests"
+environment:
+  name: "OpenJDK 11"
+buildType: MVN

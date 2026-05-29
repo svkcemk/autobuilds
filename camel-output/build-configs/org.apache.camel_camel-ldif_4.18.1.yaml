@@ -1,0 +1,10 @@
+name: org.apache.camel_camel-ldif_4.18.1
+description: "Build configuration for camel-ldif 4.18.1"
+project: camel-ldif
+scmRepository:
+  url: "https://github.com/placeholder/camel-ldif.git"
+  revision: "4.18.1"
+buildScript: "mvn clean deploy -DskipTests"
+environment:
+  name: "OpenJDK 11"
+buildType: MVN
