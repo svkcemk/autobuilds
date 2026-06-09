@@ -123,14 +123,79 @@ create_pnc_build() {
     
     echo "Creating PNC build from config: $config_file"
     
-    bacon pnc build-config create \
-        --file "$config_file" \
-        --product-version-id "$product_version_id" || {
-        echo "ERROR: Failed to create build config in PNC" >&2
+    # Check if yq is available
+    if ! command -v yq &> /dev/null; then
+        echo "ERROR: yq is required to parse YAML config files" >&2
+        echo "Install with: pip install yq or brew install yq" >&2
         return 1
-    }
+    fi
     
-    echo "Build config created successfully"
+    # Parse YAML config
+    local name=$(yq -r '.name' "$config_file")
+    local build_script=$(yq -r '.buildScript' "$config_file")
+    local scm_url=$(yq -r '.scmRepository.url' "$config_file")
+    local scm_revision=$(yq -r '.scmRepository.revision' "$config_file")
+    local environment_name=$(yq -r '.environment.name' "$config_file")
+    local build_type=$(yq -r '.buildType // "MVN"' "$config_file")
+    local description=$(yq -r '.description // ""' "$config_file")
+    local project_name=$(yq -r '.project // ""' "$config_file")
+    
+    # Validate required fields
+    if [ -z "$name" ] || [ "$name" = "null" ]; then
+        echo "ERROR: Missing 'name' in config file" >&2
+        return 1
+    fi
+    
+    if [ -z "$build_script" ] || [ "$build_script" = "null" ]; then
+        echo "ERROR: Missing 'buildScript' in config file" >&2
+        return 1
+    fi
+    
+    if [ -z "$scm_url" ] || [ "$scm_url" = "null" ]; then
+        echo "ERROR: Missing 'scmRepository.url' in config file" >&2
+        return 1
+    fi
+    
+    if [ -z "$scm_revision" ] || [ "$scm_revision" = "null" ]; then
+        echo "ERROR: Missing 'scmRepository.revision' in config file" >&2
+        return 1
+    fi
+    
+    echo "ERROR: This function requires manual configuration of PNC IDs" >&2
+    echo "" >&2
+    echo "The bacon CLI requires the following IDs that must be obtained from PNC:" >&2
+    echo "  --environment-id: ID of the build environment (e.g., 100)" >&2
+    echo "  --project-id: ID of the project in PNC (e.g., 164)" >&2
+    echo "  --scm-repository-id: ID of the SCM repository in PNC (e.g., 176)" >&2
+    echo "" >&2
+    echo "Parsed values from config file:" >&2
+    echo "  Name: $name" >&2
+    echo "  Build Script: $build_script" >&2
+    echo "  SCM URL: $scm_url" >&2
+    echo "  SCM Revision: $scm_revision" >&2
+    echo "  Environment: $environment_name" >&2
+    echo "  Build Type: $build_type" >&2
+    [ -n "$description" ] && echo "  Description: $description" >&2
+    [ -n "$project_name" ] && echo "  Project: $project_name" >&2
+    echo "" >&2
+    echo "To create this build config, you need to:" >&2
+    echo "1. Find or create the environment ID for: $environment_name" >&2
+    echo "2. Find or create the project ID for: ${project_name:-$name}" >&2
+    echo "3. Find or create the SCM repository ID for: $scm_url" >&2
+    echo "" >&2
+    echo "Then run:" >&2
+    echo "bacon pnc build-config create \\" >&2
+    echo "  --environment-id=<ENV_ID> \\" >&2
+    echo "  --project-id=<PROJECT_ID> \\" >&2
+    echo "  --scm-repository-id=<SCM_REPO_ID> \\" >&2
+    echo "  --scm-revision=\"$scm_revision\" \\" >&2
+    echo "  --build-script=\"$build_script\" \\" >&2
+    echo "  --build-type=$build_type \\" >&2
+    [ -n "$product_version_id" ] && echo "  --product-version-id=\"$product_version_id\" \\" >&2
+    [ -n "$description" ] && echo "  --description=\"$description\" \\" >&2
+    echo "  \"$name\"" >&2
+    
+    return 1
 }
 
 # Trigger build in PNC

@@ -24,7 +24,7 @@ This toolset helps automate the process of:
    ```bash
    brew install maven  # macOS
    # or
-   sudo apt-get install maven  # Linux
+   sudo dnf install maven  # Fedora Linux
    ```
 
 3. **yq** - YAML processor
@@ -36,7 +36,7 @@ This toolset helps automate the process of:
    ```bash
    brew install jq  # macOS
    # or
-   sudo apt-get install jq  # Linux
+   sudo dnf install jq  # Fedora Linux
    ```
 
 ## Files

@@ -2,9 +2,16 @@
 ###############################################################################
 # Transitive Build Config Generator for PNC using Bacon CLI (Version 3)
 # Fixed: Properly handles whitespace in BOM parsing
+# Enhanced: Uses bob CLI to fetch real artifact metadata
 ###############################################################################
 
 set -e
+
+# Source bacon utilities for helper functions
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+if [ -f "$SCRIPT_DIR/bacon_utils.sh" ]; then
+    source "$SCRIPT_DIR/bacon_utils.sh"
+fi
 
 CONFIG_FILE="build-config.yaml"
 OUTPUT_DIR="./generated-configs"
@@ -66,6 +73,17 @@ check_prerequisites() {
     if ! command -v yq &> /dev/null; then
         log_warn "yq not found. Installing via pip..."
         pip install yq || { log_error "Failed to install yq"; exit 1; }
+    fi
+    
+    if ! command -v bob &> /dev/null; then
+        log_warn "bob CLI not found. Artifact metadata will use defaults."
+        log_warn "Install bob from: https://internal.bob.ibm.com/docs/shell/getting-started/install-and-setup"
+    elif [ -z "$BOBSHELL_API_KEY" ]; then
+        log_warn "BOBSHELL_API_KEY environment variable not set. Bob queries will fail."
+        log_warn "Set BOBSHELL_API_KEY to enable bob CLI artifact metadata fetching."
+        log_warn "Example: export BOBSHELL_API_KEY='your-api-key-here'"
+    else
+        log_info "Bob CLI available with authentication configured"
     fi
     
     log_success "All prerequisites met"
@@ -201,8 +219,196 @@ filter_dependencies() {
     log_success "Filtered to $(wc -l < "$filtered_deps" | tr -d ' ') dependencies to build"
 }
 
+# Verify if SCM repository URL is accessible
+verify_scm_url() {
+    local url="$1"
+    
+    # Skip verification for placeholder URLs
+    if [[ "$url" == *"placeholder"* ]]; then
+        log_verbose "Skipping verification for placeholder URL: $url"
+        return 1
+    fi
+    
+    log_verbose "Verifying SCM URL: $url"
+    
+    # Try to access the URL with curl (follow redirects, timeout 10s)
+    if curl -sf --max-time 10 -L "$url" > /dev/null 2>&1; then
+        log_verbose "✓ SCM URL is accessible: $url"
+        return 0
+    else
+        log_verbose "✗ SCM URL is NOT accessible: $url"
+        return 1
+    fi
+}
+
+# Fetch artifact metadata using bob CLI with retry on URL verification failure
+fetch_artifact_metadata_with_bob() {
+    local group_id="$1"
+    local artifact_id="$2"
+    local version="$3"
+    local max_retries=2
+    local retry_count=0
+    
+    log_verbose "fetch_artifact_metadata_with_bob called for: $group_id:$artifact_id:$version"
+    
+    while [ $retry_count -le $max_retries ]; do
+        # Try to get artifact info from bob
+        if command -v bob &> /dev/null; then
+            if [ $retry_count -gt 0 ]; then
+                log_warn "Retry attempt $retry_count for $group_id:$artifact_id:$version - previous URL was invalid"
+            fi
+            
+            log_verbose "Bob CLI found, querying for: $group_id:$artifact_id:$version"
+            
+            # Create a temporary file for bob's response
+            local temp_response="/tmp/bob_response_$$.json"
+            
+            # Query bob for artifact information using prompt mode
+            # Ask bob to return structured JSON with the artifact metadata
+            local bob_query="For Maven artifact $group_id:$artifact_id:$version, provide the following information in JSON format:
+{
+  \"scmRepository\": {
+    \"url\": \"<git repository URL>\",
+    \"revision\": \"<git tag or commit>\"
+  },
+  \"buildScript\": \"<build command like 'mvn clean deploy -DskipTests'>\",
+  \"buildType\": \"<MVN or GRADLE>\",
+  \"environment\": {
+    \"name\": \"<build environment like 'OpenJDK 11.0; Mvn 3.6.3'>\"
+  }
+}
+Only return the JSON, no other text. Make sure the git repository URL is valid and accessible."
+            
+            if [ $retry_count -gt 0 ]; then
+                bob_query="$bob_query The previous URL was incorrect. Please provide a different, valid git repository URL."
+            fi
+            
+            # Execute bob query with yolo mode and hide intermediary output
+            local bob_output=$(bob --yolo --hide-intermediary-output --chat-mode ask "$bob_query" 2>&1)
+            local bob_exit_code=$?
+            
+            log_verbose "Bob command exit code: $bob_exit_code"
+            log_verbose "Bob raw output (first 1000 chars): ${bob_output:0:1000}"
+            
+            if [ $bob_exit_code -eq 0 ] && [ -n "$bob_output" ]; then
+                log_verbose "Bob returned data, attempting to parse JSON..."
+                
+                # Try to extract JSON from bob's response using multiple methods
+                # Method 1: Try to extract complete JSON with jq validation
+                local json_output=""
+                
+                # First, try to find JSON block between first { and matching }
+                if command -v python3 &> /dev/null; then
+                    json_output=$(echo "$bob_output" | python3 -c "
+import sys
+import json
+import re
+
+text = sys.stdin.read()
+# Find all potential JSON objects
+matches = re.finditer(r'\{[^{}]*(?:\{[^{}]*\}[^{}]*)*\}', text)
+for match in matches:
+    try:
+        obj = json.loads(match.group())
+        if 'scmRepository' in obj:
+            print(json.dumps(obj))
+            break
+    except:
+        continue
+" 2>/dev/null)
+                fi
+                
+                # Fallback: Use grep with non-greedy matching if python fails
+                if [ -z "$json_output" ]; then
+                    # Try to extract JSON more carefully - look for complete object
+                    json_output=$(echo "$bob_output" | sed -n '/{/,/}/p' | grep -v '^[[:space:]]*$' | head -20 | tr -d '\n')
+                fi
+                
+                # Validate JSON with jq
+                if [ -n "$json_output" ] && echo "$json_output" | jq empty 2>/dev/null; then
+                    log_verbose "Successfully extracted and validated JSON"
+                else
+                    log_verbose "JSON extraction or validation failed, raw output: $bob_output"
+                    json_output=""
+                fi
+                
+                if [ -n "$json_output" ]; then
+                    # Extract SCM repository URL
+                    local scm_url=$(echo "$json_output" | jq -r '.scmRepository.url // empty' 2>/dev/null)
+                    
+                    # Extract SCM revision/tag
+                    local scm_revision=$(echo "$json_output" | jq -r '.scmRepository.revision // empty' 2>/dev/null)
+                    
+                    # Extract build script
+                    local build_script=$(echo "$json_output" | jq -r '.buildScript // empty' 2>/dev/null)
+                    
+                    # Extract build type
+                    local build_type=$(echo "$json_output" | jq -r '.buildType // empty' 2>/dev/null)
+                    
+                    # Extract environment
+                    local environment=$(echo "$json_output" | jq -r '.environment.name // empty' 2>/dev/null)
+                    
+                    log_verbose "Extracted from bob: scm_url=$scm_url, scm_revision=$scm_revision, build_type=$build_type"
+                    
+                    # Verify the SCM URL if it's not empty
+                    if [ -n "$scm_url" ]; then
+                        if verify_scm_url "$scm_url"; then
+                            log_verbose "SCM URL verified successfully"
+                            # Return the extracted values
+                            echo "SCM_URL=$scm_url"
+                            echo "SCM_REVISION=$scm_revision"
+                            echo "BUILD_SCRIPT=$build_script"
+                            echo "BUILD_TYPE=$build_type"
+                            echo "ENVIRONMENT=$environment"
+                            rm -f "$temp_response"
+                            return 0
+                        else
+                            log_warn "SCM URL verification failed for: $scm_url"
+                            retry_count=$((retry_count + 1))
+                            if [ $retry_count -le $max_retries ]; then
+                                log_info "Will retry with bob CLI to get a valid URL..."
+                                sleep 2
+                                continue
+                            fi
+                        fi
+                    fi
+                else
+                    log_verbose "Could not extract JSON from bob's response"
+                fi
+            else
+                log_verbose "Bob query returned no data or failed"
+            fi
+            
+            rm -f "$temp_response"
+        else
+            log_verbose "Bob CLI not available, falling back to Maven Central POM"
+            break
+        fi
+        
+        retry_count=$((retry_count + 1))
+    done
+    
+    # If bob fails or is not available, try fetching from Maven Central POM
+    if declare -f fetch_scm_from_maven &> /dev/null; then
+        log_verbose "Falling back to Maven Central POM for: $group_id:$artifact_id:$version"
+        fetch_scm_from_maven "$group_id" "$artifact_id" "$version"
+        echo "BUILD_SCRIPT="
+        echo "BUILD_TYPE="
+        echo "ENVIRONMENT="
+        return 0
+    fi
+    
+    # Return empty values if all methods fail
+    echo "SCM_URL="
+    echo "SCM_REVISION="
+    echo "BUILD_SCRIPT="
+    echo "BUILD_TYPE="
+    echo "ENVIRONMENT="
+    return 1
+}
+
 generate_build_configs() {
-    log_info "Generating PNC build configs..."
+    log_info "Generating PNC build configs using bob CLI (one config per unique SCM URL)..."
     
     local filtered_deps="$OUTPUT_DIR/filtered-dependencies.txt"
     local configs_dir="$OUTPUT_DIR/build-configs"
@@ -219,6 +425,20 @@ generate_build_configs() {
     
     local default_env=$(yq -r '.buildConfigGeneratorConfig.defaultValues.environmentName' "$CONFIG_FILE" 2>/dev/null || echo "OpenJDK 11.0; Mvn 3.5.4")
     local default_script=$(yq -r '.buildConfigGeneratorConfig.defaultValues.buildScript' "$CONFIG_FILE" 2>/dev/null || echo "mvn -DskipTests clean deploy")
+    local default_build_type=$(yq -r '.buildConfigGeneratorConfig.defaultValues.buildType' "$CONFIG_FILE" 2>/dev/null || echo "MVN")
+    
+    log_info "Will process $total dependencies and group by unique SCM URL"
+    
+    # Associative array to track unique SCM URLs and their metadata
+    declare -A scm_url_map
+    declare -A scm_revision_map
+    declare -A build_script_map
+    declare -A build_type_map
+    declare -A environment_map
+    declare -A artifact_list_map
+    declare -A first_group_map
+    declare -A first_artifact_map
+    declare -A first_version_map
     
     while IFS= read -r dep; do
         count=$((count + 1))
@@ -233,27 +453,127 @@ generate_build_configs() {
         fi
         
         if [ $((count % 10)) -eq 0 ] || [ $count -eq $total ]; then
-            log_info "[$count/$total] Generated configs..."
+            log_info "[$count/$total] Processing: $group_id:$artifact_id:$version"
         fi
         
-        local config_name="${group_id}_${artifact_id}_${version}"
-        local config_file="$configs_dir/${config_name}.yaml"
+        # Fetch metadata using bob or fallback methods
+        log_verbose "Calling fetch_artifact_metadata_with_bob for: $group_id:$artifact_id:$version"
+        local metadata=$(fetch_artifact_metadata_with_bob "$group_id" "$artifact_id" "$version")
+        log_verbose "Metadata returned: $metadata"
         
-        cat > "$config_file" << YAML
-name: $config_name
-description: Auto-generated build config for $artifact_id
-scmRepository:
-  url: https://github.com/placeholder/${artifact_id}.git
-  revision: $version
-buildScript: $default_script
-environment:
-  name: $default_env
-buildType: MVN
-YAML
+        # Parse metadata
+        local scm_url=$(echo "$metadata" | grep "^SCM_URL=" | cut -d= -f2-)
+        local scm_revision=$(echo "$metadata" | grep "^SCM_REVISION=" | cut -d= -f2-)
+        local build_script=$(echo "$metadata" | grep "^BUILD_SCRIPT=" | cut -d= -f2-)
+        local build_type=$(echo "$metadata" | grep "^BUILD_TYPE=" | cut -d= -f2-)
+        local environment=$(echo "$metadata" | grep "^ENVIRONMENT=" | cut -d= -f2-)
+        
+        # Apply defaults if values are empty
+        if [ -z "$scm_url" ]; then
+            scm_url="https://github.com/placeholder/${artifact_id}.git"
+            log_verbose "Using placeholder SCM URL for $artifact_id"
+        fi
+        
+        if [ -z "$scm_revision" ]; then
+            scm_revision="$version"
+        fi
+        
+        if [ -z "$build_script" ]; then
+            build_script="$default_script"
+        fi
+        
+        if [ -z "$build_type" ]; then
+            build_type="$default_build_type"
+        fi
+        
+        if [ -z "$environment" ]; then
+            environment="$default_env"
+        fi
+        
+        # Apply SCM URL transformations if available
+        if declare -f transform_scm_url &> /dev/null; then
+            scm_url=$(transform_scm_url "$scm_url" "$CONFIG_FILE")
+        fi
+        
+        # Use SCM URL as key to group artifacts
+        local url_key=$(echo "$scm_url" | sed 's/[^a-zA-Z0-9]/_/g')
+        
+        # Store metadata for this SCM URL (first occurrence wins)
+        if [ -z "${scm_url_map[$url_key]}" ]; then
+            scm_url_map[$url_key]="$scm_url"
+            scm_revision_map[$url_key]="$scm_revision"
+            build_script_map[$url_key]="$build_script"
+            build_type_map[$url_key]="$build_type"
+            environment_map[$url_key]="$environment"
+            artifact_list_map[$url_key]="$group_id:$artifact_id:$version"
+            # Store the first artifact's GAV for naming
+            first_group_map[$url_key]="$group_id"
+            first_artifact_map[$url_key]="$artifact_id"
+            first_version_map[$url_key]="$version"
+            log_verbose "New SCM URL registered: $scm_url"
+        else
+            # Append artifact to the list for this SCM URL
+            artifact_list_map[$url_key]="${artifact_list_map[$url_key]}, $group_id:$artifact_id:$version"
+            log_verbose "Added artifact to existing SCM URL: $scm_url"
+        fi
         
     done < "$filtered_deps"
     
-    log_success "Build config generation complete: $count configs created"
+    # Generate one config per unique SCM URL
+    local config_count=0
+    log_info "Generating build configs for ${#scm_url_map[@]} unique SCM repositories..."
+    
+    for url_key in "${!scm_url_map[@]}"; do
+        config_count=$((config_count + 1))
+        
+        local scm_url="${scm_url_map[$url_key]}"
+        local scm_revision="${scm_revision_map[$url_key]}"
+        local build_script="${build_script_map[$url_key]}"
+        local build_type="${build_type_map[$url_key]}"
+        local environment="${environment_map[$url_key]}"
+        local artifacts="${artifact_list_map[$url_key]}"
+        
+        # Get the first artifact's GAV for the config name field
+        local first_group="${first_group_map[$url_key]}"
+        local first_artifact="${first_artifact_map[$url_key]}"
+        local first_version="${first_version_map[$url_key]}"
+        
+        # Extract repository name from SCM URL
+        local repo_name=$(basename "$scm_url" .git)
+        
+        # Create config filename in format: groupid-reponame-version
+        local config_filename="${first_group}-${repo_name}-${first_version}"
+        local config_file="$configs_dir/${config_filename}.yaml"
+        
+        # Create config name field in format: groupid_artifactid-version
+        local config_name="${first_group}_${first_artifact}-${first_version}"
+        
+        # Handle duplicate filenames (shouldn't happen with unique SCM URLs, but just in case)
+        local suffix=1
+        while [ -f "$config_file" ]; do
+            config_filename="${first_group}-${repo_name}-${first_version}_${suffix}"
+            config_file="$configs_dir/${config_filename}.yaml"
+            suffix=$((suffix + 1))
+        done
+        
+        cat > "$config_file" << YAML
+name: $config_name
+description: Auto-generated build config for $repo_name (artifacts: $artifacts)
+scmRepository:
+  url: $scm_url
+  revision: $scm_revision
+buildScript: $build_script
+environment:
+  name: $environment
+buildType: $build_type
+YAML
+        
+        log_verbose "Created config file: $(basename "$config_file") with name: $config_name (covers: $artifacts)"
+        
+    done < "$filtered_deps"
+    
+    log_success "Build config generation complete: $config_count configs created for ${#scm_url_map[@]} unique repositories"
+    log_info "Total dependencies processed: $count"
 }
 
 generate_pig_config() {
