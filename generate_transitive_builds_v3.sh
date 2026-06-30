@@ -194,8 +194,11 @@ filter_dependencies() {
         while IFS= read -r pattern; do
             if [ -n "$pattern" ]; then
                 local grep_pattern=$(echo "$pattern" | sed 's/\*/[^:]*/g')
-                grep -v -E "^$grep_pattern$" "$filtered_deps.tmp" > "$filtered_deps.tmp2" 2>/dev/null || true
-                mv "$filtered_deps.tmp2" "$filtered_deps.tmp"
+                if grep -v -E "^$grep_pattern$" "$filtered_deps.tmp" > "$filtered_deps.tmp2" 2>/dev/null; then
+                    mv "$filtered_deps.tmp2" "$filtered_deps.tmp"
+                elif [ -f "$filtered_deps.tmp2" ]; then
+                    mv "$filtered_deps.tmp2" "$filtered_deps.tmp"
+                fi
             fi
         done <<< "$exclude_patterns"
     fi

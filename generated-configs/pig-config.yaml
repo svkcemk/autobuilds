@@ -1,5 +1,0 @@
-product:
-  name: Camel Extensions for Quarkus Third Party Components
-  abbreviation: ceq-third-party
-version: 4.18.1
-milestone: DR1

@@ -1,26 +1,85 @@
 dependencyResolutionConfig:
   # BOM to analyze
-  analyzeBOM: org.apache.camel:camel-bom:4.18.1
+  analyzeBOM: org.apache.camel.quarkus:camel-quarkus-bom:3.33.0
   
   # Include optional dependencies
   includeOptionalDependencies: true
   
   # Patterns to include (supports wildcards)
   includeArtifacts:
-    - org.apache.camel:*:*
-    - org.apache.cxf:*:*
+    - org.apache.camel.quarkus:camel-quarkus-google-pubsub:*
   
   # Patterns to exclude
   excludeArtifacts:
     - org.springframework:*:*
     - org.testcontainers:*:*
+
+  # Groups to exclude from third-party combined YAML generation
+  excludeGroups:
+    - org.apache.camel
+    - org.apache.camel.quarkus
+    - io.quarkus
+    - io.quarkus.arc
+    - io.quarkus.security
   
   # Recipe repositories to check for existing builds
   recipeRepos:
     - https://github.com/redhat-appstudio/jvm-build-data
 
 buildConfigGeneratorConfig:
+  # Build script reuse configuration
+  buildScriptReuse:
+    # Enable reusing build scripts from previous versions
+    enabled: true
+    
+    # PNC integration via bacon CLI
+    pnc:
+      # Enable querying PNC for existing build configs
+      enabled: true
+      # Note: Requires 'bacon' CLI tool to be installed and configured
+      # Authentication is handled by bacon's existing configuration
+    
+    # Directories to search for previous build configs (fallback if PNC doesn't find anything)
+    searchDirectories:
+      - ./camel-final/build-configs
+      - ./camel-output/build-configs
+      - ./third-party-output/build-configs
+      - ./test-guava-output/build-configs
+      - ./test-jackson-output/build-configs
+      - ./test-commons-io-output/build-configs
+    
+    # Whether to reuse environment ID from previous version
+    # If false, will use auto-selection for new version
+    reuseEnvironmentId: false
+  
+  # Environment selection configuration
+  environmentSelection:
+    # Enable automatic environment selection based on POM analysis
+    enabled: true
+    
+    # Fallback environment ID if auto-selection fails or is disabled
+    fallbackEnvironmentId: 316
+    
+    # Prefer non-deprecated environments
+    avoidDeprecated: true
+    
+    # Custom environment mappings (Java version -> Environment ID)
+    # Uncomment and customize as needed
+    # customMappings:
+    #   "8": 660
+    #   "11": 456
+    #   "17": 1234
+    
+    # Environment preferences
+    preferences:
+      # Prefer newer Maven versions when multiple matches exist
+      preferNewerMaven: true
+      
+      # Minimum Maven version to consider
+      minimumMavenVersion: "3.5.4"
+  
   defaultValues:
+    environmentId: 316
     environmentName: "OpenJDK 11.0; Mvn 3.5.4"
     buildScript: "mvn -DskipTests clean deploy"
   
@@ -33,5 +92,5 @@ buildConfigGeneratorConfig:
     product:
       name: Camel Extensions for Quarkus Third Party Components
       abbreviation: ceq-third-party
-    version: 4.18.1
+    version: 3.33.0
     milestone: DR1

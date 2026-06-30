@@ -80,19 +80,47 @@ fetch_scm_from_pnc() {
   result_count=$(echo "$pnc_output" | jq 'length' 2>/dev/null || echo "0")
   
   if [[ "$result_count" -eq 0 ]]; then
-    # Try wildcard pattern: *artifactId*version*
-    search_pattern="*${artifact_id}*${version}*"
+    # Try simpler pattern first: *artifactId* (most flexible)
+    search_pattern="*${artifact_id}*"
     pnc_output="$(timeout 10 bacon pnc build-config list --query="name=like=${search_pattern}" -o 2>/dev/null || echo '[]')"
     result_count=$(echo "$pnc_output" | jq 'length' 2>/dev/null || echo "0")
     
     if [[ "$result_count" -eq 0 ]]; then
-      # Last resort: just artifact name with wildcards
-      search_pattern="*${artifact_id}*"
+      # Try with version: *artifactId*version*
+      search_pattern="*${artifact_id}*${version}*"
       pnc_output="$(timeout 10 bacon pnc build-config list --query="name=like=${search_pattern}" -o 2>/dev/null || echo '[]')"
       result_count=$(echo "$pnc_output" | jq 'length' 2>/dev/null || echo "0")
       
       if [[ "$result_count" -eq 0 ]]; then
         return 1
+      fi
+    fi
+  fi
+  
+  # If we got multiple results, try to filter by version to get best match
+  if [[ "$result_count" -gt 1 ]]; then
+    # Try to find exact version match in the results
+    local filtered_output
+    filtered_output=$(echo "$pnc_output" | jq --arg ver "$version" '[.[] | select(.name | contains($ver))]' 2>/dev/null || echo '[]')
+    local filtered_count
+    filtered_count=$(echo "$filtered_output" | jq 'length' 2>/dev/null || echo "0")
+    
+    if [[ "$filtered_count" -gt 0 ]]; then
+      pnc_output="$filtered_output"
+    else
+      # Try to find closest version match (e.g., 1.20.2 when looking for 1.20.3)
+      # Extract major.minor from version (e.g., 1.20 from 1.20.3)
+      local version_prefix
+      version_prefix=$(echo "$version" | grep -oE '^[0-9]+\.[0-9]+' || echo "")
+      
+      if [[ -n "$version_prefix" ]]; then
+        filtered_output=$(echo "$pnc_output" | jq --arg prefix "$version_prefix" '[.[] | select(.name | contains($prefix))]' 2>/dev/null || echo '[]')
+        filtered_count=$(echo "$filtered_output" | jq 'length' 2>/dev/null || echo "0")
+        
+        if [[ "$filtered_count" -gt 0 ]]; then
+          # Sort by version and take the latest one
+          pnc_output=$(echo "$filtered_output" | jq 'sort_by(.name) | reverse' 2>/dev/null || echo "$filtered_output")
+        fi
       fi
     fi
   fi
@@ -169,6 +197,73 @@ fetch_scm_from_family_rules() {
       ;;
     com.google.errorprone:error_prone_annotations)
       echo "SCM_URL=https://github.com/google/error-prone.git"
+      echo "SCM_REVISION=v${version}"
+      return 0
+      ;;
+    
+    # Apache Flink family
+    org.apache.flink:flink-*)
+      echo "SCM_URL=https://github.com/apache/flink.git"
+      echo "SCM_REVISION=release-${version}"
+      return 0
+      ;;
+    
+    # Apache Commons family
+    org.apache.commons:commons-compress|org.apache.commons:commons-text|org.apache.commons:commons-math3)
+      local artifact_name="${artifact_id#commons-}"
+      echo "SCM_URL=https://github.com/apache/commons-${artifact_name}.git"
+      echo "SCM_REVISION=rel/commons-${artifact_name}-${version}"
+      return 0
+      ;;
+    commons-collections:commons-collections)
+      echo "SCM_URL=https://github.com/apache/commons-collections.git"
+      echo "SCM_REVISION=collections-${version}"
+      return 0
+      ;;
+    
+    # Other common libraries
+    com.google.code.findbugs:jsr305)
+      echo "SCM_URL=https://github.com/findbugsproject/findbugs.git"
+      echo "SCM_REVISION=v${version}"
+      return 0
+      ;;
+    org.javassist:javassist)
+      echo "SCM_URL=https://github.com/jboss-javassist/javassist.git"
+      echo "SCM_REVISION=rel_${version//./_}_ga"
+      return 0
+      ;;
+    org.xerial.snappy:snappy-java)
+      echo "SCM_URL=https://github.com/xerial/snappy-java.git"
+      echo "SCM_REVISION=v${version}"
+      return 0
+      ;;
+    com.esotericsoftware.kryo:kryo)
+      echo "SCM_URL=https://github.com/EsotericSoftware/kryo.git"
+      echo "SCM_REVISION=kryo-parent-${version}"
+      return 0
+      ;;
+    com.esotericsoftware.minlog:minlog)
+      echo "SCM_URL=https://github.com/EsotericSoftware/minlog.git"
+      echo "SCM_REVISION=v${version}"
+      return 0
+      ;;
+    org.objenesis:objenesis)
+      echo "SCM_URL=https://github.com/easymock/objenesis.git"
+      echo "SCM_REVISION=${version}"
+      return 0
+      ;;
+    com.twitter:chill-java)
+      echo "SCM_URL=https://github.com/twitter/chill.git"
+      echo "SCM_REVISION=v${version}"
+      return 0
+      ;;
+    at.yawk.lz4:lz4-java)
+      echo "SCM_URL=https://github.com/yawkat/lz4-java.git"
+      echo "SCM_REVISION=v${version}"
+      return 0
+      ;;
+    tools.profiler:async-profiler)
+      echo "SCM_URL=https://github.com/async-profiler/async-profiler.git"
       echo "SCM_REVISION=v${version}"
       return 0
       ;;

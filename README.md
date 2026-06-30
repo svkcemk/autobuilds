@@ -1,66 +1,212 @@
-# Transitive Build Config Generator for PNC
+# PNC Build Config Generator
 
-Automated tool for generating PNC (Project Newcastle) build configurations for transitive dependencies using the bacon CLI.
+Automated toolset for generating PNC (Project Newcastle) build configurations for Maven artifacts and their transitive dependencies.
 
-## Overview
+## 🚀 Quick Start
 
-This toolset helps automate the process of:
-1. Analyzing transitive dependencies from a BOM (Bill of Materials)
-2. Filtering dependencies based on include/exclude patterns
-3. Generating PNC build configurations using bacon CLI
-4. Creating build groups and managing build order
+### Prerequisites
 
-## Prerequisites
+- **bash** 4.0+
+- **Maven** 3.6+
+- **Python** 3.8+
+- **jq** (JSON processor)
+- **yq** (YAML processor)
+- **bacon CLI** (optional, for PNC integration)
 
-### Required Tools
+### Installation
 
-1. **bacon CLI** - PNC command-line interface
-   ```bash
-   # Install bacon CLI
-   # See: https://project-ncl.github.io/bacon/
-   ```
+```bash
+# Install required tools (macOS)
+brew install maven jq yq
 
-2. **Maven** - For dependency analysis
-   ```bash
-   brew install maven  # macOS
-   # or
-   sudo dnf install maven  # Fedora Linux
-   ```
+# Install bacon CLI (optional)
+# See: https://project-ncl.github.io/bacon/
 
-3. **yq** - YAML processor
-   ```bash
-   pip install yq
-   ```
+# Clone and setup
+git clone <repository-url>
+cd autobuilds
+chmod +x *.sh lib/*.sh
+```
 
-4. **jq** - JSON processor (optional, for advanced features)
-   ```bash
-   brew install jq  # macOS
-   # or
-   sudo dnf install jq  # Fedora Linux
-   ```
+### Basic Usage
 
-## Files
+```bash
+# Generate build configs for a single artifact
+./generate_build_configs.sh -a org.apache.camel:camel-kafka:4.18.1
 
-- `generate_transitive_builds.sh` - Main automation script
-- `bacon_utils.sh` - Utility functions for bacon CLI integration
-- `validate_config.sh` - Configuration validator
-- `build-config.yaml` - Configuration file with dependency rules
-- `README.md` - This documentation
+# With BOM for dependency management
+./generate_build_configs.sh \
+  -a org.apache.camel:camel-kafka:4.18.1 \
+  -b org.apache.camel:camel-bom:4.18.1
 
-## Configuration
+# With productization check
+./generate_build_configs.sh \
+  -a org.apache.camel:camel-kafka:4.18.1 \
+  --check-productization \
+  --redhat-suffix redhat-00001
+```
 
-Edit `build-config.yaml` to configure:
+---
 
-### Dependency Resolution
+## 📚 Main Scripts
+
+### `generate_build_configs.sh` - **RECOMMENDED** Unified Generator
+
+The main, unified script that replaces all older generation scripts.
+
+**Features:**
+- ✅ Transitive dependency analysis
+- ✅ PNC integration (reuses existing build configs)
+- ✅ Productization checking (identifies already-built .redhat versions)
+- ✅ Environment auto-selection
+- ✅ Build script reuse from similar artifacts
+- ✅ Topological sorting
+- ✅ Multiple output formats (individual YAMLs + combined YAML)
+- ✅ SCM resolution from multiple sources
+
+**Usage:**
+```bash
+./generate_build_configs.sh [OPTIONS]
+
+Options:
+  -a, --artifact GAV           Root artifact (groupId:artifactId:version)
+  -b, --bom GAV               BOM for dependency management
+  -r, --root-artifacts FILE   File with multiple root artifacts
+  -c, --config FILE           Config file (default: build-config.yaml)
+  -o, --output DIR            Output directory (default: ./output)
+  --check-productization      Check if dependencies already have .redhat versions
+  --redhat-suffix SUFFIX      RedHat version suffix (e.g., redhat-00001)
+  --format FORMAT             Output format: individual|combined|both (default: both)
+  --no-pnc                    Disable PNC integration
+  --no-env-auto-select        Disable environment auto-selection
+  --no-build-script-reuse     Disable build script reuse
+  --no-topological-sort       Disable topological sorting
+  -v, --verbose               Enable verbose output
+  -h, --help                  Show help
+```
+
+**Examples:**
+
+```bash
+# Basic: Single artifact
+./generate_build_configs.sh -a commons-io:commons-io:2.11.0
+
+# With BOM: Camel component
+./generate_build_configs.sh \
+  -a org.apache.camel:camel-kafka:4.18.1 \
+  -b org.apache.camel:camel-bom:4.18.1
+
+# Productization check: Find what's already built
+./generate_build_configs.sh \
+  -a org.apache.camel:camel-flink:4.18.1 \
+  --check-productization \
+  --redhat-suffix redhat-00001
+
+# Multiple artifacts from file
+echo "org.apache.camel:camel-kafka:4.18.1" > artifacts.txt
+echo "org.apache.camel:camel-flink:4.18.1" >> artifacts.txt
+./generate_build_configs.sh -r artifacts.txt
+
+# Combined YAML only (for PIG)
+./generate_build_configs.sh \
+  -a org.apache.camel:camel-kafka:4.18.1 \
+  --format combined
+```
+
+**Output Structure:**
+```
+output/
+├── all-dependencies.txt              # All transitive dependencies
+├── third-party-dependencies.txt      # Filtered third-party deps
+├── root-artifacts.txt                # Root artifacts analyzed
+├── dependency-edges.txt              # Dependency graph edges
+├── unresolved-artifacts.txt          # SCM resolution failures
+├── build-from-source.txt             # Already productized (.redhat)
+├── pending-productized.txt           # Need to be built
+├── build-report.txt                  # Detailed generation report
+├── combined-build-configs.yaml       # Single YAML with all configs
+└── build-configs/                    # Individual YAML files
+    ├── groupId_artifactId_version.yaml
+    └── ...
+```
+
+---
+
+## 🔄 Migration Guide
+
+### From Old Scripts to Unified Script
+
+| Old Script | New Command | Notes |
+|------------|-------------|-------|
+| `generate_third_party_combined_yaml.sh` | `generate_build_configs.sh` | Direct replacement |
+| `generate_transitive_builds.sh` | `generate_build_configs.sh --format individual` | Use individual format |
+| `generate_transitive_builds_v2.sh` | `generate_build_configs.sh` | All v2 features included |
+| `generate_transitive_builds_v3.sh` | `generate_build_configs.sh` | All v3 features included |
+| `generate_transitive_with_pnc.sh` | `generate_build_configs.sh --check-productization` | Use productization flag |
+
+### Migration Examples
+
+#### Example 1: Basic Third-Party Generation
+
+**Old:**
+```bash
+./generate_third_party_combined_yaml.sh \
+  -a com.google.guava:guava:33.0.0 \
+  -o ./guava-output
+```
+
+**New:**
+```bash
+./generate_build_configs.sh \
+  -a com.google.guava:guava:33.0.0 \
+  -o ./guava-output
+```
+
+#### Example 2: With Productization Check
+
+**Old:**
+```bash
+./generate_transitive_with_pnc.sh \
+  ./output \
+  org.apache.camel:camel-api \
+  4.18.1.redhat-00001
+```
+
+**New:**
+```bash
+./generate_build_configs.sh \
+  -a org.apache.camel:camel-api:4.18.1.redhat-00001 \
+  -o ./output \
+  --check-productization
+```
+
+#### Example 3: With BOM
+
+**Old:**
+```bash
+./generate_third_party_combined_yaml.sh \
+  -a org.apache.camel:camel-kafka:4.18.1 \
+  -b org.apache.camel:camel-bom:4.18.1
+```
+
+**New:**
+```bash
+./generate_build_configs.sh \
+  -a org.apache.camel:camel-kafka:4.18.1 \
+  -b org.apache.camel:camel-bom:4.18.1
+```
+
+---
+
+## 🔧 Configuration
+
+### `build-config.yaml`
+
+Main configuration file for dependency filtering and build settings.
 
 ```yaml
+# Dependency filtering
 dependencyResolutionConfig:
-  # BOM to analyze
-  analyzeBOM: org.apache.camel.quarkus:camel-quarkus-bom:3.33.0
-  
-  # Include optional dependencies
-  includeOptionalDependencies: true
-  
   # Patterns to include (supports wildcards)
   includeArtifacts:
     - org.apache.camel:*:*
@@ -71,121 +217,103 @@ dependencyResolutionConfig:
     - org.springframework:*:*
     - org.testcontainers:*:*
   
-  # Recipe repositories to check for existing builds
-  recipeRepos:
-    - https://github.com/redhat-appstudio/jvm-build-data
-```
+  # Include optional dependencies
+  includeOptionalDependencies: true
 
-### Build Config Generation
-
-```yaml
+# Build configuration defaults
 buildConfigGeneratorConfig:
   defaultValues:
-    environmentName: "OpenJDK 11.0; Mvn 3.5.4"
+    environmentName: "OpenJDK 11.0; Mvn 3.9.6"
     buildScript: "mvn -DskipTests clean deploy"
   
   # SCM URL transformations
   scmPattern:
     "git@github.com:": "https://github.com/"
-  
-  # PIG (Product Integration Group) template
-  pigTemplate:
-    product:
-      name: Camel Extensions for Quarkus Third Party Components
-      abbreviation: ceq-third-party
-    version: 4.18.1
-    milestone: DR1
+    "git://github.com/": "https://github.com/"
 ```
 
-## Usage
+### Environment Database (`env-database.json`)
 
-### 1. Validate Configuration
+Auto-selects build environments based on artifact patterns.
 
-First, validate your configuration file:
+```json
+{
+  "environments": [
+    {
+      "name": "OpenJDK 11.0; Mvn 3.9.6",
+      "patterns": ["org.apache.camel:*", "org.apache.cxf:*"]
+    },
+    {
+      "name": "OpenJDK 17.0; Mvn 3.9.6",
+      "patterns": ["org.springframework.boot:*"]
+    }
+  ]
+}
+```
+
+---
+
+## 🎯 Features
+
+### 1. Productization Checking
+
+Identifies which dependencies already have `.redhat` versions in Indy/Maven repositories.
 
 ```bash
-./validate_config.sh build-config.yaml
+./generate_build_configs.sh \
+  -a org.apache.camel:camel-kafka:4.18.1 \
+  --check-productization \
+  --redhat-suffix redhat-00001
 ```
 
-### 2. Generate Build Configs
+**Output:**
+- `build-from-source.txt` - Already productized (skip building)
+- `pending-productized.txt` - Need to be built
 
-Run the main script to generate build configurations:
+### 2. PNC Integration
+
+Reuses SCM information from existing PNC build configs.
+
+**Priority order for SCM resolution:**
+1. PNC existing builds (via bacon CLI)
+2. Family rules (hardcoded patterns)
+3. JVM build data cache
+4. Camel Spring Boot data
+5. Maven Central POM
+
+### 3. Environment Auto-Selection
+
+Automatically selects the correct build environment based on artifact patterns.
+
+### 4. Build Script Reuse
+
+Reuses build scripts from similar artifacts in the same family.
+
+### 5. Topological Sorting
+
+Orders build configs based on dependency relationships.
+
+---
+
+## 📖 Additional Documentation
+
+- **[MIGRATION_GUIDE.md](MIGRATION_GUIDE.md)** - Detailed migration from old scripts
+- **[TRANSITIVE_DEPENDENCY_GUIDE.md](TRANSITIVE_DEPENDENCY_GUIDE.md)** - Understanding transitive dependencies
+- **[CAMEL_ANALYSIS_GUIDE.md](CAMEL_ANALYSIS_GUIDE.md)** - Apache Camel specific guidance
+
+---
+
+## 🛠️ Utility Scripts
+
+### `bacon_utils.sh`
+
+Helper functions for bacon CLI integration.
 
 ```bash
-# Basic usage (uses build-config.yaml)
-./generate_transitive_builds.sh
-
-# With custom config file
-./generate_transitive_builds.sh --config my-config.yaml
-
-# Specify output directory
-./generate_transitive_builds.sh --output ./my-builds
-
-# Dry run (show what would be done)
-./generate_transitive_builds.sh --dry-run
-
-# Verbose output
-./generate_transitive_builds.sh --verbose
-
-# Specify BOM directly
-./generate_transitive_builds.sh --bom org.example:my-bom:1.0.0
-```
-
-### 3. Review Generated Configs
-
-Check the output directory for generated files:
-
-```
-generated-configs/
-├── all-dependencies.txt          # All transitive dependencies
-├── filtered-dependencies.txt     # After include/exclude filtering
-├── build-configs/                # Individual build configs
-│   ├── org.example_artifact1_1.0.0.yaml
-│   ├── org.example_artifact2_2.0.0.yaml
-│   └── ...
-├── pig-config.yaml               # Product Integration Group config
-└── build-report.txt              # Summary report
-```
-
-### 4. Create Builds in PNC
-
-Use bacon CLI to create builds in PNC:
-
-```bash
-# Source utility functions
 source bacon_utils.sh
 
-# Create individual build config
-bacon pnc build-config create \
-  --file generated-configs/build-configs/org.example_artifact_1.0.0.yaml
-
-# Or use the utility function
-create_pnc_build \
-  "generated-configs/build-configs/org.example_artifact_1.0.0.yaml" \
-  "PRODUCT_VERSION_ID"
-
-# Trigger a build
-trigger_pnc_build "BUILD_CONFIG_ID"
-
-# Wait for build completion
-wait_for_build "BUILD_ID" 3600 30
-```
-
-## Advanced Usage
-
-### Using Utility Functions
-
-The `bacon_utils.sh` provides helper functions:
-
-```bash
-# Source the utilities
-source bacon_utils.sh
-
-# Fetch SCM info from Maven Central
+# Fetch SCM from Maven Central
 fetch_scm_from_maven "org.example" "artifact" "1.0.0"
-
-# Transform SCM URL using config patterns
-transform_scm_url "git@github.com:example/repo.git" "build-config.yaml"
 
 # Create build config
 create_build_config \
@@ -195,112 +323,188 @@ create_build_config \
   "mvn clean deploy" \
   "OpenJDK 11" \
   "output.yaml"
-
-# Create build group
-create_build_group \
-  "My Build Group" \
-  "PRODUCT_VERSION_ID" \
-  "CONFIG_ID_1" "CONFIG_ID_2" "CONFIG_ID_3"
 ```
 
-### Customizing Build Scripts
+### `validate_config.sh`
 
-You can customize build scripts per artifact by modifying the generated configs:
-
-```yaml
-name: org.example_artifact_1.0.0
-description: Auto-generated build config
-scmRepository:
-  url: https://github.com/example/artifact.git
-  revision: v1.0.0
-buildScript: |
-  mvn -DskipTests clean deploy
-  # Add custom steps here
-environment:
-  name: OpenJDK 11.0; Mvn 3.5.4
-buildType: MVN
-```
-
-## Workflow Example
-
-Complete workflow for generating and creating builds:
+Validates `build-config.yaml` before generation.
 
 ```bash
-# 1. Validate configuration
-./validate_config.sh
+./validate_config.sh build-config.yaml
+```
 
-# 2. Generate build configs (dry run first)
-./generate_transitive_builds.sh --dry-run --verbose
+### `env_selector.sh`
 
-# 3. Generate actual configs
-./generate_transitive_builds.sh --output ./my-builds
+Interactive environment selection tool.
 
-# 4. Review the report
-cat my-builds/build-report.txt
+```bash
+./env_selector.sh org.apache.camel:camel-kafka:4.18.1
+```
 
-# 5. Update SCM URLs in generated configs if needed
-# Edit files in my-builds/build-configs/
+---
 
-# 6. Create builds in PNC using bacon
-for config in my-builds/build-configs/*.yaml; do
+## 🐛 Troubleshooting
+
+### SCM Resolution Failures
+
+If you see warnings like:
+```
+[WARN] Failed to resolve SCM for org.example:artifact:1.0.0
+```
+
+**Solutions:**
+
+1. **Check if bacon CLI is configured:**
+   ```bash
+   bacon pnc build-config list --query="name==*artifact*"
+   ```
+
+2. **Add family rules** to `lib/scm_resolver.sh`:
+   ```bash
+   org.example:artifact*)
+     echo "SCM_URL=https://github.com/example/artifact.git"
+     echo "SCM_REVISION=v${version}"
+     return 0
+     ;;
+   ```
+
+3. **Add manual SCM mapping** to `build-config.yaml`:
+   ```yaml
+   scmMapping:
+     "org.example:artifact": "https://github.com/example/artifact.git"
+   ```
+
+### Maven Dependency Resolution
+
+If Maven fails to resolve dependencies:
+- Check your `~/.m2/settings.xml`
+- Ensure you have access to required repositories
+- Try with `--verbose` flag for detailed errors
+
+### Productization Check Failures
+
+If productization check fails:
+- Ensure artifact version has `.redhat-XXXXX` suffix
+- Check Indy/Maven repository accessibility
+- Verify `--redhat-suffix` matches your organization's convention
+
+---
+
+## 📝 Examples
+
+### Complete Workflow: Camel Component
+
+```bash
+# 1. Generate configs with productization check
+./generate_build_configs.sh \
+  -a org.apache.camel:camel-kafka:4.18.1 \
+  -b org.apache.camel:camel-bom:4.18.1 \
+  --check-productization \
+  --redhat-suffix redhat-00001 \
+  -o ./camel-kafka-output
+
+# 2. Review the report
+cat ./camel-kafka-output/build-report.txt
+
+# 3. Check what needs to be built
+cat ./camel-kafka-output/pending-productized.txt
+
+# 4. Review generated configs
+ls -la ./camel-kafka-output/build-configs/
+
+# 5. Create builds in PNC using bacon
+for config in ./camel-kafka-output/build-configs/*.yaml; do
   echo "Creating build from $config"
   bacon pnc build-config create --file "$config"
 done
-
-# 7. Create build group
-bacon pnc build-group create \
-  --name "My Transitive Builds" \
-  --file my-builds/pig-config.yaml
 ```
 
-## Troubleshooting
+### Batch Processing Multiple Artifacts
 
-### Maven Dependency Analysis Fails
+```bash
+# Create artifact list
+cat > artifacts.txt <<EOF
+org.apache.camel:camel-kafka:4.18.1
+org.apache.camel:camel-flink:4.18.1
+org.apache.camel:camel-aws2-s3:4.18.1
+EOF
 
-If Maven fails to resolve dependencies:
-- Check your Maven settings.xml
-- Ensure you have access to required repositories
-- Try running with `--verbose` to see detailed errors
+# Generate all configs
+./generate_build_configs.sh \
+  -r artifacts.txt \
+  -b org.apache.camel:camel-bom:4.18.1 \
+  --check-productization \
+  --redhat-suffix redhat-00001 \
+  -o ./batch-output
+```
 
-### SCM URLs Not Found
+---
 
-If SCM information cannot be fetched:
-- Manually update the generated configs with correct SCM URLs
-- Add SCM mappings to your build-config.yaml:
-  ```yaml
-  scmMapping:
-    "github.com/old/repo.git": "github.com/new/repo.git"
-  ```
+## 🔐 Security
 
-### Bacon CLI Errors
+- Never commit sensitive credentials to git
+- Use environment variables for authentication
+- Review generated configs before creating in PNC
+- Validate SCM URLs before building
 
-If bacon commands fail:
-- Verify bacon is installed: `bacon --version`
-- Check PNC authentication: `bacon pnc auth`
-- Ensure you have proper permissions in PNC
+---
 
-## Tips
+## 📄 License
 
-1. **Start with dry-run**: Always use `--dry-run` first to see what will be generated
-2. **Use verbose mode**: Add `--verbose` for detailed logging
-3. **Validate before generating**: Run `validate_config.sh` to catch config errors early
-4. **Review generated configs**: Check SCM URLs and build scripts before creating in PNC
-5. **Test with small BOMs**: Start with a small BOM to test your configuration
+This toolset is provided as-is for automating PNC build configuration generation.
 
-## References
+---
 
-- [Bacon CLI Documentation](https://project-ncl.github.io/bacon/)
-- [PNC Documentation](https://project-ncl.github.io/)
-- [Maven Dependency Plugin](https://maven.apache.org/plugins/maven-dependency-plugin/)
+## 🤝 Contributing
 
-## Support
+When adding new features:
+1. Update this README
+2. Add examples to relevant guides
+3. Update migration guide if changing existing behavior
+4. Test with multiple artifact types
+
+---
+
+## 📞 Support
 
 For issues or questions:
 1. Check the build-report.txt for detailed information
 2. Run with `--verbose` for debugging
-3. Review bacon CLI logs
-4. Consult PNC documentation
+3. Review relevant documentation guides
+4. Check bacon CLI logs for PNC integration issues
 
-## License
+---
 
-This toolset is provided as-is for automating PNC build configuration generation.
+## 🗂️ File Structure
+
+```
+autobuilds/
+├── README.md                              # This file
+├── MIGRATION_GUIDE.md                     # Migration from old scripts
+├── TRANSITIVE_DEPENDENCY_GUIDE.md         # Transitive dependency handling
+├── CAMEL_ANALYSIS_GUIDE.md                # Camel-specific guidance
+├── generate_build_configs.sh              # ⭐ Main unified script
+├── build-config.yaml                      # Main configuration
+├── env-database.json                      # Environment auto-selection
+├── custom_modes.yaml                      # Bob Shell custom modes
+├── bacon_utils.sh                         # Bacon CLI utilities
+├── validate_config.sh                     # Config validator
+├── env_selector.sh                        # Environment selector
+├── env_parser.sh                          # Environment parser
+├── pom_analyzer.sh                        # POM analysis utilities
+├── lib/                                   # Shared libraries
+│   ├── config_generator.sh                # Config generation logic
+│   ├── dependency_analyzer.sh             # Dependency analysis
+│   └── scm_resolver.sh                    # SCM resolution (PNC + family rules)
+└── [Legacy Scripts]                       # Kept for reference
+    ├── generate_third_party_combined_yaml.sh
+    ├── generate_transitive_builds.sh
+    ├── generate_transitive_builds_v2.sh
+    ├── generate_transitive_builds_v3.sh
+    └── generate_transitive_with_pnc.sh
+```
+
+---
+
+**Last Updated:** 2026-06-30  
+**Version:** 2.0.0

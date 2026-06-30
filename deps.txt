@@ -1,1 +1,0 @@
-org.apache.camel:camel-bom:pom:4.18.1-SNAPSHOT
