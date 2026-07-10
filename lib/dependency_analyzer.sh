@@ -43,10 +43,21 @@ analyze_dependencies() {
   
   # Resolve dependency tree with Maven
   local tree_file="$work_dir/dependency-tree.txt"
-  # Run Maven with timeout using background process (macOS compatible)
+  
+  # Determine timeout based on input type (longer for file with many artifacts)
+  local timeout=60
+  if [[ "$input_type" == "file" ]]; then
+    local artifact_count
+    artifact_count=$(wc -l < "$input_value" | tr -d ' ')
+    if [[ $artifact_count -gt 50 ]]; then
+      timeout=180  # 3 minutes for medium BOMs
+      echo "[INFO] Medium artifact set detected ($artifact_count artifacts), using extended timeout (${timeout}s)" >&2
+    fi
+  fi
+  
+  # Run Maven with timeout
   mvn -f "$temp_pom" dependency:tree -DoutputType=text -Dverbose -Dscope=compile > "$tree_file" 2>&1 &
   local mvn_pid=$!
-  local timeout=60
   local elapsed=0
   
   while kill -0 $mvn_pid 2>/dev/null && [[ $elapsed -lt $timeout ]]; do
@@ -70,12 +81,8 @@ analyze_dependencies() {
     return 1
   fi
   
-  # Copy full tree to output
   cp "$tree_file" "$output_dir/all-dependencies.txt"
-  
-  # Clean up
   rm -rf "$work_dir"
-  
   return 0
 }
 
@@ -139,6 +146,140 @@ generate_pom_for_bom() {
   </dependencyManagement>
 </project>
 EOF
+}
+
+# Extract all managed dependencies from a BOM
+# Args: bom_gav output_file
+# Returns: Creates a file with all managed dependencies (one GAV per line)
+expand_bom_dependencies() {
+  local bom_gav="$1"
+  local output_file="$2"
+  
+  local bom_group bom_artifact bom_version
+  bom_group="$(echo "$bom_gav" | cut -d: -f1)"
+  bom_artifact="$(echo "$bom_gav" | cut -d: -f2)"
+  bom_version="$(echo "$bom_gav" | cut -d: -f3)"
+  
+  echo "[INFO] Expanding BOM: $bom_gav" >&2
+  
+  # Download BOM POM
+  local bom_pom_url="https://repo1.maven.org/maven2/$(echo "$bom_group" | tr '.' '/')/${bom_artifact}/${bom_version}/${bom_artifact}-${bom_version}.pom"
+  local temp_bom
+  temp_bom="$(mktemp)"
+  
+  if ! curl -fsSL -o "$temp_bom" "$bom_pom_url" 2>/dev/null; then
+    echo "[ERROR] Failed to download BOM POM from: $bom_pom_url" >&2
+    rm -f "$temp_bom"
+    return 1
+  fi
+  
+  # Parse managed dependencies using Python (optimized for large BOMs)
+  python3 - "$temp_bom" "$output_file" "$bom_version" <<'PY'
+import sys
+import xml.etree.ElementTree as ET
+from pathlib import Path
+
+bom_file = Path(sys.argv[1])
+output_file = Path(sys.argv[2])
+bom_version = sys.argv[3] if len(sys.argv) > 3 else None
+
+# Parse BOM POM
+tree = ET.parse(bom_file)
+root = tree.getroot()
+ns = {'m': 'http://maven.apache.org/POM/4.0.0'}
+
+# Extract properties
+properties = {}
+props_elem = root.find('.//m:properties', ns)
+if props_elem is not None:
+    for prop in props_elem:
+        prop_name = prop.tag.split('}')[-1] if '}' in prop.tag else prop.tag
+        if prop.text:
+            properties[prop_name] = prop.text
+
+# Add project version
+project_version = root.find('.//m:version', ns)
+if project_version is not None and project_version.text:
+    properties['project.version'] = project_version.text
+    properties['version'] = project_version.text
+
+# Add BOM version patterns
+if bom_version:
+    artifact_elem = root.find('.//m:artifactId', ns)
+    if artifact_elem is not None:
+        base_name = artifact_elem.text.replace('-bom', '').replace('-parent', '')
+        properties.setdefault(f'{base_name}.version', bom_version)
+        properties.setdefault('bom.version', bom_version)
+
+print(f"[DEBUG] Extracted {len(properties)} properties from BOM", file=sys.stderr)
+
+# Resolve property placeholder (optimized)
+def resolve_version(version_text, max_depth=5):
+    for _ in range(max_depth):
+        if version_text and version_text.startswith('${') and version_text.endswith('}'):
+            prop_name = version_text[2:-1]
+            version_text = properties.get(prop_name)
+            if version_text is None:
+                return None
+        else:
+            break
+    return version_text
+
+# Extract managed dependencies (optimized)
+managed_deps = []
+dep_mgmt = root.find('.//m:dependencyManagement/m:dependencies', ns)
+
+if dep_mgmt is not None:
+    deps = dep_mgmt.findall('m:dependency', ns)
+    total = len(deps)
+    print(f"[INFO] Processing {total} managed dependencies...", file=sys.stderr)
+    
+    for idx, dep in enumerate(deps, 1):
+        # Progress indicator every 100 deps
+        if idx % 100 == 0:
+            print(f"[INFO] Processed {idx}/{total} dependencies...", file=sys.stderr)
+        
+        group = dep.find('m:groupId', ns)
+        artifact = dep.find('m:artifactId', ns)
+        version = dep.find('m:version', ns)
+        dep_type = dep.find('m:type', ns)
+        scope = dep.find('m:scope', ns)
+        
+        # Skip invalid or BOM/import dependencies
+        if (group is None or artifact is None or version is None or
+            (dep_type is not None and dep_type.text == 'pom') or
+            (scope is not None and scope.text == 'import')):
+            continue
+        
+        # Resolve version
+        version_text = resolve_version(version.text)
+        if version_text is None:
+            continue
+        
+        gav = f"{group.text}:{artifact.text}:{version_text}"
+        managed_deps.append(gav)
+
+# Write output
+output_file.write_text('\n'.join(managed_deps) + '\n' if managed_deps else '')
+
+print(f"[INFO] Extracted {len(managed_deps)} managed dependencies from BOM", file=sys.stderr)
+PY
+  
+  local exit_code=$?
+  rm -f "$temp_bom"
+  
+  if [[ $exit_code -ne 0 ]]; then
+    echo "[ERROR] Failed to parse BOM dependencies" >&2
+    return 1
+  fi
+  
+  # Check if any dependencies were found
+  if [[ ! -s "$output_file" ]]; then
+    echo "[WARN] No managed dependencies found in BOM" >&2
+    return 1
+  fi
+  
+  return 0
 }
 
 # Generate POM from file with multiple artifacts
@@ -275,6 +416,10 @@ for raw in tree_file.read_text().splitlines():
         parent_group = parent.split(':', 1)[0]
         if parent_group not in exclude_groups:
             edges.add((parent, gav))
+
+# If no dependencies found, include root artifacts
+if not deps and roots:
+    deps = roots
 
 # Write output
 deps_out.write_text("".join(f"{x}\n" for x in sorted(deps)))

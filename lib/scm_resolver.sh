@@ -8,7 +8,7 @@ set -euo pipefail
 # Main entry point for SCM resolution
 # Tries multiple sources in order: family rules, JVM build data, Camel data, Maven Central
 # Args: group_id artifact_id version
-# Returns: SCM_URL=... and SCM_REVISION=... on stdout, or exits with error
+# Returns: SCM_URL=... and SCM_REVISION=... and SCM_SOURCE=... on stdout, or exits with error
 resolve_scm() {
   local group_id="$1"
   local artifact_id="$2"
@@ -21,34 +21,47 @@ resolve_scm() {
   scm_data="$(fetch_scm_from_pnc "$group_id" "$artifact_id" "$version" 2>/dev/null || true)"
   if [[ -n "$scm_data" ]]; then
     echo "$scm_data"
+    echo "SCM_SOURCE=PNC Build Config"
     return 0
   fi
   
-  # PRIORITY 2: Family Rules (fast, hardcoded patterns for common libraries)
+  # PRIORITY 2: PNC SCM Repository Registry (searches SCM repos when build configs don't exist)
+  scm_data="$(fetch_scm_from_pnc_scm_registry "$group_id" "$artifact_id" "$version" 2>/dev/null || true)"
+  if [[ -n "$scm_data" ]]; then
+    echo "$scm_data"
+    echo "SCM_SOURCE=PNC SCM Registry"
+    return 0
+  fi
+  
+  # PRIORITY 3: Family Rules (fast, hardcoded patterns for common libraries)
   scm_data="$(fetch_scm_from_family_rules "$group_id" "$artifact_id" "$version" 2>/dev/null || true)"
   if [[ -n "$scm_data" ]]; then
     echo "$scm_data"
+    echo "SCM_SOURCE=Family Rules"
     return 0
   fi
   
-  # PRIORITY 3: JVM Build Data (cached from previous builds)
+  # PRIORITY 4: JVM Build Data (cached from previous builds)
   scm_data="$(fetch_scm_from_jvm_build_data "$group_id" "$artifact_id" "$version" 2>/dev/null || true)"
   if [[ -n "$scm_data" ]]; then
     echo "$scm_data"
+    echo "SCM_SOURCE=JVM Build Data"
     return 0
   fi
   
-  # PRIORITY 4: Camel Spring Boot Data (Camel-specific)
+  # PRIORITY 5: Camel Spring Boot Data (Camel-specific)
   scm_data="$(fetch_scm_from_camel_spring_boot_data "$group_id" "$artifact_id" "$version" 2>/dev/null || true)"
   if [[ -n "$scm_data" ]]; then
     echo "$scm_data"
+    echo "SCM_SOURCE=Camel Spring Boot Data"
     return 0
   fi
   
-  # PRIORITY 5: Maven Central POM (slowest, downloads and parses POM)
+  # PRIORITY 6: Maven Central POM (slowest, downloads and parses POM)
   scm_data="$(fetch_scm_from_maven "$group_id" "$artifact_id" "$version" 2>/dev/null || true)"
   if [[ -n "$scm_data" ]]; then
     echo "$scm_data"
+    echo "SCM_SOURCE=Maven Central POM"
     return 0
   fi
   
@@ -137,6 +150,72 @@ fetch_scm_from_pnc() {
   fi
   
   return 1
+}
+
+# Fetch SCM from PNC SCM repository registry (1.5th tier fallback)
+# Searches PNC's SCM repository list when build configs don't exist
+# Only provides URL, revision must be inferred from version
+fetch_scm_from_pnc_scm_registry() {
+  local group_id="$1"
+  local artifact_id="$2"
+  local version="$3"
+  
+  # Check if bacon CLI is available
+  if ! command -v bacon &> /dev/null; then
+    return 1
+  fi
+  
+  # Try searching by artifact name in URL
+  local search_url="${artifact_id}"
+  local pnc_output
+  
+  # Search for SCM repository with 10 second timeout
+  pnc_output="$(timeout 10 bacon pnc scm-repository list --search-url="${search_url}" -o 2>/dev/null || echo '[]')"
+  
+  local result_count
+  result_count=$(echo "$pnc_output" | jq 'length' 2>/dev/null || echo "0")
+  
+  if [[ "$result_count" -eq 0 ]]; then
+    # Try with group path (e.g., apache/flink)
+    local group_path="${group_id//./\/}"
+    search_url="${group_path}/${artifact_id}"
+    pnc_output="$(timeout 10 bacon pnc scm-repository list --search-url="${search_url}" -o 2>/dev/null || echo '[]')"
+    result_count=$(echo "$pnc_output" | jq 'length' 2>/dev/null || echo "0")
+    
+    if [[ "$result_count" -eq 0 ]]; then
+      return 1
+    fi
+  fi
+  
+  # Extract SCM URL from first matching repository
+  local scm_url
+  scm_url=$(echo "$pnc_output" | jq -r '.[0].internalUrl // .[0].externalUrl // empty' 2>/dev/null)
+  
+  if [[ -z "$scm_url" ]]; then
+    return 1
+  fi
+  
+  # Infer revision from version using common patterns
+  local scm_revision=""
+  
+  # Try common tag patterns
+  if [[ "$scm_url" =~ github.com/apache/ ]]; then
+    # Apache projects often use: rel/<artifact>-<version> or release-<version>
+    scm_revision="rel/${artifact_id}-${version}"
+  elif [[ "$scm_url" =~ github.com/FasterXML/ ]]; then
+    # Jackson uses: <artifact>-<version>
+    scm_revision="${artifact_id}-${version}"
+  elif [[ "$scm_url" =~ github.com/google/ ]]; then
+    # Google projects often use: v<version>
+    scm_revision="v${version}"
+  else
+    # Default: try v<version> (most common)
+    scm_revision="v${version}"
+  fi
+  
+  echo "SCM_URL=$scm_url"
+  echo "SCM_REVISION=$scm_revision"
+  return 0
 }
 
 # Fetch SCM from hardcoded family rules (200+ patterns)
@@ -554,11 +633,14 @@ fetch_scm_from_camel_spring_boot_data() {
 }
 
 # Fetch SCM from Maven Central POM
-# Parses <scm> section from POM file
+# Parses <scm> section from POM file, follows parent POM inheritance if needed
 fetch_scm_from_maven() {
   local group_id="$1"
   local artifact_id="$2"
   local version="$3"
+  local max_depth="${4:-3}"  # Prevent infinite recursion
+
+  [[ "$max_depth" -le 0 ]] && return 1
 
   local group_path pom_url pom_content scm_url scm_tag
   group_path="$(echo "$group_id" | tr '.' '/')"
@@ -567,6 +649,7 @@ fetch_scm_from_maven() {
   pom_content="$(curl -fsSL "$pom_url" 2>/dev/null || true)"
   [[ -z "$pom_content" ]] && return 1
 
+  # Try to find SCM in current POM
   scm_url="$(echo "$pom_content" | grep -oE '<connection>[^<]+' | head -1 | sed 's/<connection>//' | sed 's#^scm:git:##' | sed 's#^scm:git://##' | sed 's#^scm:svn:##' | sed 's#^scm:##')"
   [[ -z "$scm_url" ]] && scm_url="$(echo "$pom_content" | grep -oE '<developerConnection>[^<]+' | head -1 | sed 's/<developerConnection>//' | sed 's#^scm:git:##' | sed 's#^scm:git://##' | sed 's#^scm:svn:##' | sed 's#^scm:##')"
 
@@ -575,11 +658,72 @@ fetch_scm_from_maven() {
     scm_tag="$(echo "$pom_content" | grep -oE '<revision>[^<]+' | head -1 | sed 's/<revision>//')"
   fi
 
-  [[ -z "$scm_url" ]] && return 1
-  [[ -z "$scm_tag" || "$scm_tag" == "HEAD" ]] && return 1
+  # If SCM found in current POM, use it
+  if [[ -n "$scm_url" && -n "$scm_tag" && "$scm_tag" != "HEAD" ]]; then
+    echo "SCM_URL=$scm_url"
+    echo "SCM_REVISION=$scm_tag"
+    return 0
+  fi
 
-  echo "SCM_URL=$scm_url"
-  echo "SCM_REVISION=$scm_tag"
+  # If no SCM or incomplete, try parent POM
+  local parent_group parent_artifact parent_version
+  parent_group="$(echo "$pom_content" | sed -n '/<parent>/,/<\/parent>/p' | grep -oE '<groupId>[^<]+' | head -1 | sed 's/<groupId>//')"
+  parent_artifact="$(echo "$pom_content" | sed -n '/<parent>/,/<\/parent>/p' | grep -oE '<artifactId>[^<]+' | head -1 | sed 's/<artifactId>//')"
+  parent_version="$(echo "$pom_content" | sed -n '/<parent>/,/<\/parent>/p' | grep -oE '<version>[^<]+' | head -1 | sed 's/<version>//')"
+
+  if [[ -n "$parent_group" && -n "$parent_artifact" && -n "$parent_version" ]]; then
+    # Try to derive SCM URL from common patterns before falling back to parent
+    local derived_url=""
+    
+    # Apache projects: https://github.com/apache/{project}
+    if [[ "$group_id" == org.apache.* ]]; then
+      local project_name="${group_id#org.apache.}"
+      derived_url="https://github.com/apache/${project_name}.git"
+    fi
+    
+    # Eclipse projects: https://github.com/eclipse/{project}
+    if [[ "$group_id" == org.eclipse.* ]]; then
+      local project_name="${group_id#org.eclipse.}"
+      derived_url="https://github.com/eclipse/${project_name}.git"
+    fi
+    
+    # Glassfish/Jakarta EE projects: https://github.com/eclipse-ee4j/{artifact}
+    if [[ "$group_id" == org.glassfish* || "$group_id" == jakarta.* || "$group_id" == com.sun.faces* ]]; then
+      # For mojarra (JSF implementation)
+      if [[ "$artifact_id" == *mojarra* ]]; then
+        derived_url="https://github.com/eclipse-ee4j/mojarra.git"
+      else
+        derived_url="https://github.com/eclipse-ee4j/${artifact_id}.git"
+      fi
+    fi
+    
+    # If we derived a URL, use it with constructed tag
+    if [[ -n "$derived_url" ]]; then
+      local derived_tag="$artifact_id-$version"
+      echo "SCM_URL=$derived_url"
+      echo "SCM_REVISION=$derived_tag"
+      return 0
+    fi
+    
+    # Otherwise, recursively fetch from parent as fallback
+    local parent_scm
+    parent_scm="$(fetch_scm_from_maven "$parent_group" "$parent_artifact" "$parent_version" $((max_depth - 1)) 2>/dev/null || true)"
+    
+    if [[ -n "$parent_scm" ]]; then
+      local parent_url parent_tag
+      parent_url="$(echo "$parent_scm" | grep '^SCM_URL=' | cut -d= -f2-)"
+      parent_tag="$(echo "$parent_scm" | grep '^SCM_REVISION=' | cut -d= -f2-)"
+      
+      # Use parent's URL with derived tag
+      local derived_tag="$artifact_id-$version"
+      
+      echo "SCM_URL=$parent_url"
+      echo "SCM_REVISION=$derived_tag"
+      return 0
+    fi
+  fi
+
+  return 1
 }
 
 # Apply tag mapping from scm.yaml file

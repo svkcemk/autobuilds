@@ -29,8 +29,10 @@ ENABLE_ENV_AUTOSELECT=true
 ENABLE_BUILD_SCRIPT_REUSE=true
 ENABLE_TOPOLOGICAL_SORT=true
 ENABLE_PRODUCTIZATION_CHECK=false
+ENABLE_BOM_EXPANSION=false
 OUTPUT_FORMAT="both"  # individual, combined, or both
 LEGACY_MODE=""  # v1, v2, v3 for compatibility
+PARALLEL_WORKERS=1  # Number of parallel workers (1 = sequential)
 
 # Colors for output
 RED='\033[0;31m'
@@ -75,6 +77,7 @@ Feature Flags:
   --no-build-script-reuse         Disable build script reuse
   --no-topological-sort           Disable topological sorting
   --check-productization          Check if deps already have .redhat versions
+  --expand-bom                    Expand BOM to include all managed dependencies
   --redhat-suffix SUFFIX          RedHat suffix for productization check
                                   (e.g., redhat-00001)
 
@@ -89,7 +92,7 @@ Filtering:
 Behavior:
   --dry-run                       Show what would be done without executing
   --verbose                       Verbose output
-  --parallel N                    Parallel processing (N workers) [NOT IMPLEMENTED]
+  --parallel N                    Parallel processing (N workers, default: 1)
 
 Compatibility:
   --legacy-mode MODE              Emulate old script: v1|v2|v3
@@ -157,7 +160,8 @@ parse_args() {
       --no-build-script-reuse) ENABLE_BUILD_SCRIPT_REUSE=false; shift ;;
       --no-topological-sort) ENABLE_TOPOLOGICAL_SORT=false; shift ;;
       --check-productization) ENABLE_PRODUCTIZATION_CHECK=true; shift ;;
-      --redhat-suffix) 
+      --expand-bom) ENABLE_BOM_EXPANSION=true; shift ;;
+      --redhat-suffix)
         if [[ ! "$2" =~ ^redhat- ]]; then
           log_error "Invalid --redhat-suffix: must be in format 'redhat-XXXX' or 'redhat-*' for wildcard (e.g., redhat-00001, redhat-0001, redhat-*)"
           exit 1
@@ -168,6 +172,15 @@ parse_args() {
       --format) OUTPUT_FORMAT="$2"; shift 2 ;;
       --dry-run) DRY_RUN=true; shift ;;
       --verbose) VERBOSE=true; shift ;;
+      --parallel) 
+        if [[ "$2" =~ ^[0-9]+$ ]] && [[ "$2" -gt 0 ]]; then
+          PARALLEL_WORKERS="$2"
+        else
+          log_error "Invalid --parallel value: must be a positive integer"
+          exit 1
+        fi
+        shift 2
+        ;;
       --legacy-mode) LEGACY_MODE="$2"; shift 2 ;;
       -h|--help) show_usage ;;
       -v|--version) show_version ;;
@@ -223,8 +236,14 @@ check_prerequisites() {
   
   # Source shared libraries
   local lib_dir="$(dirname "$0")/lib"
-  if [[ -f "$lib_dir/scm_resolver.sh" ]]; then
+  
+  # Try AI-enhanced resolver first, fallback to standard
+  if [[ -f "$lib_dir/scm_resolver_ai.sh" ]]; then
+    source "$lib_dir/scm_resolver_ai.sh"
+    log_verbose "Using AI-enhanced SCM resolver"
+  elif [[ -f "$lib_dir/scm_resolver.sh" ]]; then
     source "$lib_dir/scm_resolver.sh"
+    log_verbose "Using standard SCM resolver"
   else
     log_error "Required library not found: $lib_dir/scm_resolver.sh"
     exit 1
@@ -257,9 +276,15 @@ validate_inputs() {
     exit 1
   fi
 
+  # Allow BOM-only input when BOM expansion is enabled
   if [[ -z "$INPUT_ARTIFACT" && -z "$ROOT_ARTIFACTS_FILE" ]]; then
-    log_error "Provide --artifact or --root-artifacts"
-    exit 1
+    if [[ "$ENABLE_BOM_EXPANSION" == "true" && -n "$INPUT_BOM" ]]; then
+      # BOM expansion mode - valid
+      :
+    else
+      log_error "Provide --artifact or --root-artifacts (or use --expand-bom with --bom)"
+      exit 1
+    fi
   fi
 
   if [[ -n "$ROOT_ARTIFACTS_FILE" && ! -f "$ROOT_ARTIFACTS_FILE" ]]; then
@@ -275,12 +300,24 @@ validate_inputs() {
 
 # Prepare workspace
 prepare_workspace() {
+  # Clean output directory to avoid mixing old and new results
+  if [[ -d "$OUTPUT_DIR/build-configs" ]]; then
+    rm -f "$OUTPUT_DIR/build-configs"/*.json 2>/dev/null || true
+  fi
   mkdir -p "$OUTPUT_DIR/build-configs"
+  
+  # Clean/create output files
   : > "$OUTPUT_DIR/root-artifacts.txt"
   : > "$OUTPUT_DIR/all-dependencies.txt"
   : > "$OUTPUT_DIR/third-party-dependencies.txt"
   : > "$OUTPUT_DIR/dependency-edges.txt"
   : > "$OUTPUT_DIR/unresolved-artifacts.txt"
+  
+  # Remove old combined outputs
+  rm -f "$OUTPUT_DIR/combined-build-configs.yaml" 2>/dev/null || true
+  rm -f "$OUTPUT_DIR/pig-config.yaml" 2>/dev/null || true
+  rm -f "$OUTPUT_DIR/build-report.txt" 2>/dev/null || true
+  
   UNRESOLVED_FILE="$OUTPUT_DIR/unresolved-artifacts.txt"
   WORK_DIR="$(mktemp -d)"
 }
@@ -335,10 +372,61 @@ main() {
     load_root_artifacts "$ROOT_ARTIFACTS_FILE" "$OUTPUT_DIR/root-artifacts.txt"
   fi
   
+  # Expand BOM if requested
+  if [[ "$ENABLE_BOM_EXPANSION" == "true" && -n "$INPUT_BOM" ]]; then
+    log_info "Expanding BOM to include all managed dependencies..."
+    local bom_deps_file="$OUTPUT_DIR/bom-expanded-deps.txt"
+    if expand_bom_dependencies "$INPUT_BOM" "$bom_deps_file"; then
+      local bom_count
+      bom_count=$(wc -l < "$bom_deps_file" | tr -d ' ')
+      log_info "Extracted $bom_count artifacts from BOM"
+      log_info "Skipping transitive dependency resolution (BOM artifacts are already managed versions)"
+      
+      # For BOM expansion: skip Maven dependency resolution entirely
+      # Treat BOM artifacts as the final list to build
+      : > "$OUTPUT_DIR/root-artifacts.txt"
+      cp "$bom_deps_file" "$OUTPUT_DIR/all-dependencies.txt"
+      cp "$bom_deps_file" "$OUTPUT_DIR/third-party-dependencies.txt"
+      : > "$OUTPUT_DIR/dependency-edges.txt"
+      
+      # Skip to config generation
+      if [[ "$ENABLE_TOPOLOGICAL_SORT" == "true" ]]; then
+        log_info "Performing topological sort..."
+        sort "$OUTPUT_DIR/third-party-dependencies.txt" -o "$OUTPUT_DIR/third-party-dependencies.txt"
+      fi
+      
+      log_info "Generating individual build configs..."
+      generate_individual_configs
+      
+      if [[ "$OUTPUT_FORMAT" == "combined" || "$OUTPUT_FORMAT" == "both" ]]; then
+        log_info "Generating combined YAML..."
+        generate_combined_yaml_wrapper
+      fi
+      
+      if [[ "$OUTPUT_FORMAT" == "combined" || "$OUTPUT_FORMAT" == "both" ]]; then
+        log_info "Generating PIG config..."
+        generate_pig_config "$CONFIG_FILE" "$OUTPUT_DIR/pig-config.yaml"
+      fi
+      
+      log_info "Generating build report..."
+      generate_build_report "$OUTPUT_DIR" "$CONFIG_FILE"
+      
+      log_success "Done! Output written to $OUTPUT_DIR"
+      exit 0
+    else
+      log_warn "Failed to expand BOM, continuing with existing root artifacts"
+    fi
+  fi
+  
   # Analyze dependencies
   log_info "Analyzing dependencies..."
   local input_type input_value
-  if [[ -n "$INPUT_ARTIFACT" ]] && [[ -z "$ROOT_ARTIFACTS_FILE" ]]; then
+  
+  # For BOM expansion, use BOM artifacts file
+  if [[ "$ENABLE_BOM_EXPANSION" == "true" && -f "$OUTPUT_DIR/bom-artifacts.txt" ]]; then
+    input_type="file"
+    input_value="$OUTPUT_DIR/bom-artifacts.txt"
+  elif [[ -n "$INPUT_ARTIFACT" ]] && [[ -z "$ROOT_ARTIFACTS_FILE" ]]; then
     # Single artifact - use artifact type for BOM detection
     input_type="artifact"
     input_value="$INPUT_ARTIFACT"
@@ -351,9 +439,17 @@ main() {
   
   # Filter third-party dependencies
   log_info "Filtering third-party dependencies..."
+  
+  # For BOM expansion, use original root artifacts (before BOM expansion) for filtering
+  local filter_root_file="$OUTPUT_DIR/root-artifacts.txt"
+  if [[ "$ENABLE_BOM_EXPANSION" == "true" && -f "$OUTPUT_DIR/root-artifacts-original.txt" ]]; then
+    filter_root_file="$OUTPUT_DIR/root-artifacts-original.txt"
+    log_info "Using original root artifacts for filtering (BOM expansion mode)"
+  fi
+  
   filter_dependencies \
     "$OUTPUT_DIR/all-dependencies.txt" \
-    "$OUTPUT_DIR/root-artifacts.txt" \
+    "$filter_root_file" \
     "$EXCLUDE_GROUPS" \
     "$OUTPUT_DIR/third-party-dependencies.txt" \
     "$OUTPUT_DIR/dependency-edges.txt"
@@ -428,63 +524,160 @@ main() {
   cat "$OUTPUT_DIR/build-report.txt"
 }
 
+# Process a single artifact (for parallel execution)
+process_single_artifact() {
+  local gav="$1"
+  local total_count="$2"
+  local show_progress="${3:-false}"
+  
+  local group_id artifact_id version
+  group_id="$(echo "$gav" | cut -d: -f1)"
+  artifact_id="$(echo "$gav" | cut -d: -f2)"
+  version="$(echo "$gav" | cut -d: -f3)"
+    
+  # Resolve SCM with source tracking
+  local scm_data scm_source=""
+  if scm_data="$(resolve_scm "$group_id" "$artifact_id" "$version" 2>&1)"; then
+    scm_source=$(echo "$scm_data" | grep -o "Source: [^$]*" | head -1 || echo "")
+  else
+    if [[ "$show_progress" == "true" ]]; then
+      printf "\r%-80s\r" "" >&2
+    fi
+    echo "[WARN] Failed to resolve SCM for $gav" >&2
+    # Thread-safe append to unresolved file (macOS compatible)
+    {
+      # Simple lock using mkdir (atomic operation)
+      while ! mkdir "$UNRESOLVED_FILE.lock" 2>/dev/null; do
+        sleep 0.01
+      done
+      echo "$gav" >> "$UNRESOLVED_FILE"
+      rmdir "$UNRESOLVED_FILE.lock"
+    }
+    return 1
+  fi
+  
+  local scm_url scm_revision
+  scm_url="$(echo "$scm_data" | awk -F= '/^SCM_URL=/{print substr($0,9)}')"
+  scm_revision="$(echo "$scm_data" | awk -F= '/^SCM_REVISION=/{print substr($0,14)}')"
+  scm_source="$(echo "$scm_data" | awk -F= '/^SCM_SOURCE=/{print substr($0,12)}')"
+  
+  # Check for productized version
+  local productized_status="Unknown"
+  if [[ "$ENABLE_PRODUCTIZATION_CHECK" == "true" ]]; then
+    if curl -fsSL --max-time 2 -I "https://repo1.maven.org/maven2/$(echo "$group_id" | tr '.' '/')/${artifact_id}/${version}.redhat-00001/${artifact_id}-${version}.redhat-00001.pom" 2>/dev/null | grep -q "200 OK"; then
+      productized_status="✓ Available"
+    else
+      productized_status="✗ Not available"
+    fi
+  fi
+  
+  # Show status
+  if [[ "$show_progress" == "true" ]]; then
+    printf "\r%-80s\r" "" >&2
+  fi
+  echo "[INFO] ✓ $gav" >&2
+  echo "[INFO]   ├─ Source: $scm_source" >&2
+  if [[ "$ENABLE_PRODUCTIZATION_CHECK" == "true" ]]; then
+    echo "[INFO]   └─ Productized: $productized_status" >&2
+  fi
+  
+  # Resolve build metadata
+  local metadata
+  metadata="$(resolve_build_metadata "$group_id" "$artifact_id" "$version" "$CONFIG_FILE")"
+  
+  local build_script build_type environment_id
+  build_script="$(echo "$metadata" | awk -F= '/^BUILD_SCRIPT=/{print substr($0,14)}')"
+  build_type="$(echo "$metadata" | awk -F= '/^BUILD_TYPE=/{print substr($0,12)}')"
+  environment_id="$(echo "$metadata" | awk -F= '/^ENVIRONMENT_ID=/{print substr($0,16)}')"
+  
+  # Generate config
+  local config_name="${group_id}_${artifact_id}_${version}"
+  local config_file="$OUTPUT_DIR/build-configs/${config_name}.yaml.json"
+  
+  generate_build_config \
+    "$config_name" \
+    "$artifact_id" \
+    "Auto-generated build config for $gav" \
+    "$scm_url" \
+    "$scm_revision" \
+    "$build_type" \
+    "$environment_id" \
+    "$build_script" \
+    "$config_file"
+}
+
 # Generate individual configs (wrapper for library function)
 generate_individual_configs() {
   : > "$UNRESOLVED_FILE"
   
-  while IFS= read -r gav || [[ -n "$gav" ]]; do
-    [[ -z "$gav" ]] && continue
-    
-    local group_id artifact_id version
-    group_id="$(echo "$gav" | cut -d: -f1)"
-    artifact_id="$(echo "$gav" | cut -d: -f2)"
-    version="$(echo "$gav" | cut -d: -f3)"
-    
-    log_verbose "Processing: $gav"
-    
-    # Resolve SCM
-    local scm_data
-    if ! scm_data="$(resolve_scm "$group_id" "$artifact_id" "$version")"; then
-      log_warn "Failed to resolve SCM for $gav"
-      echo "$gav" >> "$UNRESOLVED_FILE"
-      continue
-    fi
-    
-    local scm_url scm_revision
-    scm_url="$(echo "$scm_data" | awk -F= '/^SCM_URL=/{print substr($0,9)}')"
-    scm_revision="$(echo "$scm_data" | awk -F= '/^SCM_REVISION=/{print substr($0,14)}')"
-    
-    # Resolve build metadata
-    local metadata
-    metadata="$(resolve_build_metadata "$group_id" "$artifact_id" "$version" "$CONFIG_FILE")"
-    
-    local build_script build_type environment_id
-    build_script="$(echo "$metadata" | awk -F= '/^BUILD_SCRIPT=/{print substr($0,14)}')"
-    build_type="$(echo "$metadata" | awk -F= '/^BUILD_TYPE=/{print substr($0,12)}')"
-    environment_id="$(echo "$metadata" | awk -F= '/^ENVIRONMENT_ID=/{print substr($0,16)}')"
-    
-    # Generate config
-    local config_name="${group_id}_${artifact_id}_${version}"
-    local config_file="$OUTPUT_DIR/build-configs/${config_name}.yaml.json"
-    
-    generate_build_config \
-      "$config_name" \
-      "$artifact_id" \
-      "Auto-generated build config for $gav" \
-      "$scm_url" \
-      "$scm_revision" \
-      "$build_type" \
-      "$environment_id" \
-      "$build_script" \
-      "$config_file"
-    
-  done < "$OUTPUT_DIR/third-party-dependencies.txt"
+  # Count total artifacts for progress tracking
+  local total_count
+  total_count=$(wc -l < "$OUTPUT_DIR/third-party-dependencies.txt" | tr -d ' ')
   
-  # Check for unresolved
+  local show_progress="false"
+  [[ "$total_count" -gt 10 ]] && show_progress="true"
+  
+  if [[ "$PARALLEL_WORKERS" -gt 1 ]]; then
+    # Parallel processing
+    log_info "Processing $total_count artifacts with $PARALLEL_WORKERS parallel workers..."
+    
+    local current_jobs=0
+    local processed=0
+    
+    while IFS= read -r gav || [[ -n "$gav" ]]; do
+      [[ -z "$gav" ]] && continue
+      
+      # Launch background job
+      process_single_artifact "$gav" "$total_count" "$show_progress" &
+      current_jobs=$((current_jobs + 1))
+      processed=$((processed + 1))
+      
+      # Show progress
+      if [[ "$show_progress" == "true" ]]; then
+        local progress_pct=$((processed * 100 / total_count))
+        printf "\r[%3d%%] Processing %d/%d (active workers: %d)" "$progress_pct" "$processed" "$total_count" "$current_jobs" >&2
+      fi
+      
+      # Wait if we've reached max parallel workers
+      if [[ $current_jobs -ge $PARALLEL_WORKERS ]]; then
+        wait -n 2>/dev/null || true
+        current_jobs=$((current_jobs - 1))
+      fi
+    done < "$OUTPUT_DIR/third-party-dependencies.txt"
+    
+    # Wait for remaining jobs
+    wait
+    
+    if [[ "$show_progress" == "true" ]]; then
+      printf "\r%-80s\r" "" >&2
+    fi
+  else
+    # Sequential processing
+    local current_count=0
+    
+    while IFS= read -r gav || [[ -n "$gav" ]]; do
+      [[ -z "$gav" ]] && continue
+      
+      current_count=$((current_count + 1))
+      
+      if [[ "$show_progress" == "true" ]]; then
+        local progress_pct=$((current_count * 100 / total_count))
+        printf "\r[%3d%%] Processing %d/%d: %-60s" "$progress_pct" "$current_count" "$total_count" "$gav" >&2
+      fi
+      
+      process_single_artifact "$gav" "$total_count" "$show_progress"
+    done < "$OUTPUT_DIR/third-party-dependencies.txt"
+    
+    if [[ "$show_progress" == "true" ]]; then
+      printf "\r%-80s\r" "" >&2
+    fi
+  fi
+  
+  # Check for unresolved (warn but don't exit - allow combined YAML generation)
   if [[ -s "$UNRESOLVED_FILE" ]]; then
-    log_error "Failed to resolve SCM for $(wc -l < "$UNRESOLVED_FILE" | tr -d ' ') artifacts"
-    log_error "See: $UNRESOLVED_FILE"
-    exit 1
+    log_warn "Failed to resolve SCM for $(wc -l < "$UNRESOLVED_FILE" | tr -d ' ') artifacts"
+    log_warn "See: $UNRESOLVED_FILE"
+    log_warn "Continuing with resolved artifacts..."
   fi
 }
 
