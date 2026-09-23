@@ -1,96 +1,134 @@
-dependencyResolutionConfig:
-  # BOM to analyze
-  analyzeBOM: org.apache.camel.quarkus:camel-quarkus-bom:3.33.0
-  
-  # Include optional dependencies
-  includeOptionalDependencies: true
-  
-  # Patterns to include (supports wildcards)
-  includeArtifacts:
-    - org.apache.camel.quarkus:camel-quarkus-google-pubsub:*
-  
-  # Patterns to exclude
-  excludeArtifacts:
-    - org.springframework:*:*
-    - org.testcontainers:*:*
+#!baseMaven=mvn -DskipTests clean deploy -B dependency:tree
+#!productVersion=3.33.2
+#!quarkusCoreVersion=3.33.2.redhat-00004
+#!quarkusPlatformVersion=3.33.2.SP3.temporary-redhat-00001
+#!camelQuarkusVersion=3.33.0.redhat-00009
+#!platformScmRevision=3.33-redhat-ceq-ER1
+#!SPxNumber=SP3
+#!stage={{SPxNumber}}
+#!milestone=SP3_CQ1
+#!pssaas_secret_key=pig
+#!pssaas_secret_value=sm6nakwrAtrMNtb16ApBeAX1g8fzwzD34oILLXwyOAyNmEmdMla1EL2oenPnd1Tk
 
-  # Groups to exclude from third-party combined YAML generation
-  excludeGroups:
-    - org.apache.camel
-    - org.apache.camel.quarkus
-    - io.quarkus
-    - io.quarkus.arc
-    - io.quarkus.security
-  
-  # Recipe repositories to check for existing builds
-  recipeRepos:
-    - https://github.com/redhat-appstudio/jvm-build-data
+product:
+  name: Quarkus Platform
+  abbreviation: qrksp
+  stage: {{stage}}
+  issueTrackerUrl: https://issues.redhat.com/projects/QUARKUS
+version: {{productVersion}}
+milestone: {{milestone}}
+group: Quarkus Platform {{productVersion}} all
+defaultBuildParameters:
+  environmentName: "OpenJDK 21.0; RHEL 9; Mvn 3.9.9; Nodejs 18; npm 10"
+  buildScript: {{baseMaven}}
+builds:
+  - name: io.quarkus-quarkus-platform-{{productVersion}}
+    project: quarkusio/quarkus-platform
+    scmUrl: git@github.ibm.com:pnc-prod/quarkusio-quarkus-platform.git
+    scmRevision: {{platformScmRevision}}
+    buildScript: {{baseMaven}} -Denforcer.skip=true -DsequentialTaskScheduler --also-make
+    brewPullActive: true
+    alignmentParameters:
+      - '-Dmanipulation.disable=true'
+outputPrefixes:
+  releaseFile: rh-quarkus-platform
+  releaseDir: rh-quarkus-platform
+flow:
+  licensesGeneration:
+    strategy: GENERATE
+  repositoryGeneration:
+    strategy: BOM
+    parameters:
+      bomGavs: >-
+        com.redhat.quarkus.platform:quarkus-bom:{{quarkusPlatformVersion}}
+      cachi2LockFile: extras/artifacts.lock.yaml
+    externalAdditionalArtifacts:
+      - 'io.quarkus:quarkus-bom-quarkus-platform-descriptor:pom:{{quarkusCoreVersion}}'
+      - 'io.quarkus:quarkus-bom-quarkus-platform-descriptor:json:{{quarkusCoreVersion}}:{{quarkusCoreVersion}}'
+      - 'io.quarkus:quarkus-bom-quarkus-platform-properties:pom:{{quarkusCoreVersion}}'
+      - 'io.quarkus:quarkus-bom-quarkus-platform-properties:properties:{{quarkusCoreVersion}}'
+    steps:
+      # Core
+      -
+        parameters:
+          resolveIncludes: >-
+            *:*:*redhat-*
+          resolveArtifacts: >-
+            io.quarkus:quarkus-bom-quarkus-platform-descriptor:pom:{{quarkusCoreVersion}}
+            com.redhat.quarkus.platform:quarkus-maven-plugin:{{quarkusPlatformVersion}}
+            com.redhat.quarkus:quarkus-universe-bom:pom:{{quarkusPlatformVersion}}
+            io.quarkus:quarkus-extension-processor:{{quarkusCoreVersion}}
+            io.quarkus:quarkus-maven-plugin:{{quarkusCoreVersion}}
+            io.quarkus:quarkus-extension-maven-plugin:{{quarkusCoreVersion}}
+            io.quarkus:quarkus-bom:pom:{{quarkusCoreVersion}}
+            io.quarkus:quarkus-tls-registry-cli:{{quarkusCoreVersion}}
+            io.quarkus:quarkus-config-doc-maven-plugin:{{quarkusCoreVersion}}
+            io.smallrye.common:smallrye-common-net:2.4.0.redhat-00001
+            io.smallrye.common:smallrye-common-ref:2.4.0.redhat-00001
+            io.quarkus:quarkus-observability-devservices-deployment:{{quarkusCoreVersion}}
+          resolveExcludes: >-
+            io.smallrye.reactive:smallrye-reactive-messaging-connector-archetype:pom:maven-archetype:4.16.2.redhat-00001
+            io.smallrye.reactive:smallrye-reactive-messaging-connector-archetype:jar:maven-archetype:4.16.2.redhat-00001
+          # nonManagedDependencies: >-
+          #   io.quarkus:quarkus-resteasy-reactive-kotlin:{{quarkusCoreVersion}}
+          #   io.quarkus:quarkus-panache-common:{{quarkusCoreVersion}}
 
-buildConfigGeneratorConfig:
-  # Build script reuse configuration
-  buildScriptReuse:
-    # Enable reusing build scripts from previous versions
-    enabled: true
-    
-    # PNC integration via bacon CLI
-    pnc:
-      # Enable querying PNC for existing build configs
-      enabled: true
-      # Note: Requires 'bacon' CLI tool to be installed and configured
-      # Authentication is handled by bacon's existing configuration
-    
-    # Directories to search for previous build configs (fallback if PNC doesn't find anything)
-    searchDirectories:
-      - ./camel-final/build-configs
-      - ./camel-output/build-configs
-      - ./third-party-output/build-configs
-      - ./test-guava-output/build-configs
-      - ./test-jackson-output/build-configs
-      - ./test-commons-io-output/build-configs
-    
-    # Whether to reuse environment ID from previous version
-    # If false, will use auto-selection for new version
-    reuseEnvironmentId: false
-  
-  # Environment selection configuration
-  environmentSelection:
-    # Enable automatic environment selection based on POM analysis
-    enabled: true
-    
-    # Fallback environment ID if auto-selection fails or is disabled
-    fallbackEnvironmentId: 316
-    
-    # Prefer non-deprecated environments
-    avoidDeprecated: true
-    
-    # Custom environment mappings (Java version -> Environment ID)
-    # Uncomment and customize as needed
-    # customMappings:
-    #   "8": 660
-    #   "11": 456
-    #   "17": 1234
-    
-    # Environment preferences
-    preferences:
-      # Prefer newer Maven versions when multiple matches exist
-      preferNewerMaven: true
-      
-      # Minimum Maven version to consider
-      minimumMavenVersion: "3.5.4"
-  
-  defaultValues:
-    environmentId: 316
-    environmentName: "OpenJDK 11.0; Mvn 3.5.4"
-    buildScript: "mvn -DskipTests clean deploy"
-  
-  # SCM URL transformations
-  scmPattern:
-    "git@github.com:": "https://github.com/"
-  
-  # PIG (Product Integration Group) template
-  pigTemplate:
-    product:
-      name: Camel Extensions for Quarkus Third Party Components
-      abbreviation: ceq-third-party
-    version: 3.33.0
-    milestone: DR1
+      # Camel
+      -
+        parameters:
+          bomGavs: >-
+            com.redhat.quarkus.platform:quarkus-camel-bom:{{quarkusPlatformVersion}}
+          resolveIncludes: >-
+            *:*:*redhat-*
+          resolveArtifacts: >-
+            org.apache.camel.quarkus:camel-quarkus-bom-test:pom:{{camelQuarkusVersion}}
+      # CXF
+      -
+        parameters:
+          bomGavs: >-
+            com.redhat.quarkus.platform:quarkus-cxf-bom:{{quarkusPlatformVersion}}
+          resolveIncludes: >-
+            *:*:*redhat-*
+      # AMQ Qpid JMS Client
+      -
+        parameters:
+          bomGavs: >-
+            com.redhat.quarkus.platform:quarkus-qpid-jms-bom:{{quarkusPlatformVersion}}
+          resolveIncludes: >-
+            *:*:*redhat-*
+      # quarkus-operator-sdk
+      -
+        parameters:
+          bomGavs: >-
+            com.redhat.quarkus.platform:quarkus-operator-sdk-bom:{{quarkusPlatformVersion}}
+          resolveIncludes: >-
+            *:*:*redhat-*
+      # quarkus-langchain4j
+      -
+        parameters:
+          bomGavs: >-
+            com.redhat.quarkus.platform:quarkus-langchain4j-bom:{{quarkusPlatformVersion}}
+          resolveIncludes: >-
+            *:*:*redhat-*
+      # quarkus-mcp-server
+      -
+        parameters:
+          bomGavs: >-
+            com.redhat.quarkus.platform:quarkus-mcp-server-bom:{{quarkusPlatformVersion}}
+          resolveIncludes: >-
+            *:*:*redhat-*
+
+
+  javadocGeneration:
+    strategy: IGNORE
+  sourcesGeneration:
+    strategy: GENERATE_REDHAT_DEPENDENCIES
+    sourceBuild: io.quarkus-quarkus-platform-{{productVersion}}
+
+addons:
+  postBuildScanService:
+    productID: 180 # rh_quarkus (https://pp.engineering.redhat.com/pp/api/v7/products/180/)
+    serviceUrl: http://el-pssc-scan-listener-pssaas-service.apps.pssaas.07fi.p1.openshiftapps.com
+    serviceSecretKey: {{ pssaas_secret_key }}
+    serviceSecretValue: {{ pssaas_secret_value }}
+  saveBuildLogsLocally:

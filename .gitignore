@@ -1,1 +1,58 @@
+# Bob
 .bob/
+
+# Python bytecode
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# Output directories
+output*/
+bom-compare-*/
+compare-output-*/
+ultra-compare-*/
+camel-4*/
+camel-bom-*/
+camel-version-*/
+camel-analysis*/
+camel-productiz*/
+camel-transitive*/
+quarkus-*/
+redhat-*/
+pnc-training-*/
+test-*/
+
+# Log files
+*.log
+logs.txt
+
+# PNC harvest data (large, generated)
+pnc-bulk-harvest.jsonl
+pnc-bulk-harvest.log
+pnc-bulk-harvest-summary.json
+pnc-bulk-test.jsonl
+pnc-bulk-test-summary.json
+pnc-ceq-*.jsonl
+pnc-ceq-*.json
+pnc-ceq-all-versions-harvest.jsonl
+pnc-ceq-validation.txt
+pnc-config-generation.log
+
+# Misc generated/scratch files
+org/
+META-INF/
+*.patch
+non-redhat-artifacts.txt
+camel-productized-check-results.txt
+aws-sdk-artifacts-*.txt
+first-batch-*.txt
+
+# Backup files
+*.backup
+
+# One-off comparison text files
+camel-4.18.1-vs-*.txt
+camel-bom-*.txt
+camel-version-comparison*.txt
+test-deps-*.txt

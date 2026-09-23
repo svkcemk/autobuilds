@@ -54,7 +54,7 @@ resolve_scm_with_ai() {
     
     # Traditional methods failed, try AI fallback
     if [[ "$AI_AVAILABLE" == "true" && "$use_ai" == "true" ]]; then
-        log_verbose "Traditional SCM resolution failed, trying AI prediction..."
+        # log_verbose "Traditional SCM resolution failed, trying AI prediction..."
         
         local ai_result
         ai_result="$(predict_scm_with_ai "$group_id" "$artifact_id" "$version")"
@@ -89,9 +89,19 @@ predict_scm_with_ai() {
         return 1
     fi
     
-    # Extract confidence
-    local confidence
+    # Extract confidence and SCM URL
+    local confidence scm_url
     confidence="$(echo "$prediction" | grep '^Confidence=' | cut -d= -f2 || echo "0")"
+    scm_url="$(echo "$prediction" | grep '^SCM_URL=' | cut -d= -f2- || echo "")"
+    
+    # Transform downstream URLs to upstream
+    if [[ -n "$scm_url" ]] && [[ "$scm_url" == *"github.ibm.com"* || "$scm_url" == *"gitlab.cee.redhat.com"* ]]; then
+        local transformed_url
+        transformed_url="$(python3 "$AI_MODULE_DIR/url_transformer.py" "$scm_url" 2>/dev/null | grep '^Transformed:' | cut -d: -f2- | xargs || echo "$scm_url")"
+        if [[ -n "$transformed_url" ]]; then
+            prediction="$(echo "$prediction" | sed "s|SCM_URL=.*|SCM_URL=$transformed_url|")"
+        fi
+    fi
     
     # Only use prediction if confidence is high enough (>70%)
     if (( $(echo "$confidence >= 0.7" | bc -l 2>/dev/null || echo 0) )); then

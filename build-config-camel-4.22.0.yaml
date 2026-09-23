@@ -1,0 +1,57 @@
+#!baseMaven=mvn -DskipTests clean deploy -B dependency:tree
+#!productVersion=4.22.0
+#!camelVersion=4.22.0
+#!cxfVersion=4.2.3
+#!redhatSuffix=redhat-00001
+#!milestone=Camel_4.22.0
+#!stage=Camel_4.22.0_Transitive_Analysis
+
+product:
+  name: Apache Camel
+  abbreviation: camel
+  stage: {{stage}}
+  issueTrackerUrl: https://issues.redhat.com/projects/CAMEL
+version: {{productVersion}}
+milestone: {{milestone}}
+group: Apache Camel {{productVersion}} Transitive Dependencies
+defaultBuildParameters:
+  environmentName: "OpenJDK 21.0; RHEL 9; Mvn 3.9.9"
+  buildScript: {{baseMaven}}
+builds:
+  - name: org.apache.camel-camel-bom-{{productVersion}}
+    project: apache/camel
+    scmUrl: https://github.com/apache/camel.git
+    scmRevision: camel-{{productVersion}}
+    buildScript: {{baseMaven}} -Denforcer.skip=true
+    brewPullActive: true
+    alignmentParameters:
+      - '-Dmanipulation.disable=true'
+
+outputPrefixes:
+  releaseFile: rh-camel
+  releaseDir: rh-camel
+
+flow:
+  licensesGeneration:
+    strategy: GENERATE
+  repositoryGeneration:
+    strategy: BOM
+    parameters:
+      bomGavs: >-
+        org.apache.camel:camel-bom:{{productVersion}}
+    steps:
+      -
+        parameters:
+          resolveIncludes: >-
+            *:*:*
+          resolveArtifacts: >-
+            org.apache.camel:camel-bom:pom:{{productVersion}}
+          resolveExcludes: >-
+            org.apache.camel:*:*:test:*
+            org.apache.camel:*:*:test-jar:*
+
+  javadocGeneration:
+    strategy: IGNORE
+  sourcesGeneration:
+    strategy: GENERATE_REDHAT_DEPENDENCIES
+    sourceBuild: org.apache.camel-camel-bom-{{productVersion}}

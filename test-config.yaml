@@ -1,0 +1,35 @@
+# Configuration for Camel Quarkus 3.39 third-party build configs
+dependencyResolutionConfig:
+  includeArtifacts:
+    - "*:*:*"
+  excludeArtifacts:
+    - "org.springframework:*:*"
+  includeOptionalDependencies: false
+
+buildConfigGeneratorConfig:
+  defaultValues:
+    environmentId: "660"
+    buildType: "MVN"
+    buildScript: "mvn clean deploy -B -DskipTests -Dgpg.skip=true -Dmaven.javadoc.skip=true -Denforcer.skip=true -DskipNexusStagingDeployMojo=true"
+
+  buildScriptReuse:
+    enabled: true
+    pnc:
+      enabled: false
+    reuseEnvironmentId: true
+
+  scmPattern:
+    "git@github.com:": "https://github.com/"
+    "git://github.com/": "https://github.com/"
+
+  pigTemplate:
+    product:
+      name: "Camel Extensions for Quarkus Third Party Components"
+      abbreviation: "ceq-third-party"
+      stage: "GA"
+    version: "3.39.0"
+    milestone: "DR1"
+    group: "Camel Extensions for Quarkus 3.39 Third Party"
+    outputPrefixes:
+      releaseFile: "rh-ceq-third-party"
+      releaseDir: "rh-ceq-third-party"

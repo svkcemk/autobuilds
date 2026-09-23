@@ -1,0 +1,99 @@
+dependencyResolutionConfig:
+  analyzeBOM: "com.redhat.quarkus.platform:quarkus-bom:3.33.2.redhat-00004"
+  includeArtifacts:
+    - "*:*:*"
+  excludeArtifacts: []
+  includeOptionalDependencies: false
+
+buildConfigGeneratorConfig:
+  defaultValues:
+    environmentName: "OpenJDK 17; Maven"
+    buildType: "MVN"
+    environmentId: 316
+    buildScript: "mvn -Dmaven.test.skip=true -Dartifactory.staging.skip=true -DskipNexusStagingDeployMojo=true clean deploy"
+  buildScriptReuse:
+    enabled: true
+    reuseEnvironmentId: true
+    pnc:
+      enabled: true
+  reactorBuilds:
+    - name: "docling-java-0.5.0"
+      project: "docling-project/docling-java"
+      description: "Docling Java Gradle reactor build producing docling-core, docling-serve-api, and docling-serve-client"
+      scmUrl: "https://github.com/docling-project/docling-java.git"
+      scmRevision: "v0.5.0"
+      buildType: "GRADLE"
+      environmentId: 1612
+      buildScript: "gradle --no-daemon -Pjava.version=17 publish"
+      alignmentParameters:
+        - "-DRepour_Java=17"
+        - "-DversionOverride=0.5.0"
+        - "-DdependencyOverride.com.fasterxml.jackson.module:*@*="
+        - "-DdependencyOverride.com.fasterxml.jackson.jaxrs:*@*="
+        - "-DdependencyOverride.com.fasterxml.jackson.core:*@*="
+        - "-DdependencyOverride.com.fasterxml.jackson.dataformat:*@*="
+        - "-DdependencyOverride.com.fasterxml.jackson.datatype:*@*="
+        - "-DdependencyOverride.com.fasterxml.jackson.core:jackson-annotations@*="
+        - "-DdependencyOverride.tools.jackson.module:*@*="
+        - "-DdependencyOverride.tools.jackson.jaxrs:*@*="
+        - "-DdependencyOverride.tools.jackson.core:*@*="
+        - "-DdependencyOverride.tools.jackson.dataformat:*@*="
+        - "-DdependencyOverride.tools.jackson.datatype:*@*="
+        - "-DdependencyOverride.tools.jackson:*@*="
+      artifacts:
+        - "ai.docling:docling-core:0.5.0"
+        - "ai.docling:docling-serve-api:0.5.0"
+        - "ai.docling:docling-serve-client:0.5.0"
+    - name: "hapifhir-hapi-fhir-8.10.0"
+      project: "hapifhir/hapi-fhir"
+      description: "HAPI FHIR Maven reactor build producing requested HAPI FHIR modules"
+      scmUrl: "https://github.com/hapifhir/hapi-fhir.git"
+      scmRevision: "v8.10.0"
+      buildType: "MVN"
+      environmentId: 316
+      buildScript: "mvn clean source:jar deploy -Dmaven.test.skip=true -Dcheckstyle.skip"
+      artifacts:
+        - "ca.uhn.hapi.fhir:hapi-fhir-base:8.10.0"
+        - "ca.uhn.hapi.fhir:hapi-fhir-caching-api:8.10.0"
+        - "ca.uhn.hapi.fhir:hapi-fhir-client:8.10.0"
+        - "ca.uhn.hapi.fhir:hapi-fhir-structures-dstu2.1:8.10.0"
+        - "ca.uhn.hapi.fhir:hapi-fhir-structures-dstu3:8.10.0"
+        - "ca.uhn.hapi.fhir:hapi-fhir-structures-hl7org-dstu2:8.10.0"
+        - "ca.uhn.hapi.fhir:hapi-fhir-structures-r4:8.10.0"
+        - "ca.uhn.hapi.fhir:hapi-fhir-structures-r5:8.10.0"
+    - name: "hapifhir-hapi-fhir-8.10.1"
+      project: "hapifhir/hapi-fhir"
+      description: "HAPI FHIR Maven reactor build producing hapi-fhir-structures-dstu2"
+      scmUrl: "https://github.com/hapifhir/hapi-fhir.git"
+      scmRevision: "v8.10.1"
+      buildType: "MVN"
+      environmentId: 316
+      buildScript: "mvn clean source:jar deploy -Dmaven.test.skip=true -Dcheckstyle.skip"
+      artifacts:
+        - "ca.uhn.hapi.fhir:hapi-fhir-structures-dstu2:8.10.1"
+    - name: "hapifhir-fhir-core-6.9.12"
+      project: "hapifhir/org.hl7.fhir.core"
+      description: "HL7 FHIR Core Maven reactor build producing requested org.hl7.fhir modules"
+      scmUrl: "https://github.com/hapifhir/org.hl7.fhir.core.git"
+      scmRevision: "6.9.12"
+      buildType: "MVN"
+      environmentId: 316
+      buildScript: "mvn clean source:jar deploy -Dmaven.test.skip=true -Dcheckstyle.skip"
+      artifacts:
+        - "ca.uhn.hapi.fhir:org.hl7.fhir.dstu2016may:6.9.12"
+        - "ca.uhn.hapi.fhir:org.hl7.fhir.dstu2:6.9.12"
+        - "ca.uhn.hapi.fhir:org.hl7.fhir.dstu3:6.9.12"
+        - "ca.uhn.hapi.fhir:org.hl7.fhir.r4:6.9.12"
+        - "ca.uhn.hapi.fhir:org.hl7.fhir.r5:6.9.12"
+        - "ca.uhn.hapi.fhir:org.hl7.fhir.utilities:6.9.12"
+  pigTemplate:
+    product:
+      name: "Camel Extensions for Quarkus Third Party Components"
+      abbreviation: "ceq-third-party"
+      stage: "GA"
+    version: "3.39.0"
+    milestone: "DR1"
+    group: "Camel Quarkus 3.39 Third-Party Dependencies"
+    outputPrefixes:
+      releaseFile: "camel-quarkus-3.39-third-party"
+      releaseDir: "camel-quarkus-3.39-third-party"

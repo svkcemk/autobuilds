@@ -5,6 +5,14 @@
 
 set -euo pipefail
 
+# Source cache manager if available
+if [[ -f "$(dirname "${BASH_SOURCE[0]}")/cache_manager.sh" ]]; then
+  source "$(dirname "${BASH_SOURCE[0]}")/cache_manager.sh"
+  CACHE_ENABLED=true
+else
+  CACHE_ENABLED=false
+fi
+
 # Analyze dependencies from various input sources
 # Args: input_type (artifact|bom|file) input_value output_dir config_file
 # Returns: Creates dependency files in output_dir
@@ -16,6 +24,15 @@ analyze_dependencies() {
   
   # Prepare workspace
   mkdir -p "$output_dir"
+  
+  # Check cache first if enabled
+  if [[ "$CACHE_ENABLED" == "true" ]]; then
+    if get_cached_maven_tree "$input_type" "$input_value" "$output_dir/all-dependencies.txt"; then
+      echo "[INFO] Using cached dependency tree (cache hit)" >&2
+      return 0
+    fi
+  fi
+  
   local work_dir
   work_dir="$(mktemp -d)"
   
@@ -44,29 +61,35 @@ analyze_dependencies() {
   # Resolve dependency tree with Maven
   local tree_file="$work_dir/dependency-tree.txt"
   
-  # Determine timeout based on input type (longer for file with many artifacts)
+  # Determine timeout based on input type (scale with artifact count)
   local timeout=60
   if [[ "$input_type" == "file" ]]; then
     local artifact_count
     artifact_count=$(wc -l < "$input_value" | tr -d ' ')
-    if [[ $artifact_count -gt 50 ]]; then
-      timeout=180  # 3 minutes for medium BOMs
+    if [[ $artifact_count -gt 200 ]]; then
+      timeout=600  # 10 minutes for large BOMs (200+ artifacts)
+      echo "[INFO] Large artifact set detected ($artifact_count artifacts), using extended timeout (${timeout}s)" >&2
+    elif [[ $artifact_count -gt 50 ]]; then
+      # Scale: 180s base + 2s per artifact above 50, capped at 600s
+      timeout=$(( 180 + (artifact_count - 50) * 2 ))
+      [[ $timeout -gt 600 ]] && timeout=600
       echo "[INFO] Medium artifact set detected ($artifact_count artifacts), using extended timeout (${timeout}s)" >&2
     fi
   fi
-  
+
   # Run Maven with timeout
   mvn -f "$temp_pom" dependency:tree -DoutputType=text -Dverbose -Dscope=compile > "$tree_file" 2>&1 &
   local mvn_pid=$!
   local elapsed=0
-  
-  while kill -0 $mvn_pid 2>/dev/null && [[ $elapsed -lt $timeout ]]; do
-    sleep 1
+
+  # Poll at 0.5s intervals for faster failure detection
+  while kill -0 $mvn_pid 2>/dev/null && [[ $elapsed -lt $((timeout * 2)) ]]; do
+    sleep 0.5
     elapsed=$((elapsed + 1))
   done
   
   if kill -0 $mvn_pid 2>/dev/null; then
-    echo "[ERROR] Maven dependency:tree timed out after ${timeout}s - killing process" >&2
+    echo "[ERROR] Maven dependency:tree timed out after ${timeout}s ($(( elapsed / 2 ))s elapsed) - killing process" >&2
     kill -9 $mvn_pid 2>/dev/null
     rm -rf "$work_dir"
     return 1
@@ -82,6 +105,12 @@ analyze_dependencies() {
   fi
   
   cp "$tree_file" "$output_dir/all-dependencies.txt"
+  
+  # Cache the result if caching is enabled
+  if [[ "$CACHE_ENABLED" == "true" ]]; then
+    cache_maven_tree "$input_type" "$input_value" "$tree_file"
+  fi
+  
   rm -rf "$work_dir"
   return 0
 }
@@ -162,13 +191,37 @@ expand_bom_dependencies() {
   
   echo "[INFO] Expanding BOM: $bom_gav" >&2
   
-  # Download BOM POM
-  local bom_pom_url="https://repo1.maven.org/maven2/$(echo "$bom_group" | tr '.' '/')/${bom_artifact}/${bom_version}/${bom_artifact}-${bom_version}.pom"
+  # Download BOM POM - try multiple repositories
   local temp_bom
   temp_bom="$(mktemp)"
   
-  if ! curl -fsSL -o "$temp_bom" "$bom_pom_url" 2>/dev/null; then
-    echo "[ERROR] Failed to download BOM POM from: $bom_pom_url" >&2
+  # Repository URLs to try (in order)
+  local repos=(
+    "https://indy.corp.redhat.com/api/content/maven/hosted/pnc-builds/$(echo "$bom_group" | tr '.' '/')/${bom_artifact}/${bom_version}/${bom_artifact}-${bom_version}.pom"
+    "https://indy.psi.redhat.com/api/content/maven/group/builds-untested+shared-imports+public/$(echo "$bom_group" | tr '.' '/')/${bom_artifact}/${bom_version}/${bom_artifact}-${bom_version}.pom"
+    "https://indy.psi.redhat.com/api/content/maven/group/public/$(echo "$bom_group" | tr '.' '/')/${bom_artifact}/${bom_version}/${bom_artifact}-${bom_version}.pom"
+    "https://repo1.maven.org/maven2/$(echo "$bom_group" | tr '.' '/')/${bom_artifact}/${bom_version}/${bom_artifact}-${bom_version}.pom"
+  )
+  
+  local bom_pom_url=""
+  local download_success=false
+  
+  for repo_url in "${repos[@]}"; do
+    echo "[DEBUG] Trying repository: $repo_url" >&2
+    if curl -fsSL -o "$temp_bom" "$repo_url" 2>/dev/null; then
+      bom_pom_url="$repo_url"
+      download_success=true
+      echo "[DEBUG] Successfully downloaded from: $repo_url" >&2
+      break
+    fi
+  done
+  
+  if [[ "$download_success" != "true" ]]; then
+    echo "[ERROR] Failed to download BOM POM from any repository" >&2
+    echo "[ERROR] Tried:" >&2
+    for repo_url in "${repos[@]}"; do
+      echo "[ERROR]   - $repo_url" >&2
+    done
     rm -f "$temp_bom"
     return 1
   fi
@@ -225,8 +278,9 @@ def resolve_version(version_text, max_depth=5):
             break
     return version_text
 
-# Extract managed dependencies (optimized)
+# Extract managed dependencies including BOM imports (optimized)
 managed_deps = []
+bom_imports = []
 dep_mgmt = root.find('.//m:dependencyManagement/m:dependencies', ns)
 
 if dep_mgmt is not None:
@@ -245,10 +299,8 @@ if dep_mgmt is not None:
         dep_type = dep.find('m:type', ns)
         scope = dep.find('m:scope', ns)
         
-        # Skip invalid or BOM/import dependencies
-        if (group is None or artifact is None or version is None or
-            (dep_type is not None and dep_type.text == 'pom') or
-            (scope is not None and scope.text == 'import')):
+        # Skip invalid dependencies
+        if group is None or artifact is None or version is None:
             continue
         
         # Resolve version
@@ -256,8 +308,22 @@ if dep_mgmt is not None:
         if version_text is None:
             continue
         
+        # Handle BOM imports (type=pom, scope=import)
+        if (dep_type is not None and dep_type.text == 'pom' and
+            scope is not None and scope.text == 'import'):
+            bom_gav = f"{group.text}:{artifact.text}:{version_text}"
+            bom_imports.append(bom_gav)
+            print(f"[DEBUG] Found BOM import: {bom_gav}", file=sys.stderr)
+            continue
+        
         gav = f"{group.text}:{artifact.text}:{version_text}"
         managed_deps.append(gav)
+
+# Output BOM imports to stderr for recursive expansion
+if bom_imports:
+    print(f"[INFO] Found {len(bom_imports)} BOM imports to expand", file=sys.stderr)
+    for bom_import in bom_imports:
+        print(f"[BOM_IMPORT] {bom_import}", file=sys.stderr)
 
 # Write output
 output_file.write_text('\n'.join(managed_deps) + '\n' if managed_deps else '')
@@ -345,8 +411,16 @@ exclude_groups = {x.strip() for x in sys.argv[5].split(",") if x.strip()}
 
 # Load root artifacts
 roots = set()
+root_groups = set()
 if roots_file.exists():
-    roots = {line.strip() for line in roots_file.read_text().splitlines() if line.strip()}
+    for line in roots_file.read_text().splitlines():
+        line = line.strip()
+        if line:
+            roots.add(line)
+            # Extract groupId from root artifact to exclude all artifacts from same group
+            parts = line.split(':')
+            if len(parts) >= 3:
+                root_groups.add(parts[0])
 
 # Parse dependency tree
 artifact_re = re.compile(r'([A-Za-z0-9_.\-]+):([A-Za-z0-9_.\-]+):([A-Za-z0-9_.\-]+)(?::([A-Za-z0-9_.\-]+))?:([A-Za-z0-9_.\-]+):([A-Za-z0-9_.\-]+)')
@@ -402,6 +476,10 @@ for raw in tree_file.read_text().splitlines():
 
     # Skip root artifacts
     if gav in roots:
+        continue
+    
+    # Skip artifacts from same group as root artifacts (e.g., if root is org.apache.camel:camel-box, skip all org.apache.camel:*)
+    if group in root_groups:
         continue
     
     # Skip excluded groups
@@ -621,81 +699,106 @@ check_productization() {
     return 0
   fi
   
+  # Use parallel processor if available
+  if declare -f parallel_productization_check &>/dev/null; then
+    echo "[INFO] Using parallel productization checker..." >&2
+    local result
+    result=$(parallel_productization_check "$deps_file" "$redhat_suffix" "$output_dir" "${MAX_PARALLEL_WORKERS:-20}")
+    
+    # Rename output files to match expected names
+    [[ -f "$output_dir/productized.txt" ]] && mv "$output_dir/productized.txt" "$output_dir/build-from-source.txt"
+    [[ -f "$output_dir/pending.txt" ]] && mv "$output_dir/pending.txt" "$output_dir/pending-productized.txt"
+    
+    local build_from_source pending_productized
+    build_from_source=$(echo "$result" | cut -d: -f1)
+    pending_productized=$(echo "$result" | cut -d: -f2)
+    
+    # Display summary lists
+    if [[ $build_from_source -gt 0 ]]; then
+      echo "" >&2
+      echo "[INFO] Already Productized (first 10):" >&2
+      head -10 "$output_dir/build-from-source.txt" | while read -r line; do
+        echo "[INFO]   ✓ $line" >&2
+      done
+      [[ $build_from_source -gt 10 ]] && echo "[INFO]   ... and $((build_from_source - 10)) more (see build-from-source.txt)" >&2
+    fi
+    
+    if [[ $pending_productized -gt 0 ]]; then
+      echo "" >&2
+      echo "[INFO] Pending Productization (first 10):" >&2
+      head -10 "$output_dir/pending-productized.txt" | while read -r line; do
+        echo "[INFO]   ✗ $line" >&2
+      done
+      [[ $pending_productized -gt 10 ]] && echo "[INFO]   ... and $((pending_productized - 10)) more (see pending-productized.txt)" >&2
+    fi
+    echo "" >&2
+    
+    # Return counts via stdout for caller to capture
+    echo "$build_from_source:$pending_productized"
+    return 0
+  fi
+  
+  # Fallback to sequential processing if parallel processor not available
+  echo "[WARN] Parallel processor not available, using sequential processing..." >&2
+  
   local build_from_source=0
   local pending_productized=0
   local total_deps
   total_deps=$(grep -c ":" "$deps_file" || echo "0")
   
-  echo "[INFO] Checking productization for $total_deps dependencies (using parallel checks)..." >&2
+  echo "[INFO] Checking productization for $total_deps dependencies (sequential)..." >&2
   
   > "$output_dir/build-from-source.txt"
   > "$output_dir/pending-productized.txt"
   
-  local temp_dir
-  temp_dir=$(mktemp -d)
-  local max_parallel=10
   local current=0
   
-  # Process dependencies in parallel batches
+  # Process dependencies sequentially
   while IFS=: read -r dep_group dep_artifact dep_version; do
     [[ -z "$dep_group" ]] && continue
     
     current=$((current + 1))
     
-    # Launch parallel check
-    (
-      local found=false
-      local found_version=""
-      
-      # Handle wildcard suffix (redhat-*)
-      if [[ "$redhat_suffix" == "redhat-*" ]]; then
-        # Try common redhat suffixes in order (both 4-digit and 5-digit formats)
-        for suffix_num in 00001 00002 00003 00004 00005 0001 0002 0003 0004 0005; do
-          local test_version="${dep_version}.redhat-${suffix_num}"
-          local test_url="https://indy.corp.redhat.com/api/content/maven/hosted/pnc-builds/${dep_group//.//}/${dep_artifact}/${test_version}/${dep_artifact}-${test_version}.pom"
-          
-          if curl -s -f -m 5 -I "$test_url" > /dev/null 2>&1; then
-            found=true
-            found_version="$test_version"
-            break
-          fi
-        done
-      else
-        # Exact suffix match
-        local redhat_version="${dep_version}.${redhat_suffix}"
-        local indy_url="https://indy.corp.redhat.com/api/content/maven/hosted/pnc-builds/${dep_group//.//}/${dep_artifact}/${redhat_version}/${dep_artifact}-${redhat_version}.pom"
-        
-        if curl -s -f -m 5 -I "$indy_url" > /dev/null 2>&1; then
-          found=true
-          found_version="$redhat_version"
-        fi
-      fi
-      
-      if [[ "$found" == "true" ]]; then
-        echo "${dep_group}:${dep_artifact}:${found_version}" >> "$temp_dir/productized.txt"
-      else
-        echo "${dep_group}:${dep_artifact}:${dep_version}" >> "$temp_dir/pending.txt"
-      fi
-    ) &
+    local found=false
+    local found_version=""
     
-    # Limit parallel processes
-    if [[ $((current % max_parallel)) -eq 0 ]]; then
-      wait
+    # Handle wildcard suffix (redhat-*)
+    if [[ "$redhat_suffix" == "redhat-*" ]]; then
+      # Try common redhat suffixes in order (both 4-digit and 5-digit formats)
+      for suffix_num in 00001 00002 00003 00004 00005 0001 0002 0003 0004 0005; do
+        local test_version="${dep_version}.redhat-${suffix_num}"
+        local test_url="https://indy.corp.redhat.com/api/content/maven/hosted/pnc-builds/${dep_group//.//}/${dep_artifact}/${test_version}/${dep_artifact}-${test_version}.pom"
+        
+        if curl -s -f -m 5 -I "$test_url" > /dev/null 2>&1; then
+          found=true
+          found_version="$test_version"
+          break
+        fi
+      done
+    else
+      # Exact suffix match
+      local redhat_version="${dep_version}.${redhat_suffix}"
+      local indy_url="https://indy.corp.redhat.com/api/content/maven/hosted/pnc-builds/${dep_group//.//}/${dep_artifact}/${redhat_version}/${dep_artifact}-${redhat_version}.pom"
+      
+      if curl -s -f -m 5 -I "$indy_url" > /dev/null 2>&1; then
+        found=true
+        found_version="$redhat_version"
+      fi
+    fi
+    
+    if [[ "$found" == "true" ]]; then
+      echo "${dep_group}:${dep_artifact}:${found_version}" >> "$output_dir/build-from-source.txt"
+      build_from_source=$((build_from_source + 1))
+    else
+      echo "${dep_group}:${dep_artifact}:${dep_version}" >> "$output_dir/pending-productized.txt"
+      pending_productized=$((pending_productized + 1))
+    fi
+    
+    # Progress indicator
+    if [[ $((current % 10)) -eq 0 ]]; then
       echo "[INFO] Progress: $current/$total_deps dependencies checked..." >&2
     fi
   done < "$deps_file"
-  
-  # Wait for remaining processes
-  wait
-  
-  # Consolidate results
-  [[ -f "$temp_dir/productized.txt" ]] && cat "$temp_dir/productized.txt" >> "$output_dir/build-from-source.txt"
-  [[ -f "$temp_dir/pending.txt" ]] && cat "$temp_dir/pending.txt" >> "$output_dir/pending-productized.txt"
-  
-  build_from_source=$(wc -l < "$output_dir/build-from-source.txt" 2>/dev/null || echo "0")
-  pending_productized=$(wc -l < "$output_dir/pending-productized.txt" 2>/dev/null || echo "0")
-  
-  rm -rf "$temp_dir"
   
   echo "[INFO] Productization check complete:" >&2
   echo "[INFO]   Build-from-source: $build_from_source (already productized)" >&2
