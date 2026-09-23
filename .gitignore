@@ -56,3 +56,6 @@ camel-4.18.1-vs-*.txt
 camel-bom-*.txt
 camel-version-comparison*.txt
 test-deps-*.txt
+
+# Ignore generated content inside config/ but not source config files
+config/pnc-bulk-harvest*.jsonl
